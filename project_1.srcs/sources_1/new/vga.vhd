@@ -286,13 +286,13 @@ begin
     -- 蛇死亡判定
     ------------------------------------------------------------------
     process(clk, rst_n)
-        function body_hit(headx, heady : unsigned(9 downto 0);
-                          bodx, body : std_logic_vector;
-                          len : unsigned) return boolean is
-        begin
-            -- 由于是逐项硬编码，这里直接在下面过程里展开即可
-            return false;
-        end function;
+        -- function body_hit(headx, heady : unsigned(9 downto 0);
+        --                   bodx, body : std_logic_vector;
+        --                   len : unsigned) return boolean is
+        -- begin
+        --     -- 由于是逐项硬编码，这里直接在下面过程里展开即可
+        --     return false;
+        -- end function;
     begin
         if rst_n = '0' then
             isdead_r <= '0';
@@ -313,10 +313,286 @@ begin
                 elsif (slice10(snake_x_r,0) = slice10(snake_x_r,2) and
                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,2)) then
                     isdead_r <= '1';
-                -- ……此处可继续照 Verilog 展开 18 项；为简洁省略
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,3) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,3)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,4) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,4)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,5) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,5)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,6) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,6)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,7) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,7)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,8) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,8)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,9) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,9)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,10) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,10)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,11) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,11)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,12) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,12)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,13) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,13)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,14) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,14)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,15) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,15)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,16) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,16)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,17) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,17)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,18) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,18)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,19) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,19)) then
+                    isdead_r <= '1';
+                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,20) and
+                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,20)) then
+                    isdead_r <= '1';                    
                 end if;
             end if;
         end if;
     end process;
+
+    ------------------------------------------------------------------
+    -- 蛇身移动  
+    ------------------------------------------------------------------
+    process(clk, rst_n)
+        -- 便捷变量
+        variable head_x  : unsigned(9 downto 0);
+        variable head_y  : unsigned(9 downto 0);
+    begin
+        if rst_n = '0' then
+            -- 初始化首 3 节
+            snake_x_r(9 downto 0)    <= std_logic_vector(headx_init);
+            snake_y_r(9 downto 0)    <= std_logic_vector(heady_init);
+            snake_x_r(19 downto 10)  <= std_logic_vector(headx_init - square_length);
+            snake_y_r(19 downto 10)  <= std_logic_vector(heady_init);
+            snake_x_r(29 downto 20)  <= std_logic_vector(headx_init - 2*square_length);
+            snake_y_r(29 downto 20)  <= std_logic_vector(heady_init);
+            snake_x_r(199 downto 30) <= (others => '0');
+            snake_y_r(199 downto 30) <= (others => '0');
+        elsif rising_edge(clk) then
+            if general_state = game_start then
+                snake_x_r(9 downto 0)    <= std_logic_vector(headx_init);
+                snake_y_r(9 downto 0)    <= std_logic_vector(heady_init);
+                snake_x_r(19 downto 10)  <= std_logic_vector(headx_init - square_length);
+                snake_y_r(19 downto 10)  <= std_logic_vector(heady_init);
+                snake_x_r(29 downto 20)  <= std_logic_vector(headx_init - 2*square_length);
+                snake_y_r(29 downto 20)  <= std_logic_vector(heady_init);
+                snake_x_r(199 downto 30) <= (others => '0');
+                snake_y_r(199 downto 30) <= (others => '0');
+
+            elsif move_state = stop then
+                null; -- 保持不动
+
+            elsif (flag_printnew = '1') and (general_state = gaming) then
+                -- 取当前头坐标
+                head_x := slice10(snake_x_r,0);
+                head_y := slice10_y(snake_y_r,0);
+
+                -- 根据方向更新
+                case move_state is
+                    when face_right => head_x := head_x + square_length;
+                    when face_left  => head_x := head_x - square_length;
+                    when face_up    => head_y := head_y - square_width;
+                    when face_down  => head_y := head_y + square_width;
+                    when others     => null;
+                end case;
+
+                -- 整体移位：从尾到头
+                snake_x_r(199 downto 10) <= snake_x_r(189 downto 0);
+                snake_y_r(199 downto 10) <= snake_y_r(189 downto 0);
+
+                -- 写新头
+                snake_x_r(9 downto 0) <= std_logic_vector(head_x);
+                snake_y_r(9 downto 0) <= std_logic_vector(head_y);
+            end if;
+        end if;
+    end process;
+
+    ------------------------------------------------------------------
+    -- 颜色生成（对应 Verilog mega case）
+    ------------------------------------------------------------------
+    process(clk, rst_n)
+        -- 辅助布尔信号
+        variable issnake        : boolean;
+        variable issnake_green  : boolean;
+        variable issnake_blue   : boolean;
+        variable issnake_pink   : boolean;
+        variable isfood         : boolean;
+    begin
+        if rst_n = '0' then
+            red_r   <= (others => '0');
+            green_r <= (others => '0');
+            blue_r  <= (others => '0');
+        elsif rising_edge(clk) then
+            if W_active_flag = '0' then
+                red_r   <= (others => '0');
+                green_r <= (others => '0');
+                blue_r  <= (others => '0');
+
+            else
+                ------------------------------------------------------------------
+                -- 在这里把 issnake / isfood 等布尔量按照 Verilog 方式完整展开
+                ------------------------------------------------------------------
+                case general_state is
+                    when start =>
+                        red_r   <= (others => '0');
+                        green_r <= (others => '0');
+                        blue_r  <= (others => '0');
+
+                    when diff_menu =>
+                        case difficulty_state is
+                            when easy =>
+                                if (R_v_cnt >= v_before + 220 and R_v_cnt < v_before + 260) then
+                                    if (R_h_cnt >= h_before + 220 and R_h_cnt < h_before + 260) then
+                                        red_r   <= (others => '0');
+                                        green_r <= (others => '0');
+                                        blue_r  <= (others => '0');
+                                    elsif (R_h_cnt >= h_before + 300 and R_h_cnt < h_before + 340) then
+                                        red_r   <= (others => '0');
+                                        green_r <= (others => '0');
+                                        blue_r  <= (others => '1');
+                                    elsif (R_h_cnt >= h_before + 380 and R_h_cnt < h_before + 420) then
+                                        red_r   <= (others => '0');
+                                        green_r <= (others => '0');
+                                        blue_r  <= (others => '1');
+                                    else
+                                        red_r   <= (others => '1');
+                                        green_r <= (others => '1');
+                                        blue_r  <= (others => '1');
+                                    end if;
+                                else
+                                    red_r   <= (others => '1');
+                                    green_r <= (others => '1');
+                                    blue_r  <= (others => '1');
+                                end if;
+                            when mid =>
+                                if (R_v_cnt >= v_before + 220 and R_v_cnt < v_before + 260)  then 
+                                    if (R_h_cnt >= h_before + 300 and R_h_cnt < h_before + 340) then
+                                        red_r   <= (others => '0');
+                                        green_r <= (others => '0');
+                                        blue_r  <= (others => '0');
+                                    elsif (R_h_cnt >= h_before + 220 and R_h_cnt < h_before + 260) then
+                                        red_r   <= (others => '0');
+                                        green_r <= (others => '0');
+                                        blue_r  <= (others => '1');
+                                    elsif (R_h_cnt >= h_before + 380 and R_h_cnt < h_before + 420) then
+                                        red_r   <= (others => '0');
+                                        green_r <= (others => '0');
+                                        blue_r  <= (others => '1');
+                                    else 
+                                        red_r   <= (others => '1');
+                                        green_r <= (others => '1');
+                                        blue_r  <= (others => '1');
+                                    end if;
+                                else
+                                    red_r   <= (others => '1');
+                                    green_r <= (others => '1');
+                                    blue_r  <= (others => '1');
+                                end if;
+                            when hard =>
+                                if (R_v_cnt >= v_before + 220 and R_v_cnt < v_before + 260)  then 
+                                    if (R_h_cnt >= h_before + 380 and R_h_cnt < h_before + 420) then
+                                        red_r   <= (others => '0');
+                                        green_r <= (others => '0');
+                                        blue_r  <= (others => '0');
+                                    elsif (R_h_cnt >= h_before + 300 and R_h_cnt < h_before + 340) then
+                                        red_r   <= (others => '0');
+                                        green_r <= (others => '0');
+                                        blue_r  <= (others => '1');
+                                    elsif (R_h_cnt >= h_before + 220 and R_h_cnt < h_before + 260) then
+                                        red_r   <= (others => '0');
+                                        green_r <= (others => '0');
+                                        blue_r  <= (others => '1');
+                                    else 
+                                        red_r   <= (others => '1');
+                                        green_r <= (others => '1');
+                                        blue_r  <= (others => '1');
+                                    end if;
+                                else
+                                    red_r   <= (others => '1');
+                                    green_r <= (others => '1');
+                                    blue_r  <= (others => '1');
+                                end if;
+                            end case;
+                    when game_start =>
+                        if    
+                        (
+                            (R_h_cnt >= h_before + unsigned(snake_x_r(9 downto 0)) and R_h_cnt < h_before + unsigned(snake_x_r(9 downto 0)) + square_length
+                            and R_v_cnt >= v_before + unsigned(snake_y_r(9 downto 0)) and R_v_cnt < v_before + unsigned(snake_y_r(9 downto 0)) + square_width)
+                            or (R_h_cnt >= h_before + unsigned(snake_x_r(19 downto 10)) and R_h_cnt < h_before + unsigned(snake_x_r(19 downto 10)) + square_length
+                            and R_v_cnt >= v_before + unsigned(snake_y_r(19 downto 10)) and R_v_cnt < v_before + unsigned(snake_y_r(19 downto 10)) + square_width)
+                            or (R_h_cnt >= h_before + unsigned(snake_x_r(29 downto 20)) and R_h_cnt < h_before + unsigned(snake_x_r(29 downto 20)) + square_length
+                            and R_v_cnt >= v_before + unsigned(snake_y_r(29 downto 20)) and R_v_cnt < v_before + unsigned(snake_y_r(29 downto 20)) + square_width)
+                        )  then
+                            red_r   <= (others => '0');
+                            green_r <= (others => '1');
+                            blue_r  <= (others => '0');
+                        else
+                            red_r   <= (others => '1');
+                            green_r <= (others => '1');
+                            blue_r  <= (others => '1');
+                        end if ;
+                    when gaming =>
+                        if (isfood = TRUE) then 
+                            red_r   <= (others => '1');
+                            green_r <= (others => '0');
+                            blue_r  <= (others => '0');
+                        elsif (issnake_green = TRUE and issnake = TRUE) then
+                            red_r   <= (others => '0');
+                            green_r <= (others => '1');
+                            blue_r  <= (others => '0');
+                        elsif (issnake_blue = TRUE and issnake = TRUE) then
+                            red_r   <= (others => '0');
+                            green_r <= (others => '0');
+                            blue_r  <= (others => '1');
+                        elsif (issnake_pink = TRUE and issnake = TRUE) then
+                            red_r   <= (others => '1');
+                            green_r <= (others => '0');
+                            blue_r  <= (others => '1');
+                        else
+                            red_r   <= (others => '1');
+                            green_r <= (others => '1');
+                            blue_r  <= (others => '1');
+                        end if;   
+                    when others =>
+                        red_r   <= (others => '0');
+                        green_r <= (others => '0');
+                        blue_r  <= (others => '0');
+                end case;
+            end if;
+        end if;
+    end process;
+
+    ------------------------------------------------------------------
+    -- 端口输出
+    ------------------------------------------------------------------
+    O_red         <= red_r;
+    O_green       <= green_r;
+    O_blue        <= blue_r;
+    snake_x       <= snake_x_r;
+    snake_y       <= snake_y_r;
+    snake_length  <= std_logic_vector(snake_len_r);
+    flag_isdead   <= isdead_r;
 
 end Behavioral;
