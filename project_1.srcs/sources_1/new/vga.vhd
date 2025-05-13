@@ -435,10 +435,14 @@ begin
     process(clk, rst_n)
         -- 辅助布尔信号
         variable issnake        : boolean;
+        variable h_issnake      : boolean;
+        variable v_issnake      : boolean;
         variable issnake_green  : boolean;
         variable issnake_blue   : boolean;
         variable issnake_pink   : boolean;
         variable isfood         : boolean;
+        variable h_isfood       : boolean;
+        variable v_isfood       : boolean;
     begin
         if rst_n = '0' then
             red_r   <= (others => '0');
@@ -454,6 +458,102 @@ begin
                 ------------------------------------------------------------------
                 -- 在这里把 issnake / isfood 等布尔量按照 Verilog 方式完整展开
                 ------------------------------------------------------------------
+                h_issnake := 
+                (R_h_cnt >= h_before + unsigned(snake_x_r(9 downto 0)) and R_h_cnt < h_before + unsigned(snake_x_r(9 downto 0)) + square_length) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(19 downto 10)) and R_h_cnt < h_before + unsigned(snake_x_r(19 downto 10)) + square_length) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(29 downto 20)) and R_h_cnt < h_before + unsigned(snake_x_r(29 downto 20)) + square_length) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(39 downto 30)) and R_h_cnt < h_before + unsigned(snake_x_r(39 downto 30)) + square_length and snake_len_r >= 4) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(49 downto 40)) and R_h_cnt < h_before + unsigned(snake_x_r(49 downto 40)) + square_length and snake_len_r >= 5) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(59 downto 50)) and R_h_cnt < h_before + unsigned(snake_x_r(59 downto 50)) + square_length and snake_len_r >= 6) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(69 downto 60)) and R_h_cnt < h_before + unsigned(snake_x_r(69 downto 60)) + square_length and snake_len_r >= 7) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(79 downto 70)) and R_h_cnt < h_before + unsigned(snake_x_r(79 downto 70)) + square_length and snake_len_r >= 8) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(89 downto 80)) and R_h_cnt < h_before + unsigned(snake_x_r(89 downto 80)) + square_length and snake_len_r >= 9) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(99 downto 90)) and R_h_cnt < h_before + unsigned(snake_x_r(99 downto 90)) + square_length and snake_len_r >= 10) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(109 downto 100)) and R_h_cnt < h_before + unsigned(snake_x_r(109 downto 100)) + square_length and snake_len_r >= 11) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(119 downto 110)) and R_h_cnt < h_before + unsigned(snake_x_r(119 downto 110)) + square_length and snake_len_r >= 12) or
+                (R_h_cnt >= h_before + unsigned(snake_x_r(129 downto 120)) and R_h_cnt < h_before + unsigned(snake_x_r(129 downto 120)) + square_length and snake_len_r >= 13) or 
+                (R_h_cnt >= h_before + unsigned(snake_x_r(139 downto 130)) and R_h_cnt < h_before + unsigned(snake_x_r(139 downto 130)) + square_length and snake_len_r >= 14) or 
+                (R_h_cnt >= h_before + unsigned(snake_x_r(149 downto 140)) and R_h_cnt < h_before + unsigned(snake_x_r(149 downto 140)) + square_length and snake_len_r >= 15) or 
+                (R_h_cnt >= h_before + unsigned(snake_x_r(159 downto 150)) and R_h_cnt < h_before + unsigned(snake_x_r(159 downto 150)) + square_length and snake_len_r >= 16) or 
+                (R_h_cnt >= h_before + unsigned(snake_x_r(169 downto 160)) and R_h_cnt < h_before + unsigned(snake_x_r(169 downto 160)) + square_length and snake_len_r >= 17) or 
+                (R_h_cnt >= h_before + unsigned(snake_x_r(179 downto 170)) and R_h_cnt < h_before + unsigned(snake_x_r(179 downto 170)) + square_length and snake_len_r >= 18) or 
+                (R_h_cnt >= h_before + unsigned(snake_x_r(189 downto 180)) and R_h_cnt < h_before + unsigned(snake_x_r(189 downto 180)) + square_length and snake_len_r >= 19) or 
+                (R_h_cnt >= h_before + unsigned(snake_x_r(199 downto 190)) and R_h_cnt < h_before + unsigned(snake_x_r(199 downto 190)) + square_length and snake_len_r = 20);
+
+                v_issnake := 
+                (R_v_cnt >= v_before + unsigned(snake_y_r(9 downto 0)) and R_v_cnt < v_before + unsigned(snake_y_r(9 downto 0)) + square_width) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(19 downto 10)) and R_v_cnt < v_before + unsigned(snake_y_r(19 downto 10)) + square_width) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(29 downto 20)) and R_v_cnt < v_before + unsigned(snake_y_r(29 downto 20)) + square_width) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(39 downto 30)) and R_v_cnt < v_before + unsigned(snake_y_r(39 downto 30)) + square_width and snake_len_r >= 4) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(49 downto 40)) and R_v_cnt < v_before + unsigned(snake_y_r(49 downto 40)) + square_width and snake_len_r >= 5) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(59 downto 50)) and R_v_cnt < v_before + unsigned(snake_y_r(59 downto 50)) + square_width and snake_len_r >= 6) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(69 downto 60)) and R_v_cnt < v_before + unsigned(snake_y_r(69 downto 60)) + square_width and snake_len_r >= 7) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(79 downto 70)) and R_v_cnt < v_before + unsigned(snake_y_r(79 downto 70)) + square_width and snake_len_r >= 8) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(89 downto 80)) and R_v_cnt < v_before + unsigned(snake_y_r(89 downto 80)) + square_width and snake_len_r >= 9) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(99 downto 90)) and R_v_cnt < v_before + unsigned(snake_y_r(99 downto 90)) + square_width and snake_len_r >= 10) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(109 downto 100)) and R_v_cnt < v_before + unsigned(snake_y_r(109 downto 100)) + square_width and snake_len_r >= 11) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(119 downto 110)) and R_v_cnt < v_before + unsigned(snake_y_r(119 downto 110)) + square_width and snake_len_r >= 12) or
+                (R_v_cnt >= v_before + unsigned(snake_y_r(129 downto 120)) and R_v_cnt < v_before + unsigned(snake_y_r(129 downto 120)) + square_width and snake_len_r >= 13) or 
+                (R_v_cnt >= v_before + unsigned(snake_y_r(139 downto 130)) and R_v_cnt < v_before + unsigned(snake_y_r(139 downto 130)) + square_width and snake_len_r >= 14) or 
+                (R_v_cnt >= v_before + unsigned(snake_y_r(149 downto 140)) and R_v_cnt < v_before + unsigned(snake_y_r(149 downto 140)) + square_width and snake_len_r >= 15) or 
+                (R_v_cnt >= v_before + unsigned(snake_y_r(159 downto 150)) and R_v_cnt < v_before + unsigned(snake_y_r(159 downto 150)) + square_width and snake_len_r >= 16) or 
+                (R_v_cnt >= v_before + unsigned(snake_y_r(169 downto 160)) and R_v_cnt < v_before + unsigned(snake_y_r(169 downto 160)) + square_width and snake_len_r >= 17) or 
+                (R_v_cnt >= v_before + unsigned(snake_y_r(179 downto 170)) and R_v_cnt < v_before + unsigned(snake_y_r(179 downto 170)) + square_width and snake_len_r >= 18) or 
+                (R_v_cnt >= v_before + unsigned(snake_y_r(189 downto 180)) and R_v_cnt < v_before + unsigned(snake_y_r(189 downto 180)) + square_width and snake_len_r >= 19) or 
+                (R_v_cnt >= v_before + unsigned(snake_y_r(199 downto 190)) and R_v_cnt < v_before + unsigned(snake_y_r(199 downto 190)) + square_width and snake_len_r = 20);
+            
+                issnake := h_issnake and v_issnake;
+
+                issnake_green := 
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(9 downto 0)) and R_v_cnt < v_before + unsigned(snake_y_r(9 downto 0)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(9 downto 0)) and R_h_cnt < h_before + unsigned(snake_x_r(9 downto 0)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(39 downto 30)) and R_v_cnt < v_before + unsigned(snake_y_r(39 downto 30)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(39 downto 30)) and R_h_cnt < h_before + unsigned(snake_x_r(39 downto 30)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(69 downto 60)) and R_v_cnt < v_before + unsigned(snake_y_r(69 downto 60)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(69 downto 60)) and R_h_cnt < h_before + unsigned(snake_x_r(69 downto 60)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(99 downto 90)) and R_v_cnt < v_before + unsigned(snake_y_r(99 downto 90)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(99 downto 90)) and R_h_cnt < h_before + unsigned(snake_x_r(99 downto 90)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_x_r(129 downto 120)) and R_v_cnt < v_before + unsigned(snake_y_r(129 downto 120)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(129 downto 120)) and R_h_cnt < h_before + unsigned(snake_x_r(129 downto 120)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(159 downto 150)) and R_v_cnt < v_before + unsigned(snake_y_r(159 downto 150)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(159 downto 150)) and R_h_cnt < h_before + unsigned(snake_x_r(159 downto 150)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(189 downto 180)) and R_v_cnt < v_before + unsigned(snake_y_r(189 downto 180)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(189 downto 180)) and R_h_cnt < h_before + unsigned(snake_x_r(189 downto 180)) + square_length));
+
+                issnake_blue :=
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(19 downto 10)) and R_v_cnt < v_before + unsigned(snake_y_r(19 downto 10)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(19 downto 10)) and R_h_cnt < h_before + unsigned(snake_x_r(19 downto 10)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(49 downto 40)) and R_v_cnt < v_before + unsigned(snake_y_r(49 downto 40)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(49 downto 40)) and R_h_cnt < h_before + unsigned(snake_x_r(49 downto 40)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(79 downto 70)) and R_v_cnt < v_before + unsigned(snake_y_r(79 downto 70)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(79 downto 70)) and R_h_cnt < h_before + unsigned(snake_x_r(79 downto 70)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(109 downto 100)) and R_v_cnt < v_before + unsigned(snake_y_r(109 downto 100)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(109 downto 100)) and R_h_cnt < h_before + unsigned(snake_x_r(109 downto 100)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(139 downto 130)) and R_v_cnt < v_before + unsigned(snake_y_r(139 downto 130)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(139 downto 130)) and R_h_cnt < h_before + unsigned(snake_x_r(139 downto 130)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(169 downto 160)) and R_v_cnt < v_before + unsigned(snake_y_r(169 downto 160)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(169 downto 160)) and R_h_cnt < h_before + unsigned(snake_x_r(169 downto 160)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(199 downto 190)) and R_v_cnt < v_before + unsigned(snake_y_r(199 downto 190)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(199 downto 190)) and R_h_cnt < h_before + unsigned(snake_x_r(199 downto 190)) + square_length));
+             
+                issnake_pink := 
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(29 downto 20)) and R_v_cnt < v_before + unsigned(snake_y_r(29 downto 20)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(29 downto 20)) and R_h_cnt < h_before + unsigned(snake_x_r(29 downto 20)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(59 downto 50)) and R_v_cnt < v_before + unsigned(snake_y_r(59 downto 50)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(59 downto 50)) and R_h_cnt < h_before + unsigned(snake_x_r(59 downto 50)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(89 downto 80)) and R_v_cnt < v_before + unsigned(snake_y_r(89 downto 80)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(89 downto 80)) and R_h_cnt < h_before + unsigned(snake_x_r(89 downto 80)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(119 downto 110)) and R_v_cnt < v_before + unsigned(snake_y_r(119 downto 110)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(119 downto 110)) and R_h_cnt < h_before + unsigned(snake_x_r(119 downto 110)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(149 downto 140)) and R_v_cnt < v_before + unsigned(snake_y_r(149 downto 140)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(149 downto 140)) and R_h_cnt < h_before + unsigned(snake_x_r(149 downto 140)) + square_length)) or
+                ((R_v_cnt >= v_before + unsigned(snake_y_r(179 downto 170)) and R_v_cnt < v_before + unsigned(snake_y_r(179 downto 170)) + square_width) and
+                (R_h_cnt >= h_before + unsigned(snake_x_r(179 downto 170)) and R_h_cnt < h_before + unsigned(snake_x_r(179 downto 170)) + square_length));
+
+                h_isfood := (R_h_cnt >= h_before + food_x) and (R_h_cnt < h_before + food_x + square_length);
+                v_isfood := (R_v_cnt >= v_before + food_y) and (R_v_cnt < v_before + food_y + square_width);
+                isfood := h_isfood and v_isfood;
+
                 case general_state is
                     when start =>
                         red_r   <= (others => '0');
