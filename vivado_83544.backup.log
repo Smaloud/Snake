@@ -1,0 +1,38 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Fri May 16 18:02:49 2025
+# Process ID: 83544
+# Current directory: D:/dsd/Snake
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent37624 D:\dsd\Snake\project_1.xpr
+# Log file: D:/dsd/Snake/vivado.log
+# Journal file: D:/dsd/Snake\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/dsd/Snake/project_1.xpr
+INFO: [Project 1-313] Project file moved from 'E:/VivadoWorks/project_1' since last save.
+WARNING: [filemgmt 56-2] Default IP Output Path : Could not find the directory 'D:/dsd/Snake/project_1.gen/sources_1', nor could it be found using path 'E:/VivadoWorks/project_1/project_1.gen/sources_1'.
+WARNING: [filemgmt 56-2] IPUserFilesDir: Could not find the directory 'D:/dsd/Snake/project_1.ip_user_files', nor could it be found using path 'E:/VivadoWorks/project_1/project_1.ip_user_files'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'G:/newforvivado/Vivado/2020.2/data/ip'.
+open_project: Time (s): cpu = 00:00:21 ; elapsed = 00:00:09 . Memory (MB): peak = 1180.500 ; gain = 0.000
+update_compile_order -fileset sources_1
+close [ open D:/dsd/Snake/project_1.srcs/sources_1/new/snake_controller.vhd w ]
+add_files D:/dsd/Snake/project_1.srcs/sources_1/new/snake_controller.vhd
+close [ open D:/dsd/Snake/project_1.srcs/sources_1/new/collision_checker.vhd w ]
+add_files D:/dsd/Snake/project_1.srcs/sources_1/new/collision_checker.vhd
+close [ open D:/dsd/Snake/project_1.srcs/sources_1/new/food_generator.vhd w ]
+add_files D:/dsd/Snake/project_1.srcs/sources_1/new/food_generator.vhd
+close [ open D:/dsd/Snake/project_1.srcs/sources_1/new/score_keeper.vhd w ]
+add_files D:/dsd/Snake/project_1.srcs/sources_1/new/score_keeper.vhd
+close [ open D:/dsd/Snake/project_1.srcs/sources_1/new/game_fsm.vhd w ]
+add_files D:/dsd/Snake/project_1.srcs/sources_1/new/game_fsm.vhd
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Fri May 16 22:57:38 2025...

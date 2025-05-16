@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Fri May 16 23:09:27 2025
+# Process ID: 175884
+# Current directory: D:/dsd/Snake/project_1.runs/synth_1
+# Command line: vivado.exe -log collision_checker.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source collision_checker.tcl
+# Log file: D:/dsd/Snake/project_1.runs/synth_1/collision_checker.vds
+# Journal file: D:/dsd/Snake/project_1.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source collision_checker.tcl -notrace
