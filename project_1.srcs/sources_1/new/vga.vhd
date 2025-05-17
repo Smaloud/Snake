@@ -12,18 +12,22 @@ entity vga is
         move_state       : in  std_logic_vector(4 downto 0);       -- 蛇朝向切换
         random_x         : in  std_logic_vector(4 downto 0);       -- 食物随机x
         random_y         : in  std_logic_vector(4 downto 0);       -- 食物随机y
+        food_x           : in  std_logic_vector(9 downto 0);       -- 食物x位置
+        food_y           : in  std_logic_vector(8 downto 0);       -- 食物y位置
+
+        snake_x          : in std_logic_vector(199 downto 0);      --从snake_controller 中获得蛇的位置和长度
+        snake_y          : in std_logic_vector(199 downto 0);
+        snake_length     : in std_logic_vector(9 downto 0);
+
+        flag_isdead      : in std_logic;                           --蛇死亡判定
 
         O_red            : out std_logic_vector(3 downto 0);       -- vga红色
         O_green          : out std_logic_vector(3 downto 0);       -- vga绿色
         O_blue           : out std_logic_vector(3 downto 0);       -- vga蓝色
 
-        snake_x          : out std_logic_vector(199 downto 0);
-        snake_y          : out std_logic_vector(199 downto 0);
-        snake_length     : out std_logic_vector(9 downto 0);
-
         O_hs             : out std_logic;                          -- vga行同步
-        flag_isdead      : out std_logic;                          -- 蛇死亡判断
-        O_vs             : out std_logic                           -- vga场同步
+        O_vs             : out std_logic;                          -- vga场同步
+
     );
 end vga;
 
@@ -51,19 +55,20 @@ architecture Behavioral of vga is
     constant square_length : integer := 20;                        -- 界面长
     constant square_width  : integer := 24;                        -- 界面宽
 
-  --===============  VGA 时序常量 640 * 480===============
-    constant C_H_SYNC_PULSE   : integer := 96;
-    constant C_H_BACK_PORCH   : integer := 48;
-    constant C_H_ACTIVE_TIME  : integer := 640;
-    constant C_H_FRONT_PORCH  : integer := 16;
-    constant C_H_LINE_PERIOD  : integer := 800;
+    --===============  VGA 时序常量 1024 * 600 ===============--
+    constant C_H_SYNC_PULSE   : integer := 128;  -- 行同步脉冲
+    constant C_H_BACK_PORCH   : integer := 88;   -- 行同步后肩
+    constant C_H_ACTIVE_TIME  : integer := 1024; -- 可见区域像素数
+    constant C_H_FRONT_PORCH  : integer := 40;   -- 行同步前肩
+    constant C_H_LINE_PERIOD  : integer := C_H_SYNC_PULSE + C_H_BACK_PORCH + C_H_ACTIVE_TIME + C_H_FRONT_PORCH; -- 总行时长
 
-    constant C_V_SYNC_PULSE   : integer := 2;
-    constant C_V_BACK_PORCH   : integer := 33;
-    constant C_V_ACTIVE_TIME  : integer := 480;
-    constant C_V_FRONT_PORCH  : integer := 10;
-    constant C_V_FRAME_PERIOD : integer := 525;
+    constant C_V_SYNC_PULSE   : integer := 4;    -- 帧同步脉冲
+    constant C_V_BACK_PORCH   : integer := 23;   -- 帧同步后肩
+    constant C_V_ACTIVE_TIME  : integer := 600;  -- 可见行数
+    constant C_V_FRONT_PORCH  : integer := 1;    -- 帧同步前肩
+    constant C_V_FRAME_PERIOD : integer := C_V_SYNC_PULSE + C_V_BACK_PORCH + C_V_ACTIVE_TIME + C_V_FRONT_PORCH; -- 总帧周期
 
+    -- 方便使用的中间变量
     constant h_before : integer := C_H_SYNC_PULSE + C_H_BACK_PORCH;
     constant h_after  : integer := C_H_LINE_PERIOD - C_H_FRONT_PORCH;
     constant v_before : integer := C_V_SYNC_PULSE + C_V_BACK_PORCH;
@@ -180,153 +185,6 @@ begin
                     when hard => interval <= to_unsigned(5_000_000 ,30); --0.2
                     when others => null;
                 end case;
-            end if;
-        end if;
-    end process;
-
-    ------------------------------------------------------------------
-    -- 蛇死亡判定
-    ------------------------------------------------------------------
-    process(clk, rst_n)
-        -- function body_hit(headx, heady : unsigned(9 downto 0);
-        --                   bodx, body : std_logic_vector;
-        --                   len : unsigned) return boolean is
-        -- begin
-        --     -- 由于逐项编码，这里直接在下面过程里展开即可
-        --     return false;
-        -- end function;
-    begin
-        if rst_n = '0' then
-            isdead_r <= '0';
-        elsif rising_edge(clk) then
-            if general_state = game_start then
-                isdead_r <= '0';
-            elsif isdead_r = '0' then
-                -- 边界
-                if (slice10(snake_x_r,0) < to_unsigned(0,10)) or
-                   (slice10(snake_x_r,0) > to_unsigned(640-square_length,10)) or
-                   (slice10_y(snake_y_r,0) < to_unsigned(0,9)) or
-                   (slice10_y(snake_y_r,0) > to_unsigned(480-square_width,9)) then
-                    isdead_r <= '1';
-                -- 蛇头碰身体（编码 19 次）
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,1) and
-                       slice10_y(snake_y_r,0) = slice10_y(snake_y_r,1)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,2) and
-                       slice10_y(snake_y_r,0) = slice10_y(snake_y_r,2)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,3) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,3)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,4) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,4)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,5) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,5)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,6) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,6)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,7) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,7)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,8) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,8)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,9) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,9)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,10) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,10)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,11) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,11)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,12) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,12)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,13) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,13)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,14) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,14)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,15) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,15)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,16) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,16)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,17) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,17)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,18) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,18)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,19) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,19)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,20) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,20)) then
-                    isdead_r <= '1';                    
-                end if;
-            end if;
-        end if;
-    end process;
-
-    ------------------------------------------------------------------
-    -- 蛇身移动  
-    ------------------------------------------------------------------
-    process(clk, rst_n)
-        -- 便捷变量
-        variable head_x  : unsigned(9 downto 0);
-        variable head_y  : unsigned(9 downto 0);
-    begin
-        if rst_n = '0' then
-            -- 初始化 3 格
-            snake_x_r(9 downto 0)    <= std_logic_vector(headx_init);
-            snake_y_r(9 downto 0)    <= std_logic_vector(heady_init);
-            snake_x_r(19 downto 10)  <= std_logic_vector(headx_init - square_length);
-            snake_y_r(19 downto 10)  <= std_logic_vector(heady_init);
-            snake_x_r(29 downto 20)  <= std_logic_vector(headx_init - 2*square_length);
-            snake_y_r(29 downto 20)  <= std_logic_vector(heady_init);
-            snake_x_r(199 downto 30) <= (others => '0');
-            snake_y_r(199 downto 30) <= (others => '0');
-        elsif rising_edge(clk) then
-            if general_state = game_start then
-                snake_x_r(9 downto 0)    <= std_logic_vector(headx_init);
-                snake_y_r(9 downto 0)    <= std_logic_vector(heady_init);
-                snake_x_r(19 downto 10)  <= std_logic_vector(headx_init - square_length);
-                snake_y_r(19 downto 10)  <= std_logic_vector(heady_init);
-                snake_x_r(29 downto 20)  <= std_logic_vector(headx_init - 2*square_length);
-                snake_y_r(29 downto 20)  <= std_logic_vector(heady_init);
-                snake_x_r(199 downto 30) <= (others => '0');
-                snake_y_r(199 downto 30) <= (others => '0');
-
-            elsif move_state = stop then
-                null; -- 保持不动
-
-            elsif (flag_printnew = '1') and (general_state = gaming) then
-                -- 取当前头坐标
-                head_x := slice10(snake_x_r,0);
-                head_y := slice10_y(snake_y_r,0);
-
-                -- 根据方向更新
-                case move_state is
-                    when face_right => head_x := head_x + square_length;
-                    when face_left  => head_x := head_x - square_length;
-                    when face_up    => head_y := head_y - square_width;
-                    when face_down  => head_y := head_y + square_width;
-                    when others     => null;
-                end case;
-
-                -- 整体移位：从尾到头
-                snake_x_r(199 downto 10) <= snake_x_r(189 downto 0);
-                snake_y_r(199 downto 10) <= snake_y_r(189 downto 0);
-
-                -- 写新头
-                snake_x_r(9 downto 0) <= std_logic_vector(head_x);
-                snake_y_r(9 downto 0) <= std_logic_vector(head_y);
             end if;
         end if;
     end process;
@@ -592,9 +450,5 @@ begin
     O_red         <= red_r;
     O_green       <= green_r;
     O_blue        <= blue_r;
-    snake_x       <= snake_x_r;
-    snake_y       <= snake_y_r;
-    snake_length  <= std_logic_vector(snake_len_r);
-    flag_isdead   <= isdead_r;
 
 end Behavioral;
