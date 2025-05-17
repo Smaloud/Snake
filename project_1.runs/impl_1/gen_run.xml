@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1747408243">
+  <File Type="BITSTR-BMM" Name="collision_checker_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="collision_checker_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="collision_checker_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR" Name="collision_checker_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="collision_checker.tcl"/>
+  <File Type="OPT-TIMING" Name="collision_checker_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="collision_checker_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="collision_checker_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="collision_checker_reports.tcl"/>
+  <File Type="OPT-DRC" Name="collision_checker_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="collision_checker.hwdef"/>
+  <File Type="PWROPT-DCP" Name="collision_checker_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="collision_checker_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="collision_checker_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="collision_checker_placed.dcp"/>
+  <File Type="PLACE-IO" Name="collision_checker_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="collision_checker_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="collision_checker_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="collision_checker_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="collision_checker_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="collision_checker_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="collision_checker_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="collision_checker_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="collision_checker_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="collision_checker.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="collision_checker_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="collision_checker_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="collision_checker_drc_physopted.rpt"/>
+  <File Type="BITSTR-MSK" Name="collision_checker.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="collision_checker_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="collision_checker_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="collision_checker_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="collision_checker_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="collision_checker_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="collision_checker_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="collision_checker_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="collision_checker.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="collision_checker_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="collision_checker_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="collision_checker_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="collision_checker_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="collision_checker_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="collision_checker_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="collision_checker_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="collision_checker_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="collision_checker_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="collision_checker_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="collision_checker_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="collision_checker_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="collision_checker_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="collision_checker_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="collision_checker_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="collision_checker_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="collision_checker_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="collision_checker_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="collision_checker_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="collision_checker_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="collision_checker_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="collision_checker.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="collision_checker_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-RBT" Name="collision_checker.rbt"/>
+  <File Type="BITSTR-NKY" Name="collision_checker.nky"/>
+  <File Type="PDI-FILE" Name="collision_checker.pdi"/>
+  <File Type="RCFI_FILE" Name="collision_checker.rcfi"/>
+  <File Type="CFI_FILE" Name="collision_checker.cfi"/>
+  <File Type="RNPI_FILE" Name="collision_checker.rnpi"/>
+  <File Type="NPI_FILE" Name="collision_checker.npi"/>
+  <File Type="RBD_FILE" Name="collision_checker.rbd"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="collision_checker.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="collision_checker.sysdef"/>
+  <File Type="BG-BGN" Name="collision_checker.bgn"/>
+  <File Type="BG-DRC" Name="collision_checker.drc"/>
+  <File Type="RDI-RDI" Name="collision_checker.vdi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/collision_checker.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/vga.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/snake_controller.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/food_generator.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/score_keeper.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/game_fsm.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="collision_checker"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+</GenRun>

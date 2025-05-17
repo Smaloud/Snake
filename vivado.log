@@ -1,0 +1,34 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Fri May 16 23:04:21 2025
+# Process ID: 174184
+# Current directory: D:/dsd/Snake
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent159640 D:\dsd\Snake\project_1.xpr
+# Log file: D:/dsd/Snake/vivado.log
+# Journal file: D:/dsd/Snake\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/dsd/Snake/project_1.xpr
+WARNING: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'D:/dsd/Snake/project_1.gen/sources_1'.
+WARNING: [filemgmt 56-3] IPUserFilesDir: Could not find the directory 'D:/dsd/Snake/project_1.ip_user_files'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'G:/newforvivado/Vivado/2020.2/data/ip'.
+open_project: Time (s): cpu = 00:00:17 ; elapsed = 00:00:14 . Memory (MB): peak = 1157.410 ; gain = 0.000
+update_compile_order -fileset sources_1
+launch_runs synth_1 -jobs 24
+[Fri May 16 23:05:26 2025] Launched synth_1...
+Run output will be captured here: D:/dsd/Snake/project_1.runs/synth_1/runme.log
+reset_run synth_1
+launch_runs synth_1 -jobs 24
+[Fri May 16 23:09:20 2025] Launched synth_1...
+Run output will be captured here: D:/dsd/Snake/project_1.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 24
+[Fri May 16 23:10:43 2025] Launched impl_1...
+Run output will be captured here: D:/dsd/Snake/project_1.runs/impl_1/runme.log
+exit
+INFO: [Common 17-206] Exiting Vivado at Fri May 16 23:13:39 2025...

@@ -1,44 +1,15 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 2025/05/12 17:36:24
--- Design Name: 
--- Module Name: vga - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use ieee.numeric_std.all;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity vga is
     port(
         clk              : in  std_logic;                          -- 100 MHz
         rst_n            : in  std_logic;                          -- low active reset
-        general_state    : in  std_logic_vector(1 downto 0);--总状态切换
-        difficulty_state : in  std_logic_vector(1 downto 0);--难度切换
-        move_state       : in  std_logic_vector(4 downto 0);--蛇朝向切换
+        general_state    : in  std_logic_vector(1 downto 0); --总状态切�?
+        difficulty_state : in  std_logic_vector(1 downto 0); --难度切换
+        move_state       : in  std_logic_vector(4 downto 0);--蛇朝向切�?
         random_x         : in  std_logic_vector(4 downto 0);--食物随机x
         random_y         : in  std_logic_vector(4 downto 0);--食物随机y
 
@@ -50,37 +21,37 @@ entity vga is
         snake_y          : out std_logic_vector(199 downto 0);
         snake_length     : out std_logic_vector(9 downto 0);
 
-        O_hs             : out std_logic;--vga行同步
-        flag_isdead      : out std_logic;--蛇死亡判断
-        O_vs             : out std_logic--vga场同步
+        O_hs             : out std_logic;--vga行同�?
+        flag_isdead      : out std_logic;--蛇死亡判�?
+        O_vs             : out std_logic --vga场同�?
     );
 end vga;
 
 architecture Behavioral of vga is
     --===============  常量映射 ===============
-    constant start      : std_logic_vector(1 downto 0) := "00";--开始菜单
+    constant start      : std_logic_vector(1 downto 0) := "00";--�?始菜�?
     constant diff_menu  : std_logic_vector(1 downto 0) := "01";--选择难度菜单
     constant game_start : std_logic_vector(1 downto 0) := "10";--初始
     constant gaming     : std_logic_vector(1 downto 0) := "11";--游戏进行菜单
 
-    constant hard : std_logic_vector(1 downto 0) := "00";--难
-    constant mid  : std_logic_vector(1 downto 0) := "01";--中
-    constant easy : std_logic_vector(1 downto 0) := "10";--易
+    constant hard : std_logic_vector(1 downto 0) := "00";--�?
+    constant mid  : std_logic_vector(1 downto 0) := "01";--�?
+    constant easy : std_logic_vector(1 downto 0) := "10";--�?
 
-    constant length_init : unsigned(9 downto 0) := to_unsigned(3,10);--蛇初始长度
+    constant length_init : unsigned(9 downto 0) := to_unsigned(3,10);--蛇初始长�?
     constant headx_init  : unsigned(9 downto 0) := to_unsigned(340,10);--蛇头初始x坐标
     constant heady_init  : unsigned(8 downto 0) := to_unsigned(240,9);--蛇头初始y坐标
 
-    constant stop       : std_logic_vector(4 downto 0) := "00001";--初始停止状态
-    constant face_up    : std_logic_vector(4 downto 0) := "00010";--向上状态
-    constant face_down  : std_logic_vector(4 downto 0) := "00100";--向下状态
-    constant face_left  : std_logic_vector(4 downto 0) := "01000";--向左状态
-    constant face_right : std_logic_vector(4 downto 0) := "10000";--向右状态
+    constant stop       : std_logic_vector(4 downto 0) := "00001";--初始停止状�??
+    constant face_up    : std_logic_vector(4 downto 0) := "00010";--向上状�??
+    constant face_down  : std_logic_vector(4 downto 0) := "00100";--向下状�??
+    constant face_left  : std_logic_vector(4 downto 0) := "01000";--向左状�??
+    constant face_right : std_logic_vector(4 downto 0) := "10000";--向右状�??
 
-    constant square_length : integer := 20;--界面长
-    constant square_width  : integer := 24;--界面宽
+    constant square_length : integer := 20;--界面�?
+    constant square_width  : integer := 24;--界面�?
 
-  --===============  VGA 时序常量 （640 * 480）===============
+  --===============  VGA 时序常量 �?640 * 480�?===============
     constant C_H_SYNC_PULSE   : integer := 96;
     constant C_H_BACK_PORCH   : integer := 48;
     constant C_H_ACTIVE_TIME  : integer := 640;
@@ -104,24 +75,19 @@ architecture Behavioral of vga is
     signal W_active_flag : std_logic;--刷新标志，为1时rgb数据显示
 
     signal stay_cnt  : unsigned(29 downto 0);--蛇在每一格停留时长计数器
-    signal interval  : unsigned(29 downto 0);--蛇在每一格停留时间
+    signal interval  : unsigned(29 downto 0);--蛇在每一格停留时�?
 
-    signal food_x    : unsigned(9 downto 0);--食物x坐标
-    signal food_y    : unsigned(8 downto 0);--食物y坐标
-    signal flag_food : std_logic;--判断是否需要生成新的食物
-    signal flag_printnew : std_logic;--指定难度时间间隔，用于刷新屏幕
+    signal flag_printnew : std_logic;--指定难度时间间隔，用于刷新屏�?
 
-    signal snake_x_r : std_logic_vector(199 downto 0);--蛇身x坐标集合
-    signal snake_y_r : std_logic_vector(199 downto 0);--蛇身y坐标集合
-    signal snake_len_r : unsigned(9 downto 0);
-    signal isdead_r : std_logic;--蛇是否死亡标志
 
-    --=== 颜色寄存器 ===
+
+
+    --=== 颜色寄存�? ===
     signal red_r   : std_logic_vector(3 downto 0);
     signal green_r : std_logic_vector(3 downto 0);
     signal blue_r  : std_logic_vector(3 downto 0);
 
-    --=============== 工具函数（用于切片，把存储的蛇的位置数据转换为单元格数据） ===============
+    --=============== 工具函数（用于切片，把存储的蛇的位置数据转换为单元格数据�? ===============
     function slice10(vec : std_logic_vector; idx : natural) return unsigned is
         variable lo : integer := idx*10;
     begin
@@ -172,7 +138,7 @@ begin
     O_vs <= '0' when (R_v_cnt < C_V_SYNC_PULSE) else '1';
 
     ------------------------------------------------------------------
-    -- 有效区标志
+    -- 有效区标�?
     ------------------------------------------------------------------
     W_active_flag <= '1' when 
     (to_integer(R_h_cnt) >= h_before)  and
@@ -181,7 +147,7 @@ begin
     (to_integer(R_v_cnt) <  v_after)   else '0';
 
     ------------------------------------------------------------------
-    -- pause 计数器 (stay_cnt) 以及 flag_printnew
+    -- pause 计数�? (stay_cnt) 以及 flag_printnew
     ------------------------------------------------------------------
     W_active_flag <= '1' when 
          (to_integer(R_h_cnt) >= h_before)  and
@@ -190,7 +156,7 @@ begin
          (to_integer(R_v_cnt) <  v_after)   else '0';
 
     ------------------------------------------------------------------
-    -- pause 计数器 (stay_cnt) 以及 flag_printnew
+    -- pause 计数�? (stay_cnt) 以及 flag_printnew
     ------------------------------------------------------------------
     process(clk, rst_n)
     begin
@@ -230,57 +196,8 @@ begin
         end if;
     end process;
 
-    ------------------------------------------------------------------
-    -- snake_length 寄存器
-    ------------------------------------------------------------------
-    process(clk, rst_n)
-    begin
-        if rst_n = '1' then
-            snake_len_r <= length_init;
-        elsif rising_edge(clk) then
-            if general_state = game_start then
-                snake_len_r <= length_init;
-            elsif flag_food = '1' then
-                if snake_len_r /= to_unsigned(20,10) then
-                    snake_len_r <= snake_len_r + 1;
-                end if;
-            end if;
-        end if;
-    end process;
 
-   ------------------------------------------------------------------
-    -- 食物刷新标志
-    ------------------------------------------------------------------
-    process(clk, rst_n)
-    begin
-        if rst_n = '1' then
-            flag_food <= '0';
-        elsif rising_edge(clk) then
-            if (food_x = slice10(snake_x_r,0)) and
-               (food_y = slice10_y(snake_y_r,0)(8 downto 0)) and
-               (general_state = gaming) then
-                flag_food <= '1';
-            else
-                flag_food <= '0';
-            end if;
-        end if;
-    end process;
 
-    ------------------------------------------------------------------
-    -- 食物坐标
-    ------------------------------------------------------------------
-    process(clk, rst_n)
-    begin
-        if rst_n = '1' then
-            food_x <= (others => '0');
-            food_y <= (others => '0');
-        elsif rising_edge(clk) then
-            if flag_food = '1' or general_state = game_start then
-                food_x <= unsigned(random_x) * square_length;
-                food_y <= unsigned(random_y) * square_width;
-            end if;
-        end if;
-    end process;
 
     ------------------------------------------------------------------
     -- 蛇死亡判定
