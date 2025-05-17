@@ -521,4 +521,29 @@ begin
                             char_x := pixel_x - (SCORE_X + (6+i)*(DIGIT_WIDTH + CHAR_SPACING));
                             char_y := pixel_y - SCORE_Y;
                             in_score_area := true;
-                            pixel_on := DIGIT_ROM(digit_value, char
+                            pixel_on := DIGIT_ROM(digit_value, char_y)(5-char_x);
+                        end if;
+                    end loop;
+                end if;
+            end if;
+            
+            -- 设置输出
+            is_score_area <= '0';
+            if in_score_area then
+                is_score_area <= '1';
+                if pixel_on = '1' then
+                    -- 白色文本
+                    r_out <= "1111";
+                    g_out <= "1111";
+                    b_out <= "1111";
+                else
+                    -- 透明背景
+                    r_out <= "0000";
+                    g_out <= "0000";
+                    b_out <= "0000";
+                end if;
+            end if;
+        end if;
+    end process;
+    
+end Behavioral;
