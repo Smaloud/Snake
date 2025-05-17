@@ -32,7 +32,7 @@ architecture Behavioral of food_generator is
     signal food_y_r    : unsigned(8 downto 0) := (others => '0');
     signal flag_eat_r  : std_logic := '0';
 
-    -- ¹¤¾ßº¯Êı£ºÌáÈ¡×ø±ê
+    -- è›‡èº«åæ ‡åˆ‡ç‰‡å‡½æ•°
     function slice10(vec : std_logic_vector; idx : natural) return unsigned is
         variable lo : integer := idx * 10;
     begin
@@ -42,7 +42,7 @@ architecture Behavioral of food_generator is
 begin
 
     ------------------------------------------------------------------
-    -- ÅĞ¶ÏÉßÍ·ÊÇ·ñ³Ôµ½Ê³Îï
+    -- åˆ¤æ–­è›‡å¤´æ˜¯å¦åƒåˆ°é£Ÿç‰©
     ------------------------------------------------------------------
     process(clk, rst_n)
     begin
@@ -58,7 +58,7 @@ begin
     end process;
 
     ------------------------------------------------------------------
-    -- Ê³ÎïÉú³ÉÂß¼­£¨³õ°æ£º²»ÖØµş¼ì²â»òÖ»ÅĞ¶ÏÇ°3½Ú£©
+    -- é£Ÿç‰©ç”Ÿæˆé€»è¾‘ï¼ˆé‡å åˆ¤æ–­ï¼šåªåˆ¤æ–­å‰3èŠ‚ï¼‰
     ------------------------------------------------------------------
     process(clk, rst_n)
         variable candidate_x : unsigned(9 downto 0);
@@ -69,12 +69,12 @@ begin
             food_x_r <= (others => '0');
             food_y_r <= (others => '0');
         elsif rising_edge(clk) then
-            if (flag_eat_r = '1') or (general_state = "10") then -- eat »ò ³õÊ¼»¯
-                -- ĞÂ×ø±êºòÑ¡Öµ
+            if (flag_eat_r = '1') or (general_state = "10") then -- eat æˆ– åˆå§‹åŒ–
+                -- è®¡ç®—å€™é€‰å€¼
                 candidate_x := unsigned(random_x) * SQUARE_LENGTH;
                 candidate_y := unsigned(random_y) * SQUARE_WIDTH;
 
-                -- ³õ°æÖ»ÅĞ¶ÏÊÇ·ñºÍÉßÇ°¼¸½ÚÖØµş£¨×î¶à3½Ú£©
+                -- åªåˆ¤æ–­æ˜¯å¦ä¸å‰3èŠ‚é‡å 
                 overlap := false;
                 for i in 0 to 2 loop
                     if (candidate_x = slice10(snake_x, i)) and
@@ -83,7 +83,7 @@ begin
                     end if;
                 end loop;
 
-                -- ÈôÎŞÖØµşÔò¸üĞÂÊ³ÎïÎ»ÖÃ
+                -- ä¸é‡å åˆ™æ›´æ–°é£Ÿç‰©ä½ç½®
                 if not overlap then
                     food_x_r <= candidate_x;
                     food_y_r <= candidate_y;
@@ -93,7 +93,7 @@ begin
     end process;
 
     ------------------------------------------------------------------
-    -- Êä³ö
+    -- è¾“å‡º
     ------------------------------------------------------------------
     food_x   <= food_x_r;
     food_y   <= food_y_r;

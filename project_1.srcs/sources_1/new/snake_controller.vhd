@@ -8,8 +8,8 @@ entity snake_controller is
         rst_n         : in  std_logic;
         general_state : in  std_logic_vector(1 downto 0);
         move_state    : in  std_logic_vector(4 downto 0);
-        flag_update   : in  std_logic;  -- ¿ØÖÆÉßÃ¿Ö¡ÒÆ¶¯
-        flag_eat      : in  std_logic;  -- ³Ôµ½Ê³ÎïÊ±ÖÃÎ»
+        flag_update   : in  std_logic;  -- æ§åˆ¶æ¯å¸§ç§»åŠ¨
+        flag_eat      : in  std_logic;  -- åƒåˆ°é£Ÿç‰©æ—¶ç½®ä½
 
         snake_length  : out std_logic_vector(9 downto 0);
         snake_x       : out std_logic_vector(199 downto 0);
@@ -23,7 +23,7 @@ architecture Behavioral of snake_controller is
     constant SQUARE_LEN   : integer := 20;
     constant MAX_LENGTH   : integer := 20;
 
-    -- ·½Ïò¶¨Òå
+    -- æ–¹å‘å¸¸é‡
     constant STOP        : std_logic_vector(4 downto 0) := "00001";
     constant FACE_UP     : std_logic_vector(4 downto 0) := "00010";
     constant FACE_DOWN   : std_logic_vector(4 downto 0) := "00100";
@@ -41,32 +41,32 @@ architecture Behavioral of snake_controller is
     
 begin
 
-    -- ÒÆ¶¯¿ØÖÆ
+    -- ç§»åŠ¨æ§åˆ¶
     process(clk, rst_n)
     begin
         if rst_n = '0' then
             snake_len_r <= to_unsigned(LENGTH_INIT, 10);
             current_dir <= STOP;
 
-            -- ³õÊ¼»¯ÉßµÄÎ»ÖÃ£¨Ä¬ÈÏºáÏò£©
+            -- åˆå§‹åŒ–è›‡çš„ä½ç½®ï¼Œé»˜è®¤æ¨ªå‘
             for i in 0 to MAX_LENGTH-1 loop
                 snake_x_buf(i) <= to_unsigned(340 - i*SQUARE_LEN, 10);
                 snake_y_buf(i) <= to_unsigned(240, 9);
             end loop;
 
         elsif rising_edge(clk) then
-            if general_state = "10" then  -- ÓÎÏ·³õÊ¼»¯
+            if general_state = "10" then  -- æ¸¸æˆåˆå§‹åŒ–
                 snake_len_r <= to_unsigned(LENGTH_INIT, 10);
                 current_dir <= STOP;
-            elsif general_state = "11" then  -- ÓÎÏ·ÖĞ
-                -- ¸üĞÂ·½Ïò£¨¿É¼ÓÈë½ûÖ¹·´ÏòÂß¼­£©
+            elsif general_state = "11" then  -- æ¸¸æˆä¸­
+                -- æ›´æ–°æ–¹å‘ï¼ˆå¯é˜²æ­¢åå‘ç§»åŠ¨é€»è¾‘ï¼‰
                 if move_state /= STOP then
                     current_dir <= move_state;
                 end if;
 
-                -- Ã¿Ö¡¸üĞÂÒ»´ÎÎ»ÖÃ
+                -- æ¯å¸§æ›´æ–°ä¸€æ¬¡ä½ç½®
                 if flag_update = '1' then
-                    -- ÉíÌå´ÓÎ²°ÍÏòÍ·²¿ÒÆ¶¯£¨shift£©
+                    -- æ•´ä½“å°¾éƒ¨å‘å¤´éƒ¨ç§»åŠ¨ï¼ˆshiftï¼‰
                     for i in MAX_LENGTH - 1 downto 1 loop
                         if i < to_integer(snake_len_r) then
                             snake_x_buf(i) <= snake_x_buf(i-1);
@@ -74,7 +74,7 @@ begin
                         end if;
                     end loop;
 
-                    -- ¸ù¾İ·½Ïò¸üĞÂÉßÍ·Î»ÖÃ
+                    -- æ ¹æ®æ–¹å‘æ›´æ–°å¤´éƒ¨ä½ç½®
                     case current_dir is
                         when FACE_UP    => snake_y_buf(0) <= snake_y_buf(0) - to_unsigned(SQUARE_LEN, 9);
                         when FACE_DOWN  => snake_y_buf(0) <= snake_y_buf(0) + to_unsigned(SQUARE_LEN, 9);
@@ -83,7 +83,7 @@ begin
                         when others     => null;
                     end case;
 
-                    -- ³Ôµ½Ê³ÎïÔòÔö³¤Ò»½Ú
+                    -- åƒåˆ°é£Ÿç‰©å¢åŠ ä¸€èŠ‚
                     if flag_eat = '1' and snake_len_r < to_unsigned(MAX_LENGTH, 10) then
                         snake_len_r <= snake_len_r + 1;
                     end if;
@@ -92,7 +92,7 @@ begin
         end if;
     end process;
 
-    -- Êä³ö×ø±êºÍ³¤¶È
+    -- è¾“å‡ºé•¿åº¦å’Œåæ ‡
     snake_length <= std_logic_vector(snake_len_r);
     snake_x <= (others => '0');
     snake_y <= (others => '0');

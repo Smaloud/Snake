@@ -6,52 +6,52 @@ use ieee.numeric_std.all;
 entity vga is
     port(
         clk              : in  std_logic;                          -- 100 MHz
-        rst_n            : in  std_logic;                          -- low active reset
-        general_state    : in  std_logic_vector(1 downto 0); --总状态切�?
-        difficulty_state : in  std_logic_vector(1 downto 0); --难度切换
-        move_state       : in  std_logic_vector(4 downto 0);--蛇朝向切�?
-        random_x         : in  std_logic_vector(4 downto 0);--食物随机x
-        random_y         : in  std_logic_vector(4 downto 0);--食物随机y
+        rst_n            : in  std_logic;                          -- 低电平有效复位
+        general_state    : in  std_logic_vector(1 downto 0);       -- 总状态切换
+        difficulty_state : in  std_logic_vector(1 downto 0);       -- 难度切换
+        move_state       : in  std_logic_vector(4 downto 0);       -- 蛇朝向切换
+        random_x         : in  std_logic_vector(4 downto 0);       -- 食物随机x
+        random_y         : in  std_logic_vector(4 downto 0);       -- 食物随机y
 
-        O_red            : out std_logic_vector(3 downto 0);--vga红色
-        O_green          : out std_logic_vector(3 downto 0);--vga绿色
-        O_blue           : out std_logic_vector(3 downto 0);--vga蓝色
+        O_red            : out std_logic_vector(3 downto 0);       -- vga红色
+        O_green          : out std_logic_vector(3 downto 0);       -- vga绿色
+        O_blue           : out std_logic_vector(3 downto 0);       -- vga蓝色
 
         snake_x          : out std_logic_vector(199 downto 0);
         snake_y          : out std_logic_vector(199 downto 0);
         snake_length     : out std_logic_vector(9 downto 0);
 
-        O_hs             : out std_logic;--vga行同�?
-        flag_isdead      : out std_logic;--蛇死亡判�?
-        O_vs             : out std_logic --vga场同�?
+        O_hs             : out std_logic;                          -- vga行同步
+        flag_isdead      : out std_logic;                          -- 蛇死亡判断
+        O_vs             : out std_logic                           -- vga场同步
     );
 end vga;
 
 architecture Behavioral of vga is
     --===============  常量映射 ===============
-    constant start      : std_logic_vector(1 downto 0) := "00";--�?始菜�?
-    constant diff_menu  : std_logic_vector(1 downto 0) := "01";--选择难度菜单
-    constant game_start : std_logic_vector(1 downto 0) := "10";--初始
-    constant gaming     : std_logic_vector(1 downto 0) := "11";--游戏进行菜单
+    constant start      : std_logic_vector(1 downto 0) := "00";    -- 开始菜单
+    constant diff_menu  : std_logic_vector(1 downto 0) := "01";    -- 选择难度菜单
+    constant game_start : std_logic_vector(1 downto 0) := "10";    -- 初始
+    constant gaming     : std_logic_vector(1 downto 0) := "11";    -- 游戏进行菜单
 
-    constant hard : std_logic_vector(1 downto 0) := "00";--�?
-    constant mid  : std_logic_vector(1 downto 0) := "01";--�?
-    constant easy : std_logic_vector(1 downto 0) := "10";--�?
+    constant hard : std_logic_vector(1 downto 0) := "00";          -- 难
+    constant mid  : std_logic_vector(1 downto 0) := "01";          -- 中
+    constant easy : std_logic_vector(1 downto 0) := "10";          -- 易
 
-    constant length_init : unsigned(9 downto 0) := to_unsigned(3,10);--蛇初始长�?
-    constant headx_init  : unsigned(9 downto 0) := to_unsigned(340,10);--蛇头初始x坐标
-    constant heady_init  : unsigned(8 downto 0) := to_unsigned(240,9);--蛇头初始y坐标
+    constant length_init : unsigned(9 downto 0) := to_unsigned(3,10);   -- 蛇初始长度
+    constant headx_init  : unsigned(9 downto 0) := to_unsigned(340,10); -- 蛇头初始x坐标
+    constant heady_init  : unsigned(8 downto 0) := to_unsigned(240,9);  -- 蛇头初始y坐标
 
-    constant stop       : std_logic_vector(4 downto 0) := "00001";--初始停止状�??
-    constant face_up    : std_logic_vector(4 downto 0) := "00010";--向上状�??
-    constant face_down  : std_logic_vector(4 downto 0) := "00100";--向下状�??
-    constant face_left  : std_logic_vector(4 downto 0) := "01000";--向左状�??
-    constant face_right : std_logic_vector(4 downto 0) := "10000";--向右状�??
+    constant stop       : std_logic_vector(4 downto 0) := "00001"; -- 初始停止状态
+    constant face_up    : std_logic_vector(4 downto 0) := "00010"; -- 向上状态
+    constant face_down  : std_logic_vector(4 downto 0) := "00100"; -- 向下状态
+    constant face_left  : std_logic_vector(4 downto 0) := "01000"; -- 向左状态
+    constant face_right : std_logic_vector(4 downto 0) := "10000"; -- 向右状态
 
-    constant square_length : integer := 20;--界面�?
-    constant square_width  : integer := 24;--界面�?
+    constant square_length : integer := 20;                        -- 界面长
+    constant square_width  : integer := 24;                        -- 界面宽
 
-  --===============  VGA 时序常量 �?640 * 480�?===============
+  --===============  VGA 时序常量 640 * 480===============
     constant C_H_SYNC_PULSE   : integer := 96;
     constant C_H_BACK_PORCH   : integer := 48;
     constant C_H_ACTIVE_TIME  : integer := 640;
@@ -70,24 +70,21 @@ architecture Behavioral of vga is
     constant v_after  : integer := C_V_FRAME_PERIOD - C_V_FRONT_PORCH;
 
     --===============  内部信号 ===============
-    signal R_h_cnt       : unsigned(11 downto 0);-- 行时序计数器
-    signal R_v_cnt       : unsigned(11 downto 0);-- 列时序计数器
-    signal W_active_flag : std_logic;--刷新标志，为1时rgb数据显示
+    signal R_h_cnt       : unsigned(11 downto 0);                  -- 行时序计数器
+    signal R_v_cnt       : unsigned(11 downto 0);                  -- 列时序计数器
+    signal W_active_flag : std_logic;                             -- 刷新标志，为1时rgb数据显示
 
-    signal stay_cnt  : unsigned(29 downto 0);--蛇在每一格停留时长计数器
-    signal interval  : unsigned(29 downto 0);--蛇在每一格停留时�?
+    signal stay_cnt  : unsigned(29 downto 0);                     -- 蛇在每一格停留时长计数器
+    signal interval  : unsigned(29 downto 0);                     -- 蛇在每一格停留时间
 
-    signal flag_printnew : std_logic;--指定难度时间间隔，用于刷新屏�?
+    signal flag_printnew : std_logic;                             -- 指定难度时间间隔，用于刷新屏幕
 
-
-
-
-    --=== 颜色寄存�? ===
+    --=== 颜色寄存器 ===
     signal red_r   : std_logic_vector(3 downto 0);
     signal green_r : std_logic_vector(3 downto 0);
     signal blue_r  : std_logic_vector(3 downto 0);
 
-    --=============== 工具函数（用于切片，把存储的蛇的位置数据转换为单元格数据�? ===============
+    --=============== 工具函数（用于切片，把存储的蛇的位置数据转换为单元格数据） ===============
     function slice10(vec : std_logic_vector; idx : natural) return unsigned is
         variable lo : integer := idx*10;
     begin
@@ -138,7 +135,7 @@ begin
     O_vs <= '0' when (R_v_cnt < C_V_SYNC_PULSE) else '1';
 
     ------------------------------------------------------------------
-    -- 有效区标�?
+    -- 有效区标志
     ------------------------------------------------------------------
     W_active_flag <= '1' when 
     (to_integer(R_h_cnt) >= h_before)  and
@@ -147,16 +144,7 @@ begin
     (to_integer(R_v_cnt) <  v_after)   else '0';
 
     ------------------------------------------------------------------
-    -- pause 计数�? (stay_cnt) 以及 flag_printnew
-    ------------------------------------------------------------------
-    W_active_flag <= '1' when 
-         (to_integer(R_h_cnt) >= h_before)  and
-         (to_integer(R_h_cnt) <  h_after)   and
-         (to_integer(R_v_cnt) >= v_before)  and
-         (to_integer(R_v_cnt) <  v_after)   else '0';
-
-    ------------------------------------------------------------------
-    -- pause 计数�? (stay_cnt) 以及 flag_printnew
+    -- pause 计数器 (stay_cnt) 以及 flag_printnew
     ------------------------------------------------------------------
     process(clk, rst_n)
     begin
@@ -196,9 +184,6 @@ begin
         end if;
     end process;
 
-
-
-
     ------------------------------------------------------------------
     -- 蛇死亡判定
     ------------------------------------------------------------------
@@ -207,7 +192,7 @@ begin
         --                   bodx, body : std_logic_vector;
         --                   len : unsigned) return boolean is
         -- begin
-        --     -- 由于是逐项硬编码，这里直接在下面过程里展开即可
+        --     -- 由于逐项编码，这里直接在下面过程里展开即可
         --     return false;
         -- end function;
     begin
@@ -223,7 +208,7 @@ begin
                    (slice10_y(snake_y_r,0) < to_unsigned(0,9)) or
                    (slice10_y(snake_y_r,0) > to_unsigned(480-square_width,9)) then
                     isdead_r <= '1';
-                -- 蛇头碰身体（硬编码 19 次）
+                -- 蛇头碰身体（编码 19 次）
                 elsif (slice10(snake_x_r,0) = slice10(snake_x_r,1) and
                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,1)) then
                     isdead_r <= '1';
@@ -298,7 +283,7 @@ begin
         variable head_y  : unsigned(9 downto 0);
     begin
         if rst_n = '0' then
-            -- 初始化首 3 节
+            -- 初始化 3 格
             snake_x_r(9 downto 0)    <= std_logic_vector(headx_init);
             snake_y_r(9 downto 0)    <= std_logic_vector(heady_init);
             snake_x_r(19 downto 10)  <= std_logic_vector(headx_init - square_length);

@@ -46,13 +46,13 @@ begin
         if rst_n = '0' then
             is_dead_r <= '0';
         elsif rising_edge(clk) then
-            if general_state = "10" then -- ³õÊ¼»¯Ê±Çå³ýËÀÍö
+            if general_state = "10" then -- åˆå§‹åŒ–æ—¶é‡ç½®æ ‡å¿—
                 is_dead_r <= '0';
-            elsif general_state = "11" and is_dead_r = '0' then -- ÓÎÏ·ÖÐ & Î´ËÀÍö
+            elsif general_state = "11" and is_dead_r = '0' then -- æ¸¸æˆä¸­ & æœªæ­»äº¡
                 head_x := slice10(snake_x, 0);
                 head_y := slice10_y(snake_y, 0);
 
-                -- ×²Ç½
+                -- æ’žå¢™
                 if (head_x < to_unsigned(0, 10)) or
                    (head_x > to_unsigned(SCREEN_WIDTH - SQUARE_LENGTH, 10)) or
                    (head_y < to_unsigned(0, 10)) or
@@ -60,7 +60,7 @@ begin
                     is_dead_r <= '1';
 
                 else
-                    -- ×²×Ô¼º£¨´ÓµÚ1½Úµ½length-1ÅÐ¶Ï£©
+                    -- æ’žåˆ°è‡ªå·±ï¼ˆä»Žç¬¬1èŠ‚ç‚¹åˆ°length-1åˆ¤æ–­ï¼‰
                     for i in 1 to MAX_BODY_LEN - 1 loop
                         if (head_x = slice10(snake_x, i)) and
                            (head_y = slice10_y(snake_y, i)) then
