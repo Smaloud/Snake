@@ -286,13 +286,7 @@ begin
     -- 蛇死亡判定
     ------------------------------------------------------------------
     process(clk, rst_n)
-        -- function body_hit(headx, heady : unsigned(9 downto 0);
-        --                   bodx, body : std_logic_vector;
-        --                   len : unsigned) return boolean is
-        -- begin
-        --     -- 由于是逐项硬编码，这里直接在下面过程里展开即可
-        --     return false;
-        -- end function;
+        variable collision : boolean;
     begin
         if rst_n = '0' then
             isdead_r <= '0';
@@ -300,73 +294,26 @@ begin
             if general_state = game_start then
                 isdead_r <= '0';
             elsif isdead_r = '0' then
-                -- 边界
+                -- 边界碰撞检测
                 if (slice10(snake_x_r,0) < to_unsigned(0,10)) or
                    (slice10(snake_x_r,0) > to_unsigned(640-square_length,10)) or
                    (slice10_y(snake_y_r,0) < to_unsigned(0,9)) or
                    (slice10_y(snake_y_r,0) > to_unsigned(480-square_width,9)) then
                     isdead_r <= '1';
-                -- 蛇头碰身体（硬编码 19 次）
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,1) and
-                       slice10_y(snake_y_r,0) = slice10_y(snake_y_r,1)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,2) and
-                       slice10_y(snake_y_r,0) = slice10_y(snake_y_r,2)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,3) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,3)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,4) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,4)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,5) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,5)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,6) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,6)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,7) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,7)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,8) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,8)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,9) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,9)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,10) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,10)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,11) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,11)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,12) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,12)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,13) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,13)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,14) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,14)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,15) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,15)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,16) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,16)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,17) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,17)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,18) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,18)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,19) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,19)) then
-                    isdead_r <= '1';
-                elsif (slice10(snake_x_r,0) = slice10(snake_x_r,20) and
-                        slice10_y(snake_y_r,0) = slice10_y(snake_y_r,20)) then
-                    isdead_r <= '1';                    
+                else
+                    -- 身体碰撞检测
+                    collision := false;
+                    for i in 1 to to_integer(snake_len_r)-1 loop
+                        if (slice10(snake_x_r,0) = slice10(snake_x_r,i) and
+                            slice10_y(snake_y_r,0) = slice10_y(snake_y_r,i)) then
+                            collision := true;
+                            exit;
+                        end if;
+                    end loop;
+                    
+                    if collision then
+                        isdead_r <= '1';
+                    end if;
                 end if;
             end if;
         end if;
