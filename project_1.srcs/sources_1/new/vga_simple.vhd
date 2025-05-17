@@ -21,6 +21,8 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use ieee.numeric_std.all;
+
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -46,7 +48,7 @@ entity vga_simple is
 
         O_red            : out std_logic_vector(3 downto 0);       --输出显示红色
         O_green          : out std_logic_vector(3 downto 0);       --输出显示绿色
-        O_blue           : out std_logic_vector(3 downto 0);       --输出显示蓝色
+        O_blue           : out std_logic_vector(3 downto 0)      --输出显示蓝色
     );
 end vga_simple;
 
@@ -81,8 +83,8 @@ architecture Behavioral of vga_simple is
 
     signal flag_printnew : std_logic;                             -- 指定难度时间间隔，用于刷新屏幕
 
-    signal square_h_idx_r : unsigned(10 downto 0) := 0;           
-    signal square_v_idx_r : unsigned(9 downto 0) := 0;
+    signal square_h_idx_r : unsigned(10 downto 0) := (others => '0');           
+    signal square_v_idx_r : unsigned(9 downto 0) := (others => '0');
 
     --=== 颜色寄存器 ===
     signal color_array_r : std_logic_vector(11 downto 0);
@@ -120,7 +122,7 @@ begin
                 R_h_cnt_r <= (others => '0');
                 if square_h_idx_r < C_H_ACTIVE_TIME - 1 then
                     square_h_idx_r <= square_h_idx_r + 1;
-                else square_h_idx_r <= 0;
+                else square_h_idx_r <= (others => '0');
                 end if;
             else
                 R_h_cnt_r <= R_h_cnt_r + 1;
@@ -143,7 +145,7 @@ begin
                 R_v_cnt_r <= (others => '0');
                 if square_v_idx_r < C_V_ACTIVE_TIME - 1 then
                     square_v_idx_r <= square_v_idx_r + 1;
-                else square_v_idx_r <= 0;
+                else square_v_idx_r <= (others => '0');
                 end if;
             elsif R_h_cnt_r = C_H_LINE_PERIOD-1 then
                 R_v_cnt_r <= R_v_cnt_r + 1;
@@ -158,31 +160,32 @@ begin
     -- 有效区标志
     ------------------------------------------------------------------
     W_active_flag <= '1' when 
-    (to_integer(R_h_cnt) >= h_before)  and
-    (to_integer(R_h_cnt) <  h_after)   and
-    (to_integer(R_v_cnt) >= v_before)  and
-    (to_integer(R_v_cnt) <  v_after)   else '0';
+    (to_integer(R_h_cnt_r) >= h_before)  and
+    (to_integer(R_h_cnt_r) <  h_after)   and
+    (to_integer(R_v_cnt_r) >= v_before)  and
+    (to_integer(R_v_cnt_r) <  v_after)   else '0';
 
     ------------------------------------------------------------------
     -- 获取rgb 
     ------------------------------------------------------------------
     process(clk, rst_n)
-        if rst_n = '1' then
-            red_r   <= (others => '0');
-            green_r <= (others => '0');
-            blue_r  <= (others => '0');
-        elsif rising_edge(clk) then
-            if W_active_flag = '0' then
+        begin
+            if rst_n = '1' then
                 red_r   <= (others => '0');
                 green_r <= (others => '0');
                 blue_r  <= (others => '0');
-            else
-                red_r   <= slice_r(color_array_r);
-                green_r <= slice_g(color_array_r);
-                blue_r  <= slice_b(color_array_r);
+            elsif rising_edge(clk) then
+                if W_active_flag = '0' then
+                    red_r   <= (others => '0');
+                    green_r <= (others => '0');
+                    blue_r  <= (others => '0');
+                else
+                    red_r   <= slice_r(color_array_r);
+                    green_r <= slice_g(color_array_r);
+                    blue_r  <= slice_b(color_array_r);
+                end if;
             end if;
-        end if;
-    end process;
+        end process;
 
     ------------------------------------------------------------------
     -- 颜色端口输出

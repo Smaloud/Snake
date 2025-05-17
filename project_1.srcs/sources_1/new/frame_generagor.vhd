@@ -3,6 +3,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity frame_generator is
+
+    generic(
     -- 显示参数常量定义
     constant SCREEN_WIDTH  : integer := 640;  -- 屏幕宽度
     constant SCREEN_HEIGHT : integer := 480;  -- 屏幕高度
@@ -17,7 +19,7 @@ entity frame_generator is
     constant MAX_SNAKE_LEN : integer := GRID_TOTAL;                  -- 蛇的最大长度
     constant SNAKE_POS_BITS: integer := 10;                          -- 每个蛇身节点坐标使用的位数
     constant SNAKE_VEC_BITS: integer := MAX_SNAKE_LEN * SNAKE_POS_BITS; -- 蛇身向量总位数
-    constant SNAKE_LEN_BITS: integer := 8;                           -- 蛇长度需要的位数
+    constant SNAKE_LEN_BITS: integer := 8);                           -- 蛇长度需要的位数
     
     port (
         clk            : in  std_logic;

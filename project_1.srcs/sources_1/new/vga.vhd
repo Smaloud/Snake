@@ -26,7 +26,7 @@ entity vga is
         O_blue           : out std_logic_vector(3 downto 0);       -- vga蓝色
 
         O_hs             : out std_logic;                          -- vga行同步
-        O_vs             : out std_logic;                          -- vga场同步
+        O_vs             : out std_logic                        -- vga场同步
 
     );
 end vga;
