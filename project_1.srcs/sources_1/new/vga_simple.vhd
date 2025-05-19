@@ -56,7 +56,7 @@ architecture Behavioral of vga_simple is
     ------------------------------------------------------------------
     signal h_cnt : unsigned(11 downto 0) := (others=>'0');  -- 0‥1343
     signal v_cnt : unsigned(11 downto 0) := (others=>'0');  -- 0‥634
-    signal active_flag_r : out std_logic;   -- 有效显示区标志
+    signal active_flag_r :  std_logic;   -- 有效显示区标志
 
 
     -- 颜色寄存器

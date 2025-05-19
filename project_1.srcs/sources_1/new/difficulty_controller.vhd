@@ -20,6 +20,7 @@ architecture Behavioral of difficulty_controller is
     
     signal counter : unsigned(31 downto 0) := (others => '0');
     signal divider : unsigned(31 downto 0) := to_unsigned(EASY_SPEED, 32);
+    signal update_signal_r : std_logic; 
 begin
     -- 更新分频系数
     process(clk, rst_n)
@@ -45,15 +46,17 @@ begin
     begin
         if rst_n = '0' then
             counter <= (others => '0');
-            update_signal <= '0';
+            update_signal_r <= '0';
         elsif rising_edge(clk) then
             if counter >= divider then
                 counter <= (others => '0');
-                update_signal <= not update_signal;  -- 翻转信号，生成时钟
+                update_signal_r <= not update_signal_r;  -- 翻转信号，生成时钟
             else
                 counter <= counter + 1;
             end if;
         end if;
     end process;
+
+    update_signal <= update_signal_r;
 
 end Behavioral; 

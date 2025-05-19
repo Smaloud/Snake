@@ -16,13 +16,13 @@ entity snake_controller is
         move_state    : in  std_logic_vector(4 downto 0);
         flag_update   : in  std_logic;  -- 控制每帧移动
         food_x        : in  unsigned(4 downto 0);  -- 食物x坐标
-        food_y        : in  unsigned(3 downto 0)   -- 食物y坐标
+        food_y        : in  unsigned(3 downto 0);   -- 食物y坐标
 
         snake_length  : out std_logic_vector(8 downto 0);  -- 扩展到12位，支持最大300
 
         snake_map     : out std_logic_vector(299 downto 0);  -- 输出蛇身位置图
-        is_win        : out std_logic   -- 游戏胜利信号
-        is_dead       : out std_logic   -- 游戏失败信号
+        is_win        : out std_logic;   -- 游戏胜利信号
+        is_dead       : out std_logic;   -- 游戏失败信号
         flag_eat      : inout std_logic   -- 食物被吃掉的信号
 
 
@@ -87,7 +87,7 @@ begin
                         snake_len_r <= snake_len_r + 1;
 
                         -- 检查是否填满屏幕
-                        if snake_len_r >= to_unsigned(MAX_SNAKE_LEN 9) then
+                        if snake_len_r >= to_unsigned(MAX_SNAKE_LEN, 9) then
                             is_win_r <= '1';
                         end if;
                     end if;
