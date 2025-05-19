@@ -40,7 +40,8 @@ entity frame_generator is
         pixel_x       : out unsigned(10 downto 0);         -- 写入像素 x 坐标（0~1023）
         pixel_y       : out unsigned(9 downto 0);         -- 写入像素 y 坐标（0~599）
         pixel_color   : out std_logic_vector(11 downto 0); -- RGB444 (4+4+4)
-        write_en      : out std_logic                      -- 写使能
+        write_en      : out std_logic;                     -- 写使能
+        frame_complete: out std_logic                      -- 帧完成信号
     );
 end frame_generator;
 
@@ -232,10 +233,14 @@ begin
     begin
         if rst_n = '0' then
             write_en <= '0';
+            frame_complete <= '0';
             render_stage := INIT_BACKGROUND;
             x_pos := 0;
             y_pos := 0;
         elsif rising_edge(clk) then
+            -- 初始化帧完成信号为0
+            frame_complete <= '0';
+            
             -- 逐像素生成帧并写入RAM
             pixel_x <= to_unsigned(x_pos, 11);
             pixel_y <= to_unsigned(y_pos, 10);
@@ -381,6 +386,8 @@ begin
                             y_pos := 0;
                             -- 内容绘制完成，回到背景初始化阶段（为下一帧准备）
                             render_stage := INIT_BACKGROUND;
+                            -- 发出帧完成信号
+                            frame_complete <= '1';
                         else
                             y_pos := y_pos + 1;
                         end if;

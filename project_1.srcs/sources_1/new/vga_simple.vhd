@@ -18,6 +18,8 @@ entity vga_simple is
         O_red            : out std_logic_vector(3 downto 0);
         O_green          : out std_logic_vector(3 downto 0);
         O_blue           : out std_logic_vector(3 downto 0)
+        active_flag      : out std_logic;            -- 有效显示区标志
+
     );
 end vga_simple;
 
@@ -56,8 +58,7 @@ architecture Behavioral of vga_simple is
     signal h_cnt : unsigned(11 downto 0) := (others=>'0');  -- 0‥1343
     signal v_cnt : unsigned(11 downto 0) := (others=>'0');  -- 0‥634
 
-    -- 有效显示区标志
-    signal active_flag : std_logic;
+
 
     -- 颜色寄存器
     signal color_reg : std_logic_vector(11 downto 0);
