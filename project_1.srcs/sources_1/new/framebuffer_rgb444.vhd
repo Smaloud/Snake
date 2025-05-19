@@ -10,7 +10,7 @@ entity framebuffer_rgb444 is
         pixel_y      : in  unsigned(8 downto 0);  -- 写入像素 y 坐标（0~479）
         pixel_color  : in  std_logic_vector(11 downto 0); -- RGB444 (4+4+4)
 
-        clk_read     : in  std_logic;
+        clk_read     : in  std_logic;  -- 和vga_simple的时钟同步
         R_h_cnt      : in  unsigned(11 downto 0); -- VGA 控制器提供的行像素计数
         R_v_cnt      : in  unsigned(11 downto 0); -- VGA 控制器提供的列像素计数
         W_active_flag: in  std_logic;
@@ -23,10 +23,10 @@ end framebuffer_rgb444;
 
 architecture Behavioral of framebuffer_rgb444 is
 
-    constant SCREEN_WIDTH  : integer := 640;
-    constant SCREEN_HEIGHT : integer := 480;
-    constant PIXEL_COUNT   : integer := SCREEN_WIDTH * SCREEN_HEIGHT;  -- 307200
-    constant ADDR_WIDTH    : integer := 19;  -- ceil(log2(307200))
+    constant SCREEN_WIDTH  : integer := 1024;
+    constant SCREEN_HEIGHT : integer := 600;
+    constant PIXEL_COUNT   : integer := SCREEN_WIDTH * SCREEN_HEIGHT;  -- 614400
+    constant ADDR_WIDTH    : integer := 20;  -- ceil(log2(614400)) 注意调整！
 
     type ram_type is array (0 to PIXEL_COUNT - 1) of std_logic_vector(11 downto 0);
     signal framebuffer : ram_type := (others => (others => '0'));
