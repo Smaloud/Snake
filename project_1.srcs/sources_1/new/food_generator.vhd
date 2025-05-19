@@ -4,107 +4,74 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity food_generator is
     generic (
-        SCREEN_WIDTH  : integer := 640;  -- 屏幕宽度
-        SCREEN_HEIGHT : integer := 480;  -- 屏幕高度
-        SQUARE_SIZE   : integer := 20;   -- 蛇身方块大小
-        MAX_SNAKE_LEN : integer := 3072  -- 最大蛇身长度
+        SCREEN_WIDTH  : integer := 800;  -- 屏幕宽度
+        SCREEN_HEIGHT : integer := 600;  -- 屏幕高度
+        SQUARE_SIZE   : integer := 40;   -- 蛇身方块大小
+        MAX_SNAKE_LEN : integer := 300   -- 最大蛇身长度
     );
     port (
         clk           : in  std_logic;
         rst_n         : in  std_logic;
         general_state : in  std_logic_vector(2 downto 0);  -- 状态码扩展到3位
+        flag_eat      : inout  std_logic;  -- 食物被吃掉的信号
+        snake_map     : in  std_logic_vector(299 downto 0);  -- 蛇身位置图
 
-        snake_x       : in  std_logic_vector(MAX_SNAKE_LEN*10-1 downto 0);
-        snake_y       : in  std_logic_vector(MAX_SNAKE_LEN*10-1 downto 0);
-        snake_length  : in  std_logic_vector(11 downto 0);
-
-        head_x        : in  unsigned(9 downto 0);
-        head_y        : in  unsigned(8 downto 0);
-
-        random_x      : in  std_logic_vector(4 downto 0);
-        random_y      : in  std_logic_vector(4 downto 0);
-
-        flag_eat      : out std_logic;
-        food_x        : out unsigned(9 downto 0);
-        food_y        : out unsigned(8 downto 0)
+        food_x        : out unsigned(4 downto 0);  -- 食物x坐标
+        food_y        : out unsigned(3 downto 0)   -- 食物y坐标
     );
 end food_generator;
 
 architecture Behavioral of food_generator is
-    constant GRID_WIDTH   : integer := SCREEN_WIDTH/SQUARE_SIZE;
-    constant GRID_HEIGHT  : integer := SCREEN_HEIGHT/SQUARE_SIZE;
+    constant GRID_WIDTH   : integer := SCREEN_WIDTH/SQUARE_SIZE;   -- 20
+    constant GRID_HEIGHT  : integer := SCREEN_HEIGHT/SQUARE_SIZE;  -- 15
 
-    signal food_x_r    : unsigned(9 downto 0) := (others => '0');
-    signal food_y_r    : unsigned(8 downto 0) := (others => '0');
-    signal flag_eat_r  : std_logic := '0';
-
-    -- 蛇身坐标切片函数
-    function slice10(vec : std_logic_vector; idx : natural) return unsigned is
-        variable lo : integer := idx * 10;
-    begin
-        return unsigned(vec(lo + 9 downto lo));
-    end function;
+    signal food_x_r    : unsigned(4 downto 0) := (others => '0');
+    signal food_y_r    : unsigned(3 downto 0) := (others => '0');
+    signal random_x    : unsigned(4 downto 0) := (others => '0');
+    signal random_y    : unsigned(3 downto 0) := (others => '0');
+    signal lfsr       : std_logic_vector(15 downto 0) := x"ACE1";  -- 16位LFSR初始值
 
 begin
-
     ------------------------------------------------------------------
-    -- 判断蛇头是否吃到食物
+    -- 随机数生成（使用LFSR）
     ------------------------------------------------------------------
     process(clk, rst_n)
+        variable feedback : std_logic;
     begin
         if rst_n = '0' then
-            flag_eat_r <= '0';
+            lfsr <= x"ACE1";
         elsif rising_edge(clk) then
-            if (head_x = food_x_r) and (head_y = food_y_r) and (general_state = "011") then -- gaming
-                flag_eat_r <= '1';
-            else
-                flag_eat_r <= '0';
+            if general_state = "010" or flag_eat = '1' then  -- 初始化或食物被吃掉
+                -- LFSR更新
+                feedback := lfsr(15) xor lfsr(13) xor lfsr(12) xor lfsr(10);
+                lfsr <= lfsr(14 downto 0) & feedback;
+                
+                -- 生成随机坐标
+                random_x <= unsigned(lfsr(4 downto 0)) mod to_unsigned(GRID_WIDTH, 5);
+                random_y <= unsigned(lfsr(8 downto 5)) mod to_unsigned(GRID_HEIGHT, 4);
             end if;
         end if;
     end process;
 
     ------------------------------------------------------------------
-    -- 食物生成逻辑（检查所有蛇身节点）
+    -- 食物位置生成逻辑
     ------------------------------------------------------------------
     process(clk, rst_n)
-        variable candidate_x : unsigned(9 downto 0);
-        variable candidate_y : unsigned(8 downto 0);
-        variable overlap     : boolean;
-        variable snake_len   : integer;
+        variable map_index : integer;
     begin
         if rst_n = '0' then
             food_x_r <= (others => '0');
             food_y_r <= (others => '0');
         elsif rising_edge(clk) then
-            if (flag_eat_r = '1') or (general_state = "010") then -- eat 或 初始化
-                -- 计算候选值
-                candidate_x := unsigned(random_x) * SQUARE_SIZE;
-                candidate_y := unsigned(random_y) * SQUARE_SIZE;
+            if general_state = "010" or flag_eat = '1' then  -- 初始化或食物被吃掉
+                -- 计算在snake_map中的索引
+                map_index := to_integer(random_x) + to_integer(random_y) * GRID_WIDTH;
                 
-                -- 确保在屏幕范围内
-                if candidate_x >= to_unsigned(SCREEN_WIDTH, 10) then
-                    candidate_x := to_unsigned(SCREEN_WIDTH - SQUARE_SIZE, 10);
-                end if;
-                if candidate_y >= to_unsigned(SCREEN_HEIGHT, 9) then
-                    candidate_y := to_unsigned(SCREEN_HEIGHT - SQUARE_SIZE, 9);
-                end if;
-
-                -- 检查是否与所有蛇身节点重叠
-                overlap := false;
-                snake_len := to_integer(unsigned(snake_length));
-                
-                for i in 0 to snake_len-1 loop
-                    if (candidate_x = slice10(snake_x, i)) and
-                       (resize(candidate_y, 10) = slice10(snake_y, i)) then
-                        overlap := true;
-                        exit;  -- 发现重叠立即退出
-                    end if;
-                end loop;
-
-                -- 不重叠则更新食物位置
-                if not overlap then
-                    food_x_r <= candidate_x;
-                    food_y_r <= candidate_y;
+                -- 如果位置未被占用，则更新食物位置
+                if snake_map(map_index) = '0' then
+                    food_x_r <= random_x;
+                    food_y_r <= random_y;
+                    flag_eat <= '0';
                 end if;
             end if;
         end if;
@@ -113,8 +80,7 @@ begin
     ------------------------------------------------------------------
     -- 输出
     ------------------------------------------------------------------
-    food_x   <= food_x_r;
-    food_y   <= food_y_r;
-    flag_eat <= flag_eat_r;
+    food_x <= food_x_r;
+    food_y <= food_y_r;
 
 end Behavioral;
