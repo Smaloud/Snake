@@ -17,9 +17,8 @@ entity vga_simple is
 
         O_red            : out std_logic_vector(3 downto 0);
         O_green          : out std_logic_vector(3 downto 0);
-        O_blue           : out std_logic_vector(3 downto 0)
-        active_flag      : out std_logic;            -- 有效显示区标志
-
+        O_blue           : out std_logic_vector(3 downto 0);
+        active_flag      : out std_logic                      -- 有效显示区标志
     );
 end vga_simple;
 
@@ -57,7 +56,7 @@ architecture Behavioral of vga_simple is
     ------------------------------------------------------------------
     signal h_cnt : unsigned(11 downto 0) := (others=>'0');  -- 0‥1343
     signal v_cnt : unsigned(11 downto 0) := (others=>'0');  -- 0‥634
-
+    signal active_flag_r : out std_logic;   -- 有效显示区标志
 
 
     -- 颜色寄存器
@@ -147,7 +146,7 @@ begin
     ------------------------------------------------------------------
     -- E. 有效区标志
     ------------------------------------------------------------------
-    active_flag <= '1' when
+    active_flag_r <= '1' when
                    (to_integer(h_cnt) >= H_BEFORE) and
                    (to_integer(h_cnt) <  H_AFTER)  and
                    (to_integer(v_cnt) >= V_BEFORE) and
@@ -178,7 +177,7 @@ begin
                 red_r   <= (others=>'0');
                 green_r <= (others=>'0');
                 blue_r  <= (others=>'0');
-            elsif active_flag = '1' then
+            elsif active_flag_r = '1' then
                 red_r   <= slice_r(color_reg);
                 green_r <= slice_g(color_reg);
                 blue_r  <= slice_b(color_reg);
@@ -198,5 +197,6 @@ begin
     O_blue        <= blue_r;
     square_h_idx  <= h_cnt;
     square_v_idx  <= v_cnt;
-
+    active_flag  <= active_flag_r;
+    
 end Behavioral;

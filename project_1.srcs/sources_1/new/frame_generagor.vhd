@@ -10,7 +10,7 @@ entity frame_generator is
     constant SCREEN_HEIGHT : integer := 600;  -- 屏幕高度
     constant ADDR_WIDTH    : integer := 20;   -- 地址位宽：SCREEN_WIDTH*SCREEN_HEIGHT需要20位
     constant COLOR_DEPTH   : integer := 3;    -- 颜色深度：RGB各1位
-    constant SNAKE_SIZE    : integer := 40;   -- 蛇身单元大小（正方形）
+    constant SNAKE_SIZE    : integer := 40   -- 蛇身单元大小（正方形）
     );   
     
     port (
@@ -211,6 +211,9 @@ begin
         variable x_pos : integer range 0 to 1023 := 0;
         variable y_pos : integer range 0 to 599 := 0;
         variable render_stage : render_stage_type := INIT_BACKGROUND;
+        variable grid_x : integer;
+        variable grid_y : integer;
+        variable position : integer;
         
         -- 进程内部常量定义
         constant TITLE_START_X  : integer := SCREEN_WIDTH/2 - 80;
@@ -337,26 +340,21 @@ begin
                             -- 计算当前像素所在的网格位置
                             if x_pos < GAME_AREA_END_X then  -- 只在游戏区域内检查蛇身
                                 -- 计算当前像素对应的网格索引
-                                declare
-                                    variable grid_x, grid_y : integer;
-                                    variable position : integer;
-                                begin
-                                    grid_x := x_pos / GRID_SIZE;
-                                    grid_y := y_pos / GRID_SIZE;
+                                grid_x := x_pos / GRID_SIZE;
+                                grid_y := y_pos / GRID_SIZE;
+                                
+                                -- 确保网格索引在有效范围内
+                                if grid_x >= 0 and grid_x < GRID_COLS and grid_y >= 0 and grid_y < GRID_ROWS then
+                                    -- 计算在snake_map_r中的位置
+                                    position := grid_x + grid_y * GRID_COLS;
                                     
-                                    -- 确保网格索引在有效范围内
-                                    if grid_x >= 0 and grid_x < GRID_COLS and grid_y >= 0 and grid_y < GRID_ROWS then
-                                        -- 计算在snake_map_r中的位置
-                                        position := grid_x + grid_y * GRID_COLS;
-                                        
-                                        -- 检查该位置是否有蛇身
-                                        if position < 300 and snake_map_r(position) = '1' then
-                                            -- 绘制蛇身
-                                            fill_grid_with_color(pixel_x, pixel_y, pixel_color, write_en, 
-                                                               grid_x, grid_y, "000011110000", x_pos, y_pos);
-                                        end if;
+                                    -- 检查该位置是否有蛇身
+                                    if position < 300 and snake_map_r(position) = '1' then
+                                        -- 绘制蛇身
+                                        fill_grid_with_color(pixel_x, pixel_y, pixel_color, write_en, 
+                                                           grid_x, grid_y, "000011110000", x_pos, y_pos);
                                     end if;
-                                end;
+                                end if;
                             end if;
                         
                         -- 游戏结束
