@@ -1,98 +1,71 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 2025/05/17 22:11:04
--- Design Name: 
--- Module Name: vga_simple - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use ieee.numeric_std.all;
-
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+use IEEE.NUMERIC_STD.ALL;
 
 entity vga_simple is
     port(
-        clk              : in  std_logic;                          -- 100 MHz
-        rst_n            : in  std_logic;                          -- 低电平有效复位
+        clk              : in  std_logic;                     -- 100 MHz 主时钟
+        rst_n            : in  std_logic;                     -- 低电平有效复位
 
-        color_array      : in std_logic_vector(11 downto 0);       -- 来自ram的vga颜色序列（各4位的红绿蓝）
+        color_array      : in  std_logic_vector(11 downto 0); -- RAM 送来的 4-4-4 RGB
 
-        O_hs             : out std_logic;                          -- vga行同步
-        O_vs             : out std_logic;                          -- vga场同步
+        O_hs             : out std_logic;                     -- 行同步（负极性）
+        O_vs             : out std_logic;                     -- 场同步（负极性）
 
-        square_h_idx     : out unsigned(10 downto 0);      --目前刷新的行列格子的位置
-        square_v_idx     : out unsigned(9 downto 0);
+        square_h_idx     : out unsigned(11 downto 0);         -- 输出当前像素列计数
+        square_v_idx     : out unsigned(11 downto 0);         -- 输出当前像素行计数
 
-        O_red            : out std_logic_vector(3 downto 0);       --输出显示红色
-        O_green          : out std_logic_vector(3 downto 0);       --输出显示绿色
-        O_blue           : out std_logic_vector(3 downto 0)      --输出显示蓝色
+        O_red            : out std_logic_vector(3 downto 0);
+        O_green          : out std_logic_vector(3 downto 0);
+        O_blue           : out std_logic_vector(3 downto 0)
     );
 end vga_simple;
 
 architecture Behavioral of vga_simple is
 
-    --===============  VGA 时序常量 1024 * 600 ===============--
-    constant C_H_SYNC_PULSE   : integer := 128;  -- 行同步脉冲
-    constant C_H_BACK_PORCH   : integer := 88;   -- 行同步后肩
-    constant C_H_ACTIVE_TIME  : integer := 1024; -- 可见区域像素数
-    constant C_H_FRONT_PORCH  : integer := 40;   -- 行同步前肩
-    constant C_H_LINE_PERIOD  : integer := C_H_SYNC_PULSE + C_H_BACK_PORCH + C_H_ACTIVE_TIME + C_H_FRONT_PORCH; -- 总行时长
+    ------------------------------------------------------------------
+    -- 1. 100 MHz → 50 MHz 像素时钟（占空比 50 %）
+    ------------------------------------------------------------------
+    signal pix_clk : std_logic := '0';
+    signal div_ff  : std_logic := '0';
 
-    constant C_V_SYNC_PULSE   : integer := 4;    -- 帧同步脉冲
-    constant C_V_BACK_PORCH   : integer := 23;   -- 帧同步后肩
-    constant C_V_ACTIVE_TIME  : integer := 600;  -- 可见行数
-    constant C_V_FRONT_PORCH  : integer := 1;    -- 帧同步前肩
-    constant C_V_FRAME_PERIOD : integer := C_V_SYNC_PULSE + C_V_BACK_PORCH + C_V_ACTIVE_TIME + C_V_FRONT_PORCH; -- 总帧周期
+    ------------------------------------------------------------------
+    -- 2. 1024×600  @≈58 Hz（50 MHz 像素时钟） CVT-RB 时序
+    ------------------------------------------------------------------
+    constant C_H_FRONT : integer := 24;
+    constant C_H_SYNC  : integer := 136;
+    constant C_H_BACK  : integer := 160;
+    constant C_H_ACT   : integer := 1024;
+    constant C_H_TOTAL : integer := C_H_FRONT + C_H_SYNC + C_H_BACK + C_H_ACT; -- 1344
 
-    -- 方便使用的中间变量
-    constant h_before : integer := C_H_SYNC_PULSE + C_H_BACK_PORCH;
-    constant h_after  : integer := C_H_LINE_PERIOD - C_H_FRONT_PORCH;
-    constant v_before : integer := C_V_SYNC_PULSE + C_V_BACK_PORCH;
-    constant v_after  : integer := C_V_FRAME_PERIOD - C_V_FRONT_PORCH;
+    constant C_V_FRONT : integer := 8;
+    constant C_V_SYNC  : integer := 4;
+    constant C_V_BACK  : integer := 23;
+    constant C_V_ACT   : integer := 600;
+    constant C_V_TOTAL : integer := C_V_FRONT + C_V_SYNC + C_V_BACK + C_V_ACT; -- 635
 
-    --===============  内部信号 ===============
-    signal R_h_cnt_r       : unsigned(11 downto 0);               -- 行时序计数器
-    signal R_v_cnt_r       : unsigned(11 downto 0);               -- 列时序计数器
-    signal W_active_flag : std_logic;                             -- 刷新标志，为1时rgb数据显示
+    -- 起止位置（方便判断有效区）
+    constant H_BEFORE : integer := C_H_FRONT + C_H_SYNC + C_H_BACK; -- = 320
+    constant H_AFTER  : integer := C_H_TOTAL - C_H_FRONT;           -- = 1320
+    constant V_BEFORE : integer := C_V_FRONT + C_V_SYNC + C_V_BACK; -- = 35
+    constant V_AFTER  : integer := C_V_TOTAL - C_V_FRONT;           -- = 627
 
-    signal stay_cnt  : unsigned(29 downto 0);                     -- 蛇在每一格停留时长计数器
-    signal interval  : unsigned(29 downto 0);                     -- 蛇在每一格停留时间
+    ------------------------------------------------------------------
+    -- 3. 行列计数器
+    ------------------------------------------------------------------
+    signal h_cnt : unsigned(11 downto 0) := (others=>'0');  -- 0‥1343
+    signal v_cnt : unsigned(11 downto 0) := (others=>'0');  -- 0‥634
 
-    signal flag_printnew : std_logic;                             -- 指定难度时间间隔，用于刷新屏幕
+    -- 有效显示区标志
+    signal active_flag : std_logic;
 
-    signal square_h_idx_r : unsigned(10 downto 0) := (others => '0');           
-    signal square_v_idx_r : unsigned(9 downto 0) := (others => '0');
+    -- 颜色寄存器
+    signal color_reg : std_logic_vector(11 downto 0);
+    signal red_r, green_r, blue_r : std_logic_vector(3 downto 0);
 
-    --=== 颜色寄存器 ===
-    signal color_array_r : std_logic_vector(11 downto 0);
-    signal red_r   : std_logic_vector(3 downto 0);
-    signal green_r : std_logic_vector(3 downto 0);
-    signal blue_r  : std_logic_vector(3 downto 0);
-    
-    --=============== 工具函数（用于切片，从输入的12位rgb信号中得到分别的rgb信号） ===============
+    ------------------------------------------------------------------
+    -- 工具函数：从 12-bit RGB 中拆分 R/G/B
+    ------------------------------------------------------------------
     function slice_r(vec : std_logic_vector) return std_logic_vector is
     begin
         return vec(3 downto 0);
@@ -105,93 +78,124 @@ architecture Behavioral of vga_simple is
 
     function slice_b(vec : std_logic_vector) return std_logic_vector is
     begin
-        return vec(11 downto 0);
+        return vec(11 downto 8);
     end function;
 
 begin
-
     ------------------------------------------------------------------
-    -- 行计数器
+    -- A. 2 分频：100 MHz → 50 MHz
     ------------------------------------------------------------------
-    process(clk, rst_n)
+    process(clk)
     begin
-        if rst_n = '1' then
-            R_h_cnt_r <= (others => '0');
-        elsif rising_edge(clk) then
-            if R_h_cnt_r = C_H_LINE_PERIOD-1 then
-                R_h_cnt_r <= (others => '0');
-                if square_h_idx_r < C_H_ACTIVE_TIME - 1 then
-                    square_h_idx_r <= square_h_idx_r + 1;
-                else square_h_idx_r <= (others => '0');
-                end if;
+        if rising_edge(clk) then
+            if rst_n = '0' then                 -- 低电平复位
+                div_ff  <= '0';
+                pix_clk <= '0';
             else
-                R_h_cnt_r <= R_h_cnt_r + 1;
+                div_ff  <= not div_ff;
+                pix_clk <= div_ff;
             end if;
         end if;
     end process;
 
-    O_hs <= '0' when (R_h_cnt_r < C_H_SYNC_PULSE) else '1';
-    square_h_idx <= square_h_idx_r;
-
     ------------------------------------------------------------------
-    -- 列计数器
+    -- B. 行计数器
     ------------------------------------------------------------------
-    process(clk, rst_n)
+    process(pix_clk)
     begin
-        if rst_n = '1' then
-            R_v_cnt_r <= (others => '0');
-        elsif rising_edge(clk) then
-            if R_v_cnt_r = C_V_FRAME_PERIOD-1 then
-                R_v_cnt_r <= (others => '0');
-                if square_v_idx_r < C_V_ACTIVE_TIME - 1 then
-                    square_v_idx_r <= square_v_idx_r + 1;
-                else square_v_idx_r <= (others => '0');
-                end if;
-            elsif R_h_cnt_r = C_H_LINE_PERIOD-1 then
-                R_v_cnt_r <= R_v_cnt_r + 1;
+        if rising_edge(pix_clk) then
+            if rst_n = '0' then
+                h_cnt <= (others=>'0');
+            elsif h_cnt = C_H_TOTAL-1 then
+                h_cnt <= (others=>'0');
+            else
+                h_cnt <= h_cnt + 1;
             end if;
         end if;
     end process;
 
-    O_vs <= '0' when (R_v_cnt_r < C_V_SYNC_PULSE) else '1';
-    square_v_idx <= square_v_idx_r;
-
     ------------------------------------------------------------------
-    -- 有效区标志
+    -- C. 列计数器
     ------------------------------------------------------------------
-    W_active_flag <= '1' when 
-    (to_integer(R_h_cnt_r) >= h_before)  and
-    (to_integer(R_h_cnt_r) <  h_after)   and
-    (to_integer(R_v_cnt_r) >= v_before)  and
-    (to_integer(R_v_cnt_r) <  v_after)   else '0';
-
-    ------------------------------------------------------------------
-    -- 获取rgb 
-    ------------------------------------------------------------------
-    process(clk, rst_n)
-        begin
-            if rst_n = '1' then
-                red_r   <= (others => '0');
-                green_r <= (others => '0');
-                blue_r  <= (others => '0');
-            elsif rising_edge(clk) then
-                if W_active_flag = '0' then
-                    red_r   <= (others => '0');
-                    green_r <= (others => '0');
-                    blue_r  <= (others => '0');
+    process(pix_clk)
+    begin
+        if rising_edge(pix_clk) then
+            if rst_n = '0' then
+                v_cnt <= (others=>'0');
+            elsif h_cnt = C_H_TOTAL-1 then
+                if v_cnt = C_V_TOTAL-1 then
+                    v_cnt <= (others=>'0');
                 else
-                    red_r   <= slice_r(color_array_r);
-                    green_r <= slice_g(color_array_r);
-                    blue_r  <= slice_b(color_array_r);
+                    v_cnt <= v_cnt + 1;
                 end if;
             end if;
-        end process;
+        end if;
+    end process;
 
     ------------------------------------------------------------------
-    -- 颜色端口输出
+    -- D. 同步信号（负极性）
+    ------------------------------------------------------------------
+    O_hs <= '0' when (to_integer(h_cnt) >= C_H_FRONT) and
+                     (to_integer(h_cnt) <  C_H_FRONT + C_H_SYNC)
+            else '1';
+
+    O_vs <= '0' when (to_integer(v_cnt) >= C_V_FRONT) and
+                     (to_integer(v_cnt) <  C_V_FRONT + C_V_SYNC)
+            else '1';
+
+    ------------------------------------------------------------------
+    -- E. 有效区标志
+    ------------------------------------------------------------------
+    active_flag <= '1' when
+                   (to_integer(h_cnt) >= H_BEFORE) and
+                   (to_integer(h_cnt) <  H_AFTER)  and
+                   (to_integer(v_cnt) >= V_BEFORE) and
+                   (to_integer(v_cnt) <  V_AFTER)
+                   else '0';
+
+    ------------------------------------------------------------------
+    -- F. 将外部颜色数据打一拍
+    ------------------------------------------------------------------
+    process(pix_clk)
+    begin
+        if rising_edge(pix_clk) then
+            if rst_n = '0' then
+                color_reg <= (others=>'0');
+            else
+                color_reg <= color_array;
+            end if;
+        end if;
+    end process;
+
+    ------------------------------------------------------------------
+    -- G. 根据 active_flag 输出 RGB
+    ------------------------------------------------------------------
+    process(pix_clk)
+    begin
+        if rising_edge(pix_clk) then
+            if rst_n = '0' then
+                red_r   <= (others=>'0');
+                green_r <= (others=>'0');
+                blue_r  <= (others=>'0');
+            elsif active_flag = '1' then
+                red_r   <= slice_r(color_reg);
+                green_r <= slice_g(color_reg);
+                blue_r  <= slice_b(color_reg);
+            else
+                red_r   <= (others=>'0');
+                green_r <= (others=>'0');
+                blue_r  <= (others=>'0');
+            end if;
+        end if;
+    end process;
+
+    ------------------------------------------------------------------
+    -- H. 端口输出
     ------------------------------------------------------------------
     O_red         <= red_r;
     O_green       <= green_r;
     O_blue        <= blue_r;
-            
+    square_h_idx  <= h_cnt;
+    square_v_idx  <= v_cnt;
+
 end Behavioral;
