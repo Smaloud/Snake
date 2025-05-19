@@ -8,6 +8,8 @@ entity score_keeper is
         rst_n         : in  std_logic;
         general_state : in  std_logic_vector(1 downto 0);  -- 游戏状态
         flag_eat      : in  std_logic;                     -- 吃到食物信号
+        flag_update   : in  std_logic;                     -- 更新分数信号
+        
         
         score         : out std_logic_vector(15 downto 0); -- 当前分数（最高65535）
         high_score    : out std_logic_vector(15 downto 0)  -- 最高分
@@ -25,13 +27,13 @@ architecture Behavioral of score_keeper is
     
 begin
     -- 分数计算过程
-    process(clk, rst_n)
+    process(flag_update, rst_n)
     begin
         if rst_n = '0' then
             score_r <= (others => '0');
             -- 复位时不清除最高分
             
-        elsif rising_edge(clk) then
+        elsif rising_edge(flag_update) then
             if general_state = GAME_START then
                 -- 游戏重新开始时，重置当前分数
                 score_r <= (others => '0');
