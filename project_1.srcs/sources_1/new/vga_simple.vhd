@@ -7,7 +7,7 @@ entity vga_simple is
         clk              : in  std_logic;                     -- 100 MHz 主时钟
         rst_n            : in  std_logic;                     -- 低电平有效复位
 
-        color_array      : in  std_logic_vector(11 downto 0); -- RAM 送来的 4-4-4 RGB
+        color_array      : in  std_logic_vector(2 downto 0); -- RAM 送来的 4-4-4 RGB
 
         O_hs             : out std_logic;                     -- 行同步（负极性）
         O_vs             : out std_logic;                     -- 场同步（负极性）
@@ -60,25 +60,25 @@ architecture Behavioral of vga_simple is
 
 
     -- 颜色寄存器
-    signal color_reg : std_logic_vector(11 downto 0);
+    signal color_reg : std_logic_vector(2 downto 0);
     signal red_r, green_r, blue_r : std_logic_vector(3 downto 0);
 
     ------------------------------------------------------------------
-    -- 工具函数：从 12-bit RGB 中拆分 R/G/B
+    -- 工具函数：从 3-bit RGB 中拆分 R/G/B
     ------------------------------------------------------------------
-    function slice_r(vec : std_logic_vector) return std_logic_vector is
+    function slice_r(vec : std_logic_vector(2 downto 0)) return std_logic_vector is
     begin
-        return vec(3 downto 0);
+        return (others => vec(2));
     end function;
 
-    function slice_g(vec : std_logic_vector) return std_logic_vector is
+    function slice_g(vec : std_logic_vector(2 downto 0)) return std_logic_vector is
     begin
-        return vec(7 downto 4);
+        return (others => vec(1));
     end function;
 
-    function slice_b(vec : std_logic_vector) return std_logic_vector is
+    function slice_b(vec : std_logic_vector(2 downto 0)) return std_logic_vector is
     begin
-        return vec(11 downto 8);
+        return (others => vec(0));
     end function;
 
 begin
