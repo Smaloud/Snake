@@ -43,11 +43,9 @@ entity frame_generator is
         R_v_cnt        : in  unsigned(11 downto 0);         -- VGA 控制器提供的列像素计数
         W_active_flag  : in  std_logic;                     -- VGA有效显示区标志
         
-        -- Framebuffer写入接口
-        pixel_x       : out unsigned(10 downto 0);         -- 写入像素 x 坐标（0~1023）
-        pixel_y       : out unsigned(9 downto 0);         -- 写入像素 y 坐标（0~599）
-        pixel_color   : out std_logic_vector(2 downto 0); -- RGB444 (4+4+4)
-        write_en      : out std_logic;                     -- 写使能
+        -- 输出接口
+        pixel_color   : out std_logic_vector(2 downto 0); -- RGB颜色 (R+G+B)
+        write_en      : out std_logic;                     -- 像素有效信号
         frame_complete: out std_logic                      -- 帧完成信号
     );
 end frame_generator;
@@ -61,9 +59,6 @@ architecture Behavioral of frame_generator is
     constant GRID_TOTAL    : integer := 300;       -- 总网格数
     constant MAX_SNAKE_LEN : integer := 300;                  -- 蛇的最大长度
 
-    -- 定义渲染阶段类型
-    type render_stage_type is (INIT_BACKGROUND, DRAW_CONTENT);
-    
     -- 辅助函数：判断当前像素是否为分数显示区域
     function is_score_display(
         x : integer;
@@ -128,9 +123,8 @@ architecture Behavioral of frame_generator is
 begin
     -- 帧生成过程
     process(clk, rst_n)
-        variable x_pos : integer range 0 to 1023 := 0;
-        variable y_pos : integer range 0 to 599 := 0;
-        variable render_stage : render_stage_type := INIT_BACKGROUND;
+        variable h_pos : integer;
+        variable v_pos : integer;
         variable grid_x : integer;
         variable grid_y : integer;
         variable position : integer;
@@ -157,157 +151,91 @@ begin
         if rst_n = '0' then
             write_en <= '0';
             frame_complete <= '0';
-            render_stage := INIT_BACKGROUND;
-            x_pos := 0;
-            y_pos := 0;
         elsif rising_edge(clk) then
-            -- 初始化帧完成信号为0
-            frame_complete <= '0';
+            -- 获取当前像素位置
+            h_pos := to_integer(R_h_cnt);
+            v_pos := to_integer(R_v_cnt);
             
-            -- 逐像素生成帧并写入RAM
-            pixel_x <= to_unsigned(x_pos, 11);
-            pixel_y <= to_unsigned(y_pos, 10);
+            -- 检测帧结束
+            if h_pos = SCREEN_WIDTH-1 and v_pos = SCREEN_HEIGHT-1 then
+                frame_complete <= '1';
+            else
+                frame_complete <= '0';
+            end if;
+
+            -- 默认为背景色和无效像素
+            pixel_color <= "000";
+            write_en <= '0';
             
-            -- 根据当前渲染阶段执行不同的操作
-            case render_stage is
-                -- 阶段1: 初始化背景
-                when INIT_BACKGROUND =>
-                    -- 使用固定颜色作为背景
-                    pixel_color <= "000";
-                    
-                    write_en <= '1';
-                    
-                    -- 更新位置
-                    if x_pos = SCREEN_WIDTH-1 then
-                        x_pos := 0;
-                        if y_pos = SCREEN_HEIGHT-1 then
-                            y_pos := 0;
-                            -- 背景初始化完成，切换到内容绘制阶段
-                            render_stage := DRAW_CONTENT;
-                        else
-                            y_pos := y_pos + 1;
-                        end if;
-                    else
-                        x_pos := x_pos + 1;
-                    end if;
+            -- 只在有效显示区域内处理像素
+            if W_active_flag = '1' then
+                -- 设置像素有效
+                write_en <= '1';
                 
-                -- 阶段2: 绘制游戏内容
-                when DRAW_CONTENT =>
-                    -- 默认不写入
-                    write_en <= '0';
+                -- 根据游戏状态绘制不同内容
+                case general_state is
+                    -- 主菜单
+                    when "000" =>
+                        -- 开始菜单内容，可以添加开始GreedySnake图片
+                        if (h_pos >= TITLE_START_X and h_pos < TITLE_END_X and v_pos >= TITLE_START_Y and v_pos < TITLE_END_Y) then
+                            pixel_color <= "001"; -- 蓝色标题 (R=0, G=0, B=F)
+                        end if;
                     
-                    -- 根据游戏状态绘制不同内容
-                    case general_state is
-                        -- 主菜单
-                        when "000" =>
-                            -- 开始菜单内容，可以添加开始GreedySnake图片
-                            if (x_pos >= TITLE_START_X and x_pos < TITLE_END_X and y_pos >= TITLE_START_Y and y_pos < TITLE_END_Y) then
-                                pixel_color <= "001"; -- 蓝色标题 (R=0, G=0, B=F)
-                                write_en <= '1';
-                            -- 暂时注释掉分数显示
-                            -- elsif is_score_display(x_pos, y_pos, score(7 downto 0)) then
-                            --     pixel_color <= "001"; -- 蓝色分数 (R=0, G=0, B=1)
-                            --     write_en <= '1';
-                            end if;
+                    -- 难度选择
+                    when "001" =>
+                        -- 初始化界面内容
+                        if (h_pos >= PROGRESS_START_X and h_pos < PROGRESS_END_X and v_pos >= PROGRESS_START_Y and v_pos < PROGRESS_END_Y) then
+                            pixel_color <= "101"; -- 紫色进度条背景 (R=F, G=0, B=F)
+                        end if;
+                    
+                    -- 游戏初始化
+                    when "010" =>
+                        -- 初始化界面内容
+                        if (h_pos >= PROGRESS_START_X and h_pos < PROGRESS_END_X and v_pos >= PROGRESS_START_Y and v_pos < PROGRESS_END_Y) then
+                            pixel_color <= "101"; -- 紫色进度条背景 (R=F, G=0, B=F)
+                        end if;
+                    
+                    -- 游戏运行中
+                    when "011" =>
+                        -- 游戏中的内容
                         
-                        -- 难度选择
-                        when "001" =>
-                            -- 初始化界面内容
-                            if (x_pos >= PROGRESS_START_X and x_pos < PROGRESS_END_X and y_pos >= PROGRESS_START_Y and y_pos < PROGRESS_END_Y) then
-                                pixel_color <= "101"; -- 紫色进度条背景 (R=F, G=0, B=F)
-                                write_en <= '1';
-                            end if;
-                        
-                        -- 游戏初始化
-                        when "010" =>
-                            -- 初始化界面内容
-                            if (x_pos >= PROGRESS_START_X and x_pos < PROGRESS_END_X and y_pos >= PROGRESS_START_Y and y_pos < PROGRESS_END_Y) then
-                                pixel_color <= "101"; -- 紫色进度条背景 (R=F, G=0, B=F)
-                                write_en <= '1';
-                            end if;
-                        
-                        -- 游戏运行中
-                        when "011" =>
-                            -- 游戏中的内容
+                        -- 4. 绘制蛇身（使用snake_map）
+                        -- 计算当前像素所在的网格位置
+                        if h_pos < GAME_AREA_END_X then  -- 只在游戏区域内检查蛇身
+                            -- 计算当前像素对应的网格索引
+                            grid_x := h_pos / GRID_SIZE;
+                            grid_y := v_pos / GRID_SIZE;
                             
-                            -- 0. 显示游戏信息（模式、速度、难度）- 已注释
-                            -- if is_game_info_display(x_pos, y_pos, difficulty) then
-                            --     pixel_color <= "110"; -- 黄色信息区 (R=1, G=1, B=0)
-                            --     write_en <= '1';
-                            
-                            -- 2. 绘制分数 (暂时注释掉)
-                            -- elsif is_score_display(x_pos, y_pos, score(7 downto 0)) then
-                            --     pixel_color <= "001"; -- 蓝色分数 (R=0, G=0, B=1)
-                            --     write_en <= '1';
-                            
-                            -- 3. 绘制最高分 (暂时注释掉)
-                            -- elsif is_high_score_display(x_pos, y_pos, high_score) then
-                            --     pixel_color <= "101"; -- 紫色最高分 (R=1, G=0, B=1)
-                            --     write_en <= '1';
-                            
-                            -- 4. 绘制蛇身（使用snake_map）
-                            -- 计算当前像素所在的网格位置
-                            if x_pos < GAME_AREA_END_X then  -- 只在游戏区域内检查蛇身
-                                -- 计算当前像素对应的网格索引
-                                grid_x := x_pos / GRID_SIZE;
-                                grid_y := y_pos / GRID_SIZE;
+                            -- 确保网格索引在有效范围内
+                            if grid_x >= 0 and grid_x < GRID_COLS and grid_y >= 0 and grid_y < GRID_ROWS then
+                                -- 计算在snake_map中的位置
+                                position := grid_x + grid_y * GRID_COLS;
                                 
-                                -- 确保网格索引在有效范围内
-                                if grid_x >= 0 and grid_x < GRID_COLS and grid_y >= 0 and grid_y < GRID_ROWS then
-                                    -- 计算在snake_map中的位置
-                                    position := grid_x + grid_y * GRID_COLS;
-                                    
-                                    -- 优先绘制蛇身，如果当前位置没有蛇，再检查是否是食物
-                                    if position < 300 and snake_map(position) = '1' then
-                                        -- 绘制蛇身 (绿色)
-                                        pixel_color <= "010";
-                                        write_en <= '1';
-                                    -- 检查是否是食物
-                                    elsif grid_x = to_integer(food_x) and grid_y = to_integer(food_y) then
-                                        -- 绘制食物 (红色)
-                                        pixel_color <= "100"; -- 红色食物 (R=1, G=0, B=0)
-                                        write_en <= '1';
-                                    end if;
+                                -- 优先绘制蛇身，如果当前位置没有蛇，再检查是否是食物
+                                if position < 300 and snake_map(position) = '1' then
+                                    -- 绘制蛇身 (绿色)
+                                    pixel_color <= "010";
+                                -- 检查是否是食物
+                                elsif grid_x = to_integer(food_x) and grid_y = to_integer(food_y) then
+                                    -- 绘制食物 (红色)
+                                    pixel_color <= "100"; -- 红色食物 (R=1, G=0, B=0)
                                 end if;
                             end if;
-                        
-                        -- 游戏结束
-                        when "100" =>
-                            -- 游戏结束内容
-                            if (x_pos >= GAMEOVER_START_X and x_pos < GAMEOVER_END_X and y_pos >= GAMEOVER_START_Y and y_pos < GAMEOVER_END_Y) then
-                                pixel_color <= "100"; -- 红色游戏结束文字 (R=F, G=0, B=0)
-                                write_en <= '1';
-                            -- 暂时注释掉分数和最高分显示
-                            -- elsif is_score_display(x_pos, y_pos, score(7 downto 0)) then
-                            --     pixel_color <= "001"; -- 蓝色最终分数 (R=0, G=0, B=F)
-                            --     write_en <= '1';
-                            -- elsif is_high_score_display(x_pos, y_pos, high_score) then
-                            --     pixel_color <= "101"; -- 紫色最高分 (R=F, G=0, B=F)
-                            --     write_en <= '1';
-                            end if;
-                        
-                        -- 默认情况
-                        when others =>
-                            -- 不执行任何操作
-                            null;
-                    end case;
-                    
-                    -- 更新位置
-                    if x_pos = SCREEN_WIDTH-1 then
-                        x_pos := 0;
-                        if y_pos = SCREEN_HEIGHT-1 then
-                            y_pos := 0;
-                            -- 内容绘制完成，回到背景初始化阶段（为下一帧准备）
-                            render_stage := INIT_BACKGROUND;
-                            -- 发出帧完成信号
-                            frame_complete <= '1';
-                        else
-                            y_pos := y_pos + 1;
                         end if;
-                    else
-                        x_pos := x_pos + 1;
-                    end if;
-            end case;
+                    
+                    -- 游戏结束
+                    when "100" =>
+                        -- 游戏结束内容
+                        if (h_pos >= GAMEOVER_START_X and h_pos < GAMEOVER_END_X and v_pos >= GAMEOVER_START_Y and v_pos < GAMEOVER_END_Y) then
+                            pixel_color <= "100"; -- 红色游戏结束文字 (R=F, G=0, B=0)
+                        end if;
+                    
+                    -- 默认情况
+                    when others =>
+                        -- 不执行任何操作
+                        null;
+                end case;
+            end if;
         end if;
     end process;
 end Behavioral;

@@ -51,7 +51,6 @@ architecture Behavioral of snake_game_top is
     signal pixel_color   : std_logic_vector(2 downto 0);   -- 像素颜色
     signal write_en      : std_logic;                       -- 写使能
     signal frame_complete: std_logic;                       -- 帧完成信号
-    signal color_array   : std_logic_vector(2 downto 0);   -- 颜色数据
     signal active_flag   : std_logic;                       -- 有效显示区标志
     signal R_h_cnt       : unsigned(11 downto 0);           -- VGA行计数
     signal R_v_cnt       : unsigned(11 downto 0);           -- VGA列计数
@@ -157,28 +156,12 @@ begin
         frame_complete => frame_complete
     );
 
-    -- 帧缓冲区
-    framebuffer_inst : entity work.framebuffer_rgb444
-    port map (
-        clk            => clk,
-        rst_n          => rst_n,
-        write_en       => write_en,
-        frame_complete => frame_complete,
-        pixel_x        => pixel_x,
-        pixel_y        => pixel_y,
-        pixel_color    => pixel_color,
-        R_h_cnt        => R_h_cnt,
-        R_v_cnt        => R_v_cnt,
-        W_active_flag  => active_flag,
-        color_array    => color_array
-    );
-
     -- VGA控制器
     vga_inst : entity work.vga_simple
     port map (
         clk         => clk,
         rst_n       => rst_n,
-        color_array => color_array,
+        color_array => pixel_color,
         square_h_idx     => R_h_cnt,
         square_v_idx     => R_v_cnt,
         O_hs        => O_hs,
