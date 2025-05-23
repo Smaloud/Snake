@@ -17,11 +17,11 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100
 INFO: [Device 21-403] Loading part xc7a100tcsg324-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 24776
+INFO: [Synth 8-7075] Helper process launched with PID 3488
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1207.730 ; gain = 45.762
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1014.965 ; gain = 0.000
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_GameOver' [e:/VivadoWorks/project_1/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/synth/blk_mem_gen_GameOver.vhd:67]
+INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_GameOver' [e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/synth/blk_mem_gen_GameOver.vhd:67]
 	Parameter C_FAMILY bound to: artix7 - type: string 
 	Parameter C_XDEVICEFAMILY bound to: artix7 - type: string 
 	Parameter C_ELABORATION_DIR bound to: ./ - type: string 
@@ -51,8 +51,8 @@ INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_GameOver' [e:/VivadoWorks/p
 	Parameter C_USE_BYTE_WEA bound to: 0 - type: integer 
 	Parameter C_WEA_WIDTH bound to: 1 - type: integer 
 	Parameter C_WRITE_MODE_A bound to: WRITE_FIRST - type: string 
-	Parameter C_WRITE_WIDTH_A bound to: 3 - type: integer 
-	Parameter C_READ_WIDTH_A bound to: 3 - type: integer 
+	Parameter C_WRITE_WIDTH_A bound to: 1 - type: integer 
+	Parameter C_READ_WIDTH_A bound to: 1 - type: integer 
 	Parameter C_WRITE_DEPTH_A bound to: 700000 - type: integer 
 	Parameter C_READ_DEPTH_A bound to: 700000 - type: integer 
 	Parameter C_ADDRA_WIDTH bound to: 20 - type: integer 
@@ -65,8 +65,8 @@ INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_GameOver' [e:/VivadoWorks/p
 	Parameter C_USE_BYTE_WEB bound to: 0 - type: integer 
 	Parameter C_WEB_WIDTH bound to: 1 - type: integer 
 	Parameter C_WRITE_MODE_B bound to: WRITE_FIRST - type: string 
-	Parameter C_WRITE_WIDTH_B bound to: 3 - type: integer 
-	Parameter C_READ_WIDTH_B bound to: 3 - type: integer 
+	Parameter C_WRITE_WIDTH_B bound to: 1 - type: integer 
+	Parameter C_READ_WIDTH_B bound to: 1 - type: integer 
 	Parameter C_WRITE_DEPTH_B bound to: 700000 - type: integer 
 	Parameter C_READ_DEPTH_B bound to: 700000 - type: integer 
 	Parameter C_ADDRB_WIDTH bound to: 20 - type: integer 
@@ -94,60 +94,60 @@ INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_GameOver' [e:/VivadoWorks/p
 	Parameter C_EN_SHUTDOWN_PIN bound to: 0 - type: integer 
 	Parameter C_EN_SAFETY_CKT bound to: 0 - type: integer 
 	Parameter C_DISABLE_WARN_BHV_RANGE bound to: 0 - type: integer 
-	Parameter C_COUNT_36K_BRAM bound to: 64 - type: string 
+	Parameter C_COUNT_36K_BRAM bound to: 21 - type: string 
 	Parameter C_COUNT_18K_BRAM bound to: 1 - type: string 
-	Parameter C_EST_POWER_SUMMARY bound to: Estimated Power for IP     :     6.406773 mW - type: string 
-INFO: [Synth 8-3491] module 'blk_mem_gen_v8_4_4' declared at 'e:/VivadoWorks/project_1/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd:195321' bound to instance 'U0' of component 'blk_mem_gen_v8_4_4' [e:/VivadoWorks/project_1/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/synth/blk_mem_gen_GameOver.vhd:230]
-INFO: [Synth 8-256] done synthesizing module 'blk_mem_gen_GameOver' (11#1) [e:/VivadoWorks/project_1/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/synth/blk_mem_gen_GameOver.vhd:67]
+	Parameter C_EST_POWER_SUMMARY bound to: Estimated Power for IP     :     2.13594 mW - type: string 
+INFO: [Synth 8-3491] module 'blk_mem_gen_v8_4_4' declared at 'e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd:195321' bound to instance 'U0' of component 'blk_mem_gen_v8_4_4' [e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/synth/blk_mem_gen_GameOver.vhd:230]
+INFO: [Synth 8-256] done synthesizing module 'blk_mem_gen_GameOver' (11#1) [e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/synth/blk_mem_gen_GameOver.vhd:67]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished RTL Elaboration : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 1681.047 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 65 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.012 . Memory (MB): peak = 1301.516 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 22 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [e:/VivadoWorks/project_1/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver_ooc.xdc] for cell 'U0'
-Finished Parsing XDC File [e:/VivadoWorks/project_1/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver_ooc.xdc] for cell 'U0'
-Parsing XDC File [E:/VivadoWorks/project_1/project_1.runs/blk_mem_gen_GameOver_synth_1/dont_touch.xdc]
-Finished Parsing XDC File [E:/VivadoWorks/project_1/project_1.runs/blk_mem_gen_GameOver_synth_1/dont_touch.xdc]
+Parsing XDC File [e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver_ooc.xdc] for cell 'U0'
+Finished Parsing XDC File [e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver_ooc.xdc] for cell 'U0'
+Parsing XDC File [E:/Snake/project_1.runs/blk_mem_gen_GameOver_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [E:/Snake/project_1.runs/blk_mem_gen_GameOver_synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1681.047 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1301.516 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.061 . Memory (MB): peak = 1681.047 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.028 . Memory (MB): peak = 1301.516 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  E:/VivadoWorks/project_1/project_1.runs/blk_mem_gen_GameOver_synth_1/dont_touch.xdc, line 9).
+Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  E:/Snake/project_1.runs/blk_mem_gen_GameOver_synth_1/dont_touch.xdc, line 9).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:30 ; elapsed = 00:00:33 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -173,25 +173,25 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:34 ; elapsed = 00:00:38 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:34 ; elapsed = 00:00:38 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Timing Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:34 ; elapsed = 00:00:38 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Technology Mapping : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -209,37 +209,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished IO Insertion : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -255,39 +255,37 @@ Report Cell Usage:
 +------+---------+------+
 |      |Cell     |Count |
 +------+---------+------+
-|1     |LUT3     |     3|
-|2     |LUT4     |    10|
-|3     |LUT5     |     7|
-|4     |LUT6     |     7|
-|5     |MUXF7    |     3|
-|6     |RAMB18E1 |     1|
-|7     |RAMB36E1 |    64|
-|25    |FDRE     |     6|
+|1     |LUT4     |    10|
+|2     |LUT5     |     1|
+|3     |LUT6     |     6|
+|4     |RAMB18E1 |     1|
+|5     |RAMB36E1 |    21|
+|21    |FDRE     |     6|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1301.516 ; gain = 286.551
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:09 ; elapsed = 00:00:37 . Memory (MB): peak = 1681.047 ; gain = 519.078
-Synthesis Optimization Complete : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1681.047 ; gain = 519.078
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:09 ; elapsed = 00:00:26 . Memory (MB): peak = 1301.516 ; gain = 286.551
+Synthesis Optimization Complete : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1301.516 ; gain = 286.551
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1681.047 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 68 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1301.516 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 22 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1681.047 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1301.516 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
 19 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:40 ; elapsed = 00:00:58 . Memory (MB): peak = 1681.047 ; gain = 519.078
-INFO: [Common 17-1381] The checkpoint 'E:/VivadoWorks/project_1/project_1.runs/blk_mem_gen_GameOver_synth_1/blk_mem_gen_GameOver.dcp' has been generated.
+synth_design: Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1301.516 ; gain = 286.551
+INFO: [Common 17-1381] The checkpoint 'E:/Snake/project_1.runs/blk_mem_gen_GameOver_synth_1/blk_mem_gen_GameOver.dcp' has been generated.
 WARNING: [Common 17-576] 'use_project_ipc' is deprecated. This option is deprecated and no longer used.
-INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP blk_mem_gen_GameOver, cache-ID = 6fac2903b368628e
-INFO: [Coretcl 2-1174] Renamed 76 cell refs.
-INFO: [Common 17-1381] The checkpoint 'E:/VivadoWorks/project_1/project_1.runs/blk_mem_gen_GameOver_synth_1/blk_mem_gen_GameOver.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP blk_mem_gen_GameOver, cache-ID = 7f84ce86009359a8
+INFO: [Coretcl 2-1174] Renamed 30 cell refs.
+INFO: [Common 17-1381] The checkpoint 'E:/Snake/project_1.runs/blk_mem_gen_GameOver_synth_1/blk_mem_gen_GameOver.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file blk_mem_gen_GameOver_utilization_synth.rpt -pb blk_mem_gen_GameOver_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Fri May 23 18:39:05 2025...
+INFO: [Common 17-206] Exiting Vivado at Fri May 23 22:31:09 2025...

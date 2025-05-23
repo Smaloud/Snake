@@ -57,7 +57,7 @@
 blk_mem_gen_GameOver your_instance_name (
   .clka(clka),    // input wire clka
   .addra(addra),  // input wire [19 : 0] addra
-  .douta(douta)  // output wire [2 : 0] douta
+  .douta(douta)  // output wire [0 : 0] douta
 );
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 

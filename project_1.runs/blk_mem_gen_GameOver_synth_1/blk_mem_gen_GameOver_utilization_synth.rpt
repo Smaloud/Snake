@@ -1,8 +1,8 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Fri May 23 18:39:04 2025
-| Host         : LAPTOP-FMHA2MNQ running 64-bit major release  (build 9200)
+| Date         : Fri May 23 22:31:08 2025
+| Host         : DESKTOP-TFS410 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file blk_mem_gen_GameOver_utilization_synth.rpt -pb blk_mem_gen_GameOver_utilization_synth.pb
 | Design       : blk_mem_gen_GameOver
 | Device       : 7a100tcsg324-1
@@ -30,13 +30,13 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             |   27 |     0 |     63400 |  0.04 |
-|   LUT as Logic          |   27 |     0 |     63400 |  0.04 |
+| Slice LUTs*             |   17 |     0 |     63400 |  0.03 |
+|   LUT as Logic          |   17 |     0 |     63400 |  0.03 |
 |   LUT as Memory         |    0 |     0 |     19000 |  0.00 |
 | Slice Registers         |    6 |     0 |    126800 | <0.01 |
 |   Register as Flip Flop |    6 |     0 |    126800 | <0.01 |
 |   Register as Latch     |    0 |     0 |    126800 |  0.00 |
-| F7 Muxes                |    3 |     0 |     31700 | <0.01 |
+| F7 Muxes                |    0 |     0 |     31700 |  0.00 |
 | F8 Muxes                |    0 |     0 |     15850 |  0.00 |
 +-------------------------+------+-------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
@@ -67,9 +67,9 @@ Table of Contents
 +-------------------+------+-------+-----------+-------+
 |     Site Type     | Used | Fixed | Available | Util% |
 +-------------------+------+-------+-----------+-------+
-| Block RAM Tile    | 64.5 |     0 |       135 | 47.78 |
-|   RAMB36/FIFO*    |   64 |     0 |       135 | 47.41 |
-|     RAMB36E1 only |   64 |       |           |       |
+| Block RAM Tile    | 21.5 |     0 |       135 | 15.93 |
+|   RAMB36/FIFO*    |   21 |     0 |       135 | 15.56 |
+|     RAMB36E1 only |   21 |       |           |       |
 |   RAMB18          |    1 |     0 |       270 |  0.37 |
 |     RAMB18E1 only |    1 |       |           |       |
 +-------------------+------+-------+-----------+-------+
@@ -148,14 +148,12 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| RAMB36E1 |   64 |        Block Memory |
+| RAMB36E1 |   21 |        Block Memory |
 | LUT4     |   10 |                 LUT |
-| LUT6     |    7 |                 LUT |
-| LUT5     |    7 |                 LUT |
+| LUT6     |    6 |                 LUT |
 | FDRE     |    6 |        Flop & Latch |
-| MUXF7    |    3 |               MuxFx |
-| LUT3     |    3 |                 LUT |
 | RAMB18E1 |    1 |        Block Memory |
+| LUT5     |    1 |                 LUT |
 +----------+------+---------------------+
 
 

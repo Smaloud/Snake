@@ -56,7 +56,7 @@ COMPONENT blk_mem_gen_GameOver
   PORT (
     clka : IN STD_LOGIC;
     addra : IN STD_LOGIC_VECTOR(19 DOWNTO 0);
-    douta : OUT STD_LOGIC_VECTOR(2 DOWNTO 0)
+    douta : OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
   );
 END COMPONENT;
 -- COMP_TAG_END ------ End COMPONENT Declaration ------------
