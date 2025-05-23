@@ -12,7 +12,7 @@ entity food_generator is
     port (
         clk           : in  std_logic;
         rst_n         : in  std_logic;
-        general_state : in  std_logic_vector(2 downto 0);  -- 状态码扩展到3位
+        general_state : in  std_logic_vector(1 downto 0);  -- 状态码：00-菜单, 01-初始化, 10-运行中, 11-游戏结束
         flag_eat      : inout  std_logic;  -- 食物被吃掉的信号
         snake_map     : in  std_logic_vector(299 downto 0);  -- 蛇身位置图
 
@@ -41,7 +41,7 @@ begin
         if rst_n = '0' then
             lfsr <= x"ACE1";
         elsif rising_edge(clk) then
-            if general_state = "010" or flag_eat = '1' then  -- 初始化或食物被吃掉
+            if general_state = "01" or flag_eat = '1' then  -- 初始化或食物被吃掉
                 -- LFSR更新
                 feedback := lfsr(15) xor lfsr(13) xor lfsr(12) xor lfsr(10);
                 lfsr <= lfsr(14 downto 0) & feedback;
@@ -63,7 +63,7 @@ begin
             food_x_r <= (others => '0');
             food_y_r <= (others => '0');
         elsif rising_edge(clk) then
-            if general_state = "010" or flag_eat = '1' then  -- 初始化或食物被吃掉
+            if general_state = "01" or flag_eat = '1' then  -- 初始化或食物被吃掉
                 -- 计算在snake_map中的索引
                 map_index := to_integer(random_x) + to_integer(random_y) * GRID_WIDTH;
                 
