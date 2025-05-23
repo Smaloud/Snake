@@ -53,7 +53,10 @@ entity frame_generator is
         -- 图片ROM接口
         image_select  : out std_logic_vector(2 downto 0);   -- 图片选择信号，选择使用哪一张图片
         rom_addr      : out unsigned(19 downto 0);          -- 图片ROM地址
-        rom_data      : in  std_logic_vector(11 downto 0)   -- 图片ROM数据
+        rom_data      : in  std_logic_vector(11 downto 0);   -- 图片ROM数据
+        
+        -- 缓冲区就绪信号
+        buffer_ready  : in  std_logic                       -- 缓冲区就绪信号
     );
 end frame_generator;
 
@@ -220,6 +223,9 @@ architecture Behavioral of frame_generator is
         end if;
     end procedure fill_grid_with_color;
 
+    -- 添加帧生成控制信号
+    signal generating_frame : std_logic := '0';
+
 begin
     -- 设置图片选择信号 - 根据不同状态选择不同背景图
     process(general_state)
@@ -245,7 +251,6 @@ begin
     process(clk, rst_n)
         variable x_pos : integer range 0 to 1023 := 0;
         variable y_pos : integer range 0 to 599 := 0;
-        variable render_stage : render_stage_type := INIT_BACKGROUND;
         variable grid_x : integer;
         variable grid_y : integer;
         variable position : integer;
@@ -272,162 +277,116 @@ begin
         if rst_n = '0' then
             write_en <= '0';
             frame_complete <= '0';
-            render_stage := INIT_BACKGROUND;
+            generating_frame <= '0';
             x_pos := 0;
             y_pos := 0;
         elsif rising_edge(clk) then
             -- 初始化帧完成信号为0
             frame_complete <= '0';
             
-            -- 计算当前像素在rom中的地址
-            rom_addr <= to_unsigned(y_pos * SCREEN_WIDTH + x_pos, 20);
+            -- 只有在没有正在生成帧且缓冲区就绪时才开始新帧
+            if generating_frame = '0' and buffer_ready = '1' then
+                generating_frame <= '1';
+            end if;
             
-            -- 逐像素生成帧并写入RAM
-            pixel_x <= to_unsigned(x_pos, 11);
-            pixel_y <= to_unsigned(y_pos, 10);
-            
-            -- 根据当前渲染阶段执行不同的操作
-            case render_stage is
-                -- 阶段1: 初始化背景
-                when INIT_BACKGROUND =>
-                    -- 使用图片ROM作为背景
-                    -- 使用ROM数据作为像素颜色
-                    pixel_color <= rom_data;
-                    
-                    write_en <= '1';
-                    
-                    -- 更新位置
-                    if x_pos = SCREEN_WIDTH-1 then
-                        x_pos := 0;
-                        if y_pos = SCREEN_HEIGHT-1 then
-                            y_pos := 0;
-                            -- 背景初始化完成，切换到内容绘制阶段
-                            render_stage := DRAW_CONTENT;
-                        else
-                            y_pos := y_pos + 1;
-                        end if;
-                    else
-                        x_pos := x_pos + 1;
-                    end if;
+            -- 只有在正在生成帧时才进行像素生成
+            if generating_frame = '1' then
+                -- 计算当前像素在rom中的地址
+                rom_addr <= to_unsigned(y_pos * SCREEN_WIDTH + x_pos, 20);
                 
-                -- 阶段2: 绘制游戏内容
-                when DRAW_CONTENT =>
-                    -- 默认不写入
-                    write_en <= '0';
+                -- 逐像素生成帧并写入RAM
+                pixel_x <= to_unsigned(x_pos, 11);
+                pixel_y <= to_unsigned(y_pos, 10);
+                
+                -- 默认不写入
+                write_en <= '0';
+                
+                -- 根据游戏状态绘制不同内容
+                case general_state is
+                    -- 主菜单
+                    when "000" =>
+                        -- 使用ROM数据作为背景
+                        pixel_color <= rom_data;
+                        write_en <= '1';
+                        
+                        -- 菜单内容
+                        if (x_pos >= TITLE_START_X and x_pos < TITLE_END_X and y_pos >= TITLE_START_Y and y_pos < TITLE_END_Y) then
+                            pixel_color <= "000000001111"; -- 蓝色标题
+                            write_en <= '1';
+                        end if;
                     
-                    -- 根据游戏状态绘制不同内容
-                    case general_state is
-                        -- 主菜单
-                        when "000" =>
-                            -- 开始菜单内容
-                            if (x_pos >= TITLE_START_X and x_pos < TITLE_END_X and y_pos >= TITLE_START_Y and y_pos < TITLE_END_Y) then
-                                pixel_color <= "000000001111"; -- 蓝色标题 (R=0, G=0, B=F)
-                                write_en <= '1';
-                            elsif is_game_info_display(x_pos, y_pos, difficulty) then
-                                pixel_color <= "111111110000"; -- 黄色信息区 (R=F, G=F, B=0)
-                                write_en <= '1';
-                            end if;
+                    -- 游戏运行中
+                    when "011" =>
+                        -- 使用ROM数据作为背景
+                        pixel_color <= rom_data;
+                        write_en <= '1';
                         
-                        -- 难度选择
-                        when "001" =>
-                            -- 初始化界面内容
-                            if (x_pos >= PROGRESS_START_X and x_pos < PROGRESS_END_X and y_pos >= PROGRESS_START_Y and y_pos < PROGRESS_END_Y) then
-                                pixel_color <= "111100001111"; -- 紫色进度条背景 (R=F, G=0, B=F)
-                                write_en <= '1';
-                            end if;
-                        
-                        -- 游戏初始化
-                        when "010" =>
-                            -- 初始化界面内容
-                            if (x_pos >= PROGRESS_START_X and x_pos < PROGRESS_END_X and y_pos >= PROGRESS_START_Y and y_pos < PROGRESS_END_Y) then
-                                pixel_color <= "111100001111"; -- 紫色进度条背景 (R=F, G=0, B=F)
-                                write_en <= '1';
-                            end if;
-                        
-                        -- 游戏运行中
-                        when "011" =>
-                            -- 游戏中的内容
+                        -- 1. 首先绘制蛇身（最高优先级）
+                        if x_pos < GAME_AREA_END_X then
+                            grid_x := x_pos / GRID_SIZE;
+                            grid_y := y_pos / GRID_SIZE;
                             
-                            -- 0. 显示游戏信息（模式、速度、难度）
-                            if is_game_info_display(x_pos, y_pos, difficulty) then
-                                pixel_color <= "111111110000"; -- 黄色信息区 (R=F, G=F, B=0)
-                                write_en <= '1';
-                            
-                            -- 1. 绘制食物
-                            elsif is_food(x_pos, y_pos, 
-                                         to_unsigned(to_integer(food_x) * GRID_SIZE, 10), 
-                                         to_unsigned(to_integer(food_y) * GRID_SIZE, 9)) then
-                                pixel_color <= "111100000000"; -- 红色食物 (R=F, G=0, B=0)
-                                write_en <= '1';
-                            
-                            -- 2. 绘制分数
-                            elsif is_score_display(x_pos, y_pos, score(7 downto 0)) then
-                                pixel_color <= "000000001111"; -- 蓝色分数 (R=0, G=0, B=F)
-                                write_en <= '1';
-                            
-                            -- 3. 绘制最高分
-                            elsif is_high_score_display(x_pos, y_pos, high_score) then
-                                pixel_color <= "111100001111"; -- 紫色最高分 (R=F, G=0, B=F)
-                                write_en <= '1';
-                            end if;
-                            
-                            -- 4. 绘制蛇身（使用snake_map）
-                            -- 计算当前像素所在的网格位置
-                            if x_pos < GAME_AREA_END_X then  -- 只在游戏区域内检查蛇身
-                                -- 计算当前像素对应的网格索引
-                                grid_x := x_pos / GRID_SIZE;
-                                grid_y := y_pos / GRID_SIZE;
+                            if grid_x >= 0 and grid_x < GRID_COLS and grid_y >= 0 and grid_y < GRID_ROWS then
+                                position := grid_x + grid_y * GRID_COLS;
                                 
-                                -- 确保网格索引在有效范围内
-                                if grid_x >= 0 and grid_x < GRID_COLS and grid_y >= 0 and grid_y < GRID_ROWS then
-                                    -- 计算在snake_map中的位置
-                                    position := grid_x + grid_y * GRID_COLS;
-                                    
-                                    -- 检查该位置是否有蛇身
-                                    if position < 300 and snake_map(position) = '1' then
-                                        -- 绘制蛇身
-                                        fill_grid_with_color(pixel_x, pixel_y, pixel_color, write_en, 
-                                                           grid_x, grid_y, "000011110000", x_pos, y_pos);
-                                    end if;
+                                if position < 300 and snake_map(position) = '1' then
+                                    fill_grid_with_color(pixel_x, pixel_y, pixel_color, write_en, 
+                                                       grid_x, grid_y, "000011110000", x_pos, y_pos);
                                 end if;
                             end if;
-                        
-                        -- 游戏结束
-                        when "100" =>
-                            -- 游戏结束内容
-                            if (x_pos >= GAMEOVER_START_X and x_pos < GAMEOVER_END_X and y_pos >= GAMEOVER_START_Y and y_pos < GAMEOVER_END_Y) then
-                                pixel_color <= "111100000000"; -- 红色游戏结束文字 (R=F, G=0, B=0)
-                                write_en <= '1';
-                            elsif is_score_display(x_pos, y_pos, score(7 downto 0)) then
-                                pixel_color <= "000000001111"; -- 蓝色最终分数 (R=0, G=0, B=F)
-                                write_en <= '1';
-                            elsif is_high_score_display(x_pos, y_pos, high_score) then
-                                pixel_color <= "111100001111"; -- 紫色最高分 (R=F, G=0, B=F)
-                                write_en <= '1';
-                            end if;
-                        
-                        -- 默认情况
-                        when others =>
-                            -- 不执行任何操作
-                            null;
-                    end case;
-                    
-                    -- 更新位置
-                    if x_pos = SCREEN_WIDTH-1 then
-                        x_pos := 0;
-                        if y_pos = SCREEN_HEIGHT-1 then
-                            y_pos := 0;
-                            -- 内容绘制完成，回到背景初始化阶段（为下一帧准备）
-                            render_stage := INIT_BACKGROUND;
-                            -- 发出帧完成信号
-                            frame_complete <= '1';
-                        else
-                            y_pos := y_pos + 1;
                         end if;
+                        
+                        -- 2. 绘制食物
+                        if is_food(x_pos, y_pos, food_x, food_y) then
+                            pixel_color <= "111100000000"; -- 红色食物
+                            write_en <= '1';
+                        end if;
+                        
+                        -- 3. 绘制分数和游戏信息
+                        if is_score_display(x_pos, y_pos, score) then
+                            pixel_color <= "000000001111"; -- 蓝色分数
+                            write_en <= '1';
+                        elsif is_high_score_display(x_pos, y_pos, high_score) then
+                            pixel_color <= "111100001111"; -- 紫色最高分
+                            write_en <= '1';
+                        elsif is_game_info_display(x_pos, y_pos, difficulty) then
+                            pixel_color <= "111111110000"; -- 黄色信息区
+                            write_en <= '1';
+                        end if;
+                    
+                    -- 游戏结束
+                    when "100" =>
+                        -- 使用ROM数据作为背景
+                        pixel_color <= rom_data;
+                        write_en <= '1';
+                        
+                        if (x_pos >= GAMEOVER_START_X and x_pos < GAMEOVER_END_X and y_pos >= GAMEOVER_START_Y and y_pos < GAMEOVER_END_Y) then
+                            pixel_color <= "111100000000"; -- 红色游戏结束文字
+                            write_en <= '1';
+                        end if;
+                    
+                    -- 其他状态
+                    when others =>
+                        -- 使用ROM数据作为背景
+                        pixel_color <= rom_data;
+                        write_en <= '1';
+                end case;
+                
+                -- 更新位置
+                if x_pos = SCREEN_WIDTH-1 then
+                    x_pos := 0;
+                    if y_pos = SCREEN_HEIGHT-1 then
+                        y_pos := 0;
+                        -- 帧生成完成，发出完成信号并停止生成
+                        frame_complete <= '1';
+                        generating_frame <= '0';
                     else
-                        x_pos := x_pos + 1;
+                        y_pos := y_pos + 1;
                     end if;
-            end case;
+                else
+                    x_pos := x_pos + 1;
+                end if;
+            end if;
         end if;
     end process;
 end Behavioral;
