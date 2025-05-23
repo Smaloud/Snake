@@ -10,7 +10,7 @@ entity framebuffer_rgb444 is
         frame_complete: in  std_logic;                      -- 一帧写入完成标志
         pixel_x       : in  unsigned(10 downto 0);          -- 写入像素 x 坐标(0~1023)
         pixel_y       : in  unsigned(9 downto 0);           -- 写入像素 y 坐标(0~599)
-        pixel_color   : in  std_logic_vector(11 downto 0);  -- 写入像素颜色RGB444
+        pixel_color   : in  std_logic_vector(2 downto 0);  -- 写入像素颜色RGB444
 
         -- VGA控制接口
         R_h_cnt       : in  unsigned(11 downto 0);          -- VGA 控制器提供的行像素计数
@@ -18,7 +18,7 @@ entity framebuffer_rgb444 is
         W_active_flag : in  std_logic;                      -- VGA有效显示区标志
 
         -- 输出给VGA控制器的颜色
-        color_array   : out std_logic_vector(11 downto 0)   -- 12位RGB444色彩信号
+        color_array   : out std_logic_vector(2 downto 0)   -- 12位RGB444色彩信号
     );
 end framebuffer_rgb444;
 
@@ -38,13 +38,13 @@ architecture Behavioral of framebuffer_rgb444 is
     signal div_ff  : std_logic := '0';
 
     -- 双缓冲区RAM
-    type ram_type is array (0 to PIXEL_COUNT - 1) of std_logic_vector(11 downto 0);
+    type ram_type is array (0 to PIXEL_COUNT - 1) of std_logic_vector(2 downto 0);
     signal framebuffer0 : ram_type := (others => (others => '0'));
     signal framebuffer1 : ram_type := (others => (others => '0'));
 
     signal write_addr : unsigned(ADDR_WIDTH-1 downto 0);
     signal read_addr  : unsigned(ADDR_WIDTH-1 downto 0);
-    signal pixel_read : std_logic_vector(11 downto 0);
+    signal pixel_read : std_logic_vector(2 downto 0);
 
 begin
     -- 生成像素时钟

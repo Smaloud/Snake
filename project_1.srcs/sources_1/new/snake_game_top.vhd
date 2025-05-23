@@ -48,18 +48,13 @@ architecture Behavioral of snake_game_top is
     -- 显示相关信号
     signal pixel_x       : unsigned(10 downto 0);           -- 像素x坐标
     signal pixel_y       : unsigned(9 downto 0);            -- 像素y坐标
-    signal pixel_color   : std_logic_vector(11 downto 0);   -- 像素颜色
+    signal pixel_color   : std_logic_vector(2 downto 0);   -- 像素颜色
     signal write_en      : std_logic;                       -- 写使能
     signal frame_complete: std_logic;                       -- 帧完成信号
-    signal color_array   : std_logic_vector(11 downto 0);   -- 颜色数据
+    signal color_array   : std_logic_vector(2 downto 0);   -- 颜色数据
     signal active_flag   : std_logic;                       -- 有效显示区标志
     signal R_h_cnt       : unsigned(11 downto 0);           -- VGA行计数
     signal R_v_cnt       : unsigned(11 downto 0);           -- VGA列计数
-    
-    -- 图像ROM相关信号
-    signal image_select  : std_logic_vector(2 downto 0);    -- 图片选择信号
-    signal rom_addr      : unsigned(19 downto 0);           -- 图片ROM地址
-    signal rom_data      : std_logic_vector(11 downto 0);   -- 图片ROM数据
 
 begin
     -- 游戏状态机
@@ -138,15 +133,6 @@ begin
         high_score    => high_score
     );
 
-    -- 图像ROM
-    image_rom_inst : entity work.image_rom
-    port map (
-        clk           => clk,
-        addr          => rom_addr,
-        image_select  => image_select,
-        data          => rom_data
-    );
-
     -- 帧生成器
     frame_generator_inst : entity work.frame_generator
     port map (
@@ -168,10 +154,7 @@ begin
         pixel_y        => pixel_y,
         pixel_color    => pixel_color,
         write_en       => write_en,
-        frame_complete => frame_complete,
-        image_select   => image_select,
-        rom_addr       => rom_addr,
-        rom_data       => rom_data
+        frame_complete => frame_complete
     );
 
     -- 帧缓冲区
