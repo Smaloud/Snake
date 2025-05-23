@@ -11,8 +11,8 @@ entity score_keeper is
         flag_update   : in  std_logic;                     -- 更新分数信号
         
         
-        score         : out std_logic_vector(15 downto 0); -- 当前分数（最高65535）
-        high_score    : out std_logic_vector(15 downto 0)  -- 最高分
+        score         : out std_logic_vector(11 downto 0); -- 当前分数（最高65535）
+        high_score    : out std_logic_vector(11 downto 0)  -- 最高分
     );
 end score_keeper;
 

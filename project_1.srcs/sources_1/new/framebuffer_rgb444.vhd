@@ -1,6 +1,6 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 entity framebuffer_rgb444 is
     port (
@@ -23,33 +23,31 @@ entity framebuffer_rgb444 is
 end framebuffer_rgb444;
 
 architecture Behavioral of framebuffer_rgb444 is
-
     constant SCREEN_WIDTH  : integer := 1024;
     constant SCREEN_HEIGHT : integer := 600;
     constant PIXEL_COUNT   : integer := SCREEN_WIDTH * SCREEN_HEIGHT;  -- 614400
-    constant ADDR_WIDTH    : integer := 20;  -- ceil(log2(614400)) 注意调整！
+    constant ADDR_WIDTH    : integer := 20;  -- ceil(log2(614400))
 
     -- 帧缓冲区管理信号
-    signal frame_ready : std_logic := '0';  -- 帧数据准备就绪标志
-    signal frame_buffer_index : std_logic := '0';  -- 当前使用的帧缓冲区索引
-    signal display_buffer_index : std_logic := '0';  -- 当前显示的帧缓冲区索引
+    signal frame_ready : std_logic := '0';
+    signal frame_buffer_index : std_logic := '0';
+    signal display_buffer_index : std_logic := '0';
     
-    -- 像素时钟相关 (从100MHz分频得到50MHz)
+    -- 像素时钟相关
     signal pix_clk : std_logic := '0';
     signal div_ff  : std_logic := '0';
 
     -- 双缓冲区RAM
     type ram_type is array (0 to PIXEL_COUNT - 1) of std_logic_vector(11 downto 0);
-    signal framebuffer0 : ram_type := (others => (others => '0'));  -- 写入缓冲区
-    signal framebuffer1 : ram_type := (others => (others => '0'));  -- 显示缓冲区
+    signal framebuffer0 : ram_type := (others => (others => '0'));
+    signal framebuffer1 : ram_type := (others => (others => '0'));
 
     signal write_addr : unsigned(ADDR_WIDTH-1 downto 0);
     signal read_addr  : unsigned(ADDR_WIDTH-1 downto 0);
     signal pixel_read : std_logic_vector(11 downto 0);
 
 begin
-
-    -- 1. 生成像素时钟 (2分频: 100MHz → 50MHz)
+    -- 生成像素时钟
     process(clk)
     begin
         if rising_edge(clk) then
@@ -63,36 +61,33 @@ begin
         end if;
     end process;
 
-    -- 写地址（行优先编码）
+    -- 写地址计算
     write_addr <= resize(pixel_y * SCREEN_WIDTH + pixel_x, ADDR_WIDTH);
 
-    -- 写入过程 (使用系统时钟)
+    -- 写入过程
     process(clk)
     begin
         if rising_edge(clk) then
             if rst_n = '0' then
-                -- 复位时清空状态
                 frame_buffer_index <= '0';
                 frame_ready <= '0';
             elsif write_en = '1' then
-                -- 正常写入操作
                 if frame_buffer_index = '0' then
                     framebuffer0(to_integer(write_addr)) <= pixel_color;
                 else
                     framebuffer1(to_integer(write_addr)) <= pixel_color;
                 end if;
             elsif frame_complete = '1' then
-                -- 帧完成信号
-                frame_buffer_index <= not frame_buffer_index;  -- 切换写入缓冲区
-                frame_ready <= '1';  -- 指示有完整帧可显示
+                frame_buffer_index <= not frame_buffer_index;
+                frame_ready <= '1';
             end if;
         end if;
     end process;
 
-    -- 读地址（与 VGA 控制器扫描同步）
+    -- 读地址计算
     read_addr <= resize(R_v_cnt * SCREEN_WIDTH + R_h_cnt, ADDR_WIDTH);
 
-    -- 读取过程 (使用像素时钟)
+    -- 读取过程
     process(pix_clk)
     begin
         if rising_edge(pix_clk) then
@@ -100,23 +95,22 @@ begin
                 pixel_read <= (others => '0');
                 display_buffer_index <= '0';
             else
-                -- 读取当前显示缓冲区
+                -- 从帧缓冲区读取数据
                 if display_buffer_index = '0' then
                     pixel_read <= framebuffer0(to_integer(read_addr));
                 else
                     pixel_read <= framebuffer1(to_integer(read_addr));
                 end if;
                 
-                -- 在VGA垂直同步开始时，切换显示缓冲区
                 if R_v_cnt = 0 and R_h_cnt = 0 and frame_ready = '1' then
-                    display_buffer_index <= frame_buffer_index;  -- 更新显示缓冲区
-                    frame_ready <= '0';  -- 重置标志
+                    display_buffer_index <= frame_buffer_index;
+                    frame_ready <= '0';
                 end if;
             end if;
         end if;
     end process;
 
-    -- RGB 输出
-    color_array <= pixel_read when W_active_flag = '1' else (others => '0');
+    -- RGB输出 - 移除显示控制，直接输出像素值，让frame_generator控制
+    color_array <= pixel_read;
 
 end Behavioral;

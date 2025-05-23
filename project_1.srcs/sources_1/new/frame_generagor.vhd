@@ -19,29 +19,41 @@ entity frame_generator is
         general_state  : in  std_logic_vector(2 downto 0);  -- 游戏状态：000-菜单, 001-难度选择, 010-初始化, 011-运行中, 100-游戏结束
         
         -- 游戏配置信息
-        game_speed     : in  std_logic_vector(1 downto 0);  -- 游戏速度：00-慢, 01-中, 10-快, 11-超快
+        difficulty     : in  std_logic_vector(1 downto 0);  -- 游戏速度：00-慢, 01-中, 10-快, 11-超快
         
         -- 蛇的信息
-        snake_map_r    : in std_logic_vector(299 downto 0); -- 20*15=300位，表示蛇身位置
+        snake_map    : in std_logic_vector(299 downto 0); -- 20*15=300位，表示蛇身位置
 
         
         -- 食物的信息
-        food_x         : in  unsigned(9 downto 0);
-        food_y         : in  unsigned(8 downto 0);
+        food_x         : in  unsigned(4 downto 0);
+        food_y         : in  unsigned(3 downto 0);
         
         -- 障碍物信息（用于障碍模式）
-        obstacle_map   : in  std_logic_vector(63 downto 0); -- 8x8网格的障碍物地图
+        -- obstacle_map   : in  std_logic_vector(63 downto 0); -- 8x8网格的障碍物地图
         
         -- 分数信息
-        score          : in  std_logic_vector(7 downto 0);  -- 假设分数为8位
-        high_score     : in  std_logic_vector(15 downto 0); -- 最高分记录
+        score          : in  std_logic_vector(11 downto 0);  -- 假设分数为8位
+        high_score     : in  std_logic_vector(11 downto 0); -- 最高分记录
+        is_win         : in  std_logic;                     -- 是否胜利
+        is_dead        : in  std_logic;                     -- 是否死亡
+        
+        -- VGA 显示控制信号
+        R_h_cnt        : in  unsigned(11 downto 0);         -- VGA 控制器提供的行像素计数
+        R_v_cnt        : in  unsigned(11 downto 0);         -- VGA 控制器提供的列像素计数
+        W_active_flag  : in  std_logic;                     -- VGA有效显示区标志
         
         -- Framebuffer写入接口
         pixel_x       : out unsigned(10 downto 0);         -- 写入像素 x 坐标（0~1023）
         pixel_y       : out unsigned(9 downto 0);         -- 写入像素 y 坐标（0~599）
         pixel_color   : out std_logic_vector(11 downto 0); -- RGB444 (4+4+4)
         write_en      : out std_logic;                     -- 写使能
-        frame_complete: out std_logic                      -- 帧完成信号
+        frame_complete: out std_logic;                      -- 帧完成信号
+        
+        -- 图片ROM接口
+        image_select  : out std_logic_vector(2 downto 0);   -- 图片选择信号，选择使用哪一张图片
+        rom_addr      : out unsigned(19 downto 0);          -- 图片ROM地址
+        rom_data      : in  std_logic_vector(11 downto 0)   -- 图片ROM数据
     );
 end frame_generator;
 
@@ -57,12 +69,15 @@ architecture Behavioral of frame_generator is
     -- 定义渲染阶段类型
     type render_stage_type is (INIT_BACKGROUND, DRAW_CONTENT);
     
+    -- 图片访问接口
+    signal current_image_select : std_logic_vector(2 downto 0) := "000";
+    
     -- 辅助函数：判断当前像素是否为食物
     function is_food(
         x : integer;
         y : integer;
-        food_x_pos : unsigned(9 downto 0);
-        food_y_pos : unsigned(8 downto 0)
+        food_x_pos : unsigned(4 downto 0);
+        food_y_pos : unsigned(3 downto 0)
     ) return boolean is
     begin
         -- 食物大小与蛇身相同
@@ -78,7 +93,7 @@ architecture Behavioral of frame_generator is
     function is_score_display(
         x : integer;
         y : integer;
-        score_val : std_logic_vector(7 downto 0)
+        score_val : std_logic_vector(11 downto 0)
     ) return boolean is
         constant SCORE_START_X  : integer := SCREEN_WIDTH - 100;
         constant SCORE_END_X    : integer := SCREEN_WIDTH - 20;
@@ -97,7 +112,7 @@ architecture Behavioral of frame_generator is
     function is_high_score_display(
         x : integer;
         y : integer;
-        high_score_val : std_logic_vector(15 downto 0)
+        high_score_val : std_logic_vector(11 downto 0)
     ) return boolean is
         constant SCORE_START_X  : integer := SCREEN_WIDTH - 100;
         constant SCORE_END_X    : integer := SCREEN_WIDTH - 20;
@@ -206,6 +221,26 @@ architecture Behavioral of frame_generator is
     end procedure fill_grid_with_color;
 
 begin
+    -- 设置图片选择信号 - 根据不同状态选择不同背景图
+    process(general_state)
+    begin
+        case general_state is
+            when "000" =>  -- 菜单状态
+                current_image_select <= "000";  -- 使用第一张图片作为菜单背景
+            when "001" | "010" =>  -- 难度选择和初始化状态
+                current_image_select <= "001";  -- 使用第二张图片
+            when "011" =>  -- 游戏运行中
+                current_image_select <= "001";  -- 使用第二张图片作为游戏背景
+            when "100" =>  -- 游戏结束
+                current_image_select <= "010";  -- 使用第三张图片作为游戏结束背景
+            when others =>
+                current_image_select <= "000";
+        end case;
+    end process;
+    
+    -- 输出图片选择信号
+    image_select <= current_image_select;
+
     -- 帧生成过程
     process(clk, rst_n)
         variable x_pos : integer range 0 to 1023 := 0;
@@ -244,6 +279,9 @@ begin
             -- 初始化帧完成信号为0
             frame_complete <= '0';
             
+            -- 计算当前像素在rom中的地址
+            rom_addr <= to_unsigned(y_pos * SCREEN_WIDTH + x_pos, 20);
+            
             -- 逐像素生成帧并写入RAM
             pixel_x <= to_unsigned(x_pos, 11);
             pixel_y <= to_unsigned(y_pos, 10);
@@ -252,14 +290,9 @@ begin
             case render_stage is
                 -- 阶段1: 初始化背景
                 when INIT_BACKGROUND =>
-                    -- 写入背景颜色
-                    if x_pos >= 0 and x_pos <= GAME_AREA_END_X and y_pos >= 0 and y_pos <= 599 then
-                        -- 游戏区(0-800, 0-599)写入黑色背景
-                        pixel_color <= "000000000000"; -- 黑色背景 (R=0, G=0, B=0)
-                    else
-                        -- 信息区(801-1023, 0-599)写入白色背景
-                        pixel_color <= "111111111111"; -- 白色背景 (R=F, G=F, B=F)
-                    end if;
+                    -- 使用图片ROM作为背景
+                    -- 使用ROM数据作为像素颜色
+                    pixel_color <= rom_data;
                     
                     write_en <= '1';
                     
@@ -290,7 +323,7 @@ begin
                             if (x_pos >= TITLE_START_X and x_pos < TITLE_END_X and y_pos >= TITLE_START_Y and y_pos < TITLE_END_Y) then
                                 pixel_color <= "000000001111"; -- 蓝色标题 (R=0, G=0, B=F)
                                 write_en <= '1';
-                            elsif is_game_info_display(x_pos, y_pos, game_speed) then
+                            elsif is_game_info_display(x_pos, y_pos, difficulty) then
                                 pixel_color <= "111111110000"; -- 黄色信息区 (R=F, G=F, B=0)
                                 write_en <= '1';
                             end if;
@@ -316,17 +349,19 @@ begin
                             -- 游戏中的内容
                             
                             -- 0. 显示游戏信息（模式、速度、难度）
-                            if is_game_info_display(x_pos, y_pos, game_speed) then
+                            if is_game_info_display(x_pos, y_pos, difficulty) then
                                 pixel_color <= "111111110000"; -- 黄色信息区 (R=F, G=F, B=0)
                                 write_en <= '1';
                             
                             -- 1. 绘制食物
-                            elsif is_food(x_pos, y_pos, food_x, food_y) then
+                            elsif is_food(x_pos, y_pos, 
+                                         to_unsigned(to_integer(food_x) * GRID_SIZE, 10), 
+                                         to_unsigned(to_integer(food_y) * GRID_SIZE, 9)) then
                                 pixel_color <= "111100000000"; -- 红色食物 (R=F, G=0, B=0)
                                 write_en <= '1';
                             
                             -- 2. 绘制分数
-                            elsif is_score_display(x_pos, y_pos, score) then
+                            elsif is_score_display(x_pos, y_pos, score(7 downto 0)) then
                                 pixel_color <= "000000001111"; -- 蓝色分数 (R=0, G=0, B=F)
                                 write_en <= '1';
                             
@@ -336,7 +371,7 @@ begin
                                 write_en <= '1';
                             end if;
                             
-                            -- 4. 绘制蛇身（使用snake_map_r）
+                            -- 4. 绘制蛇身（使用snake_map）
                             -- 计算当前像素所在的网格位置
                             if x_pos < GAME_AREA_END_X then  -- 只在游戏区域内检查蛇身
                                 -- 计算当前像素对应的网格索引
@@ -345,11 +380,11 @@ begin
                                 
                                 -- 确保网格索引在有效范围内
                                 if grid_x >= 0 and grid_x < GRID_COLS and grid_y >= 0 and grid_y < GRID_ROWS then
-                                    -- 计算在snake_map_r中的位置
+                                    -- 计算在snake_map中的位置
                                     position := grid_x + grid_y * GRID_COLS;
                                     
                                     -- 检查该位置是否有蛇身
-                                    if position < 300 and snake_map_r(position) = '1' then
+                                    if position < 300 and snake_map(position) = '1' then
                                         -- 绘制蛇身
                                         fill_grid_with_color(pixel_x, pixel_y, pixel_color, write_en, 
                                                            grid_x, grid_y, "000011110000", x_pos, y_pos);
@@ -363,7 +398,7 @@ begin
                             if (x_pos >= GAMEOVER_START_X and x_pos < GAMEOVER_END_X and y_pos >= GAMEOVER_START_Y and y_pos < GAMEOVER_END_Y) then
                                 pixel_color <= "111100000000"; -- 红色游戏结束文字 (R=F, G=0, B=0)
                                 write_en <= '1';
-                            elsif is_score_display(x_pos, y_pos, score) then
+                            elsif is_score_display(x_pos, y_pos, score(7 downto 0)) then
                                 pixel_color <= "000000001111"; -- 蓝色最终分数 (R=0, G=0, B=F)
                                 write_en <= '1';
                             elsif is_high_score_display(x_pos, y_pos, high_score) then
