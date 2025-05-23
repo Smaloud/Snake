@@ -130,7 +130,6 @@ begin
     process(clk, rst_n)
         variable x_pos : integer range 0 to 1023 := 0;
         variable y_pos : integer range 0 to 599 := 0;
-        variable render_stage : render_stage_type := INIT_BACKGROUND;
         variable grid_x : integer;
         variable grid_y : integer;
         variable position : integer;
@@ -157,7 +156,7 @@ begin
         if rst_n = '0' then
             write_en <= '0';
             frame_complete <= '0';
-            render_stage := INIT_BACKGROUND;
+            generating_frame <= '0';
             x_pos := 0;
             y_pos := 0;
         elsif rising_edge(clk) then
