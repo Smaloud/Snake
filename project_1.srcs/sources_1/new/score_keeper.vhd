@@ -22,8 +22,8 @@ architecture Behavioral of score_keeper is
     signal high_score_r : unsigned(11 downto 0) := (others => '0');
     
     -- 游戏状态常量
-    constant GAME_START : std_logic_vector(1 downto 0) := "10";
-    constant GAMING     : std_logic_vector(1 downto 0) := "11";
+    constant GAME_START : std_logic_vector(1 downto 0) := "01";
+    constant GAMING     : std_logic_vector(1 downto 0) := "10";
     
 begin
     -- 分数计算过程

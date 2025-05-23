@@ -12,7 +12,7 @@ entity snake_controller is
     port (
         clk           : in  std_logic;
         rst_n         : in  std_logic;
-        general_state : in  std_logic_vector(2 downto 0);  -- 状态码扩展到3位
+        general_state : in  std_logic_vector(1 downto 0);  -- 状态码：00-菜单, 01-初始化, 10-运行中, 11-游戏结束
         move_state    : in  std_logic_vector(4 downto 0);
         flag_update   : in  std_logic;  -- 控制每帧移动
         food_x        : in  unsigned(4 downto 0);  -- 食物x坐标
@@ -64,56 +64,52 @@ begin
             current_dir <= STOP;
             is_win_r <= '0';
         elsif rising_edge(flag_update) then
-            if general_state = "010" then  -- 游戏初始化
+            if general_state = "01" then  -- 游戏初始化
                 snake_len_r <= to_unsigned(LENGTH_INIT, 9);
                 current_dir <= STOP;
                 is_win_r <= '0';
-                                -- 初始化蛇身位置
+                -- 初始化蛇身位置
                 for i in 0 to LENGTH_INIT-1 loop
                     snake_x_buf(i) <= to_unsigned(GRID_WIDTH/2 - i, 5);
                     snake_y_buf(i) <= to_unsigned(GRID_HEIGHT/2, 4);
                 end loop;
-            elsif general_state = "011" then  -- 游戏中
+            elsif general_state = "10" then  -- 游戏中
                 -- 更新方向（可防止反向移动逻辑）
                 if move_state /= STOP then
                     current_dir <= move_state;
                 end if;
 
                 -- 每帧更新一次位置
- 
+                -- 吃到食物增加一节
+                if flag_eat = '1' and snake_len_r < to_unsigned(MAX_SNAKE_LEN, 9) then
+                    snake_len_r <= snake_len_r + 1;
 
-                    -- 吃到食物增加一节
-                    if flag_eat = '1' and snake_len_r < to_unsigned(MAX_SNAKE_LEN, 9) then
-                        snake_len_r <= snake_len_r + 1;
-
-                        -- 检查是否填满屏幕
-                        if snake_len_r >= to_unsigned(MAX_SNAKE_LEN, 9) then
-                            is_win_r <= '1';
-                        end if;
+                    -- 检查是否填满屏幕
+                    if snake_len_r >= to_unsigned(MAX_SNAKE_LEN, 9) then
+                        is_win_r <= '1';
                     end if;
+                end if;
 
-                    -- 整体尾部向头部移动（shift）
-                    for i in MAX_SNAKE_LEN-1 downto 1 loop
-                        if i < to_integer(snake_len_r) then
-                            snake_x_buf(i) <= snake_x_buf(i-1);
-                            snake_y_buf(i) <= snake_y_buf(i-1);
-                        end if;
-                    end loop;
-
-                    -- 根据方向更新头部位置
-                    case current_dir is
-                        when FACE_UP    => snake_y_buf(0) <= snake_y_buf(0) - 1;
-                        when FACE_DOWN  => snake_y_buf(0) <= snake_y_buf(0) + 1;
-                        when FACE_LEFT  => snake_x_buf(0) <= snake_x_buf(0) - 1;
-                        when FACE_RIGHT => snake_x_buf(0) <= snake_x_buf(0) + 1;
-                        when others     => null;
-                    end case;
-                    
-                    if food_x = snake_x_buf(0) and food_y = snake_y_buf(0) then
-                        flag_eat <= '1';
+                -- 整体尾部向头部移动（shift）
+                for i in MAX_SNAKE_LEN-1 downto 1 loop
+                    if i < to_integer(snake_len_r) then
+                        snake_x_buf(i) <= snake_x_buf(i-1);
+                        snake_y_buf(i) <= snake_y_buf(i-1);
                     end if;
+                end loop;
 
-
+                -- 根据方向更新头部位置
+                case current_dir is
+                    when FACE_UP    => snake_y_buf(0) <= snake_y_buf(0) - 1;
+                    when FACE_DOWN  => snake_y_buf(0) <= snake_y_buf(0) + 1;
+                    when FACE_LEFT  => snake_x_buf(0) <= snake_x_buf(0) - 1;
+                    when FACE_RIGHT => snake_x_buf(0) <= snake_x_buf(0) + 1;
+                    when others     => null;
+                end case;
+                
+                if food_x = snake_x_buf(0) and food_y = snake_y_buf(0) then
+                    flag_eat <= '1';
+                end if;
             end if;
         end if;
     end process;
