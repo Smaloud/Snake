@@ -13,8 +13,9 @@ entity snake_game_top is
         btn_down  : in  std_logic;
         btn_left  : in  std_logic;
         btn_right : in  std_logic;
-        btn_start : in  std_logic;  -- 开始按钮
-        btn_select: in  std_logic;  -- 选择按钮
+        btn_diff1 : in  std_logic;  -- 难度选择按钮1
+        btn_diff2 : in  std_logic;  -- 难度选择按钮2
+        btn_diff3 : in  std_logic;  -- 难度选择按钮3
         btn_back  : in  std_logic;  -- 返回按钮
         
         -- VGA输出
@@ -28,7 +29,7 @@ end snake_game_top;
 
 architecture Behavioral of snake_game_top is
     -- 内部信号声明
-    signal general_state : std_logic_vector(2 downto 0);  -- 游戏状态
+    signal general_state : std_logic_vector(1 downto 0);  -- 游戏状态
     signal difficulty    : std_logic_vector(1 downto 0);  -- 难度选择
     signal update_signal : std_logic;                     -- 更新信号
     signal move_state    : std_logic_vector(4 downto 0);  -- 移动状态
@@ -54,6 +55,29 @@ architecture Behavioral of snake_game_top is
     signal active_flag   : std_logic;                       -- 有效显示区标志
     signal R_h_cnt       : unsigned(11 downto 0);           -- VGA行计数
     signal R_v_cnt       : unsigned(11 downto 0);           -- VGA列计数
+    
+    -- ROM相关信号
+    signal menu_rom_addr : std_logic_vector(19 downto 0);   -- 菜单ROM地址
+    signal menu_rom_data : std_logic;                       -- 菜单ROM数据
+    signal gameover_rom_addr : std_logic_vector(19 downto 0); -- GameOver ROM地址
+    signal gameover_rom_data : std_logic;                     -- GameOver ROM数据
+    
+    -- ROM IP核组件声明
+    component blk_mem_gen_menu
+        port (
+            clka  : in  std_logic;
+            addra : in  std_logic_vector(19 downto 0);
+            douta : out std_logic
+        );
+    end component;
+    
+    component blk_mem_gen_gameover
+        port (
+            clka  : in  std_logic;
+            addra : in  std_logic_vector(19 downto 0);
+            douta : out std_logic
+        );
+    end component;
 
 begin
     -- 游戏状态机
@@ -61,11 +85,16 @@ begin
     port map (
         clk           => clk,
         rst_n         => rst_n,
-        start_btn     => btn_start,
         is_dead       => is_dead,
         is_win        => is_win,
-        select_btn    => btn_select,
+        diff_btn1     => btn_diff1,
+        diff_btn2     => btn_diff2,
+        diff_btn3     => btn_diff3,
         back_btn      => btn_back,
+        up_btn        => btn_up,
+        down_btn      => btn_down,
+        left_btn      => btn_left,
+        right_btn     => btn_right,
         current_state => general_state,
         difficulty    => difficulty
     );
@@ -125,11 +154,27 @@ begin
     port map (
         clk           => clk,
         rst_n         => rst_n,
-        general_state => general_state(1 downto 0),
+        general_state => general_state,
         flag_eat      => flag_eat,
         flag_update   => update_signal,
         score         => score,
         high_score    => high_score
+    );
+    
+    -- 菜单ROM实例化
+    menu_rom_inst : blk_mem_gen_menu
+    port map (
+        clka  => clk,
+        addra => menu_rom_addr,
+        douta => menu_rom_data
+    );
+    
+    -- GameOver ROM实例化
+    gameover_rom_inst : blk_mem_gen_gameover
+    port map (
+        clka  => clk,
+        addra => gameover_rom_addr,
+        douta => gameover_rom_data
     );
 
     -- 帧生成器
@@ -149,11 +194,13 @@ begin
         R_h_cnt        => R_h_cnt,
         R_v_cnt        => R_v_cnt,
         W_active_flag  => active_flag,
-        pixel_x        => pixel_x,
-        pixel_y        => pixel_y,
+        menu_rom_data  => menu_rom_data,
+        gameover_rom_data => gameover_rom_data,
         pixel_color    => pixel_color,
         write_en       => write_en,
-        frame_complete => frame_complete
+        frame_complete => frame_complete,
+        menu_rom_addr  => menu_rom_addr,
+        gameover_rom_addr => gameover_rom_addr
     );
 
     -- VGA控制器

@@ -7,13 +7,19 @@ entity game_fsm is
         clk           : in  std_logic;
         rst_n         : in  std_logic;
 
-        start_btn     : in  std_logic;  -- 开始按钮输入
+        -- 移除start_btn，依靠难度按键直接开始游戏
         is_dead       : in  std_logic;  -- 来自 collision_checker 的死亡信号
         is_win        : in  std_logic;  -- 游戏胜利信号
         diff_btn1     : in  std_logic;  -- 难度选择按钮1
         diff_btn2     : in  std_logic;  -- 难度选择按钮2
         diff_btn3     : in  std_logic;  -- 难度选择按钮3
         back_btn      : in  std_logic;  -- 返回按钮
+        
+        -- 添加方向键输入
+        up_btn        : in  std_logic;  -- 上方向键
+        down_btn      : in  std_logic;  -- 下方向键
+        left_btn      : in  std_logic;  -- 左方向键
+        right_btn     : in  std_logic;  -- 右方向键
 
         current_state : out std_logic_vector(1 downto 0);  -- 状态编码：00-菜单, 01-初始化, 10-游戏中, 11-游戏结束
         difficulty    : out std_logic_vector(1 downto 0)   -- 难度选择：00-简单，01-中等，10-困难
@@ -34,8 +40,13 @@ architecture Behavioral of game_fsm is
     signal diff_btn1_reg : std_logic_vector(1 downto 0) := "11";
     signal diff_btn2_reg : std_logic_vector(1 downto 0) := "11";
     signal diff_btn3_reg : std_logic_vector(1 downto 0) := "11";
-    signal start_btn_reg : std_logic_vector(1 downto 0) := "11";
     signal back_btn_reg  : std_logic_vector(1 downto 0) := "11";
+    
+    -- 方向键状态寄存器
+    signal up_btn_reg    : std_logic_vector(1 downto 0) := "11";
+    signal down_btn_reg  : std_logic_vector(1 downto 0) := "11";
+    signal left_btn_reg  : std_logic_vector(1 downto 0) := "11";
+    signal right_btn_reg : std_logic_vector(1 downto 0) := "11";
 
 begin
     -- 按键消抖和状态控制过程
@@ -48,16 +59,22 @@ begin
             diff_btn1_reg <= "11";
             diff_btn2_reg <= "11";
             diff_btn3_reg <= "11";
-            start_btn_reg <= "11";
             back_btn_reg <= "11";
+            up_btn_reg <= "11";
+            down_btn_reg <= "11";
+            left_btn_reg <= "11";
+            right_btn_reg <= "11";
 
         elsif rising_edge(clk) then
             -- 移位寄存器采样按键状态
             diff_btn1_reg <= diff_btn1_reg(0) & diff_btn1;
             diff_btn2_reg <= diff_btn2_reg(0) & diff_btn2;
             diff_btn3_reg <= diff_btn3_reg(0) & diff_btn3;
-            start_btn_reg <= start_btn_reg(0) & start_btn;
             back_btn_reg <= back_btn_reg(0) & back_btn;
+            up_btn_reg <= up_btn_reg(0) & up_btn;
+            down_btn_reg <= down_btn_reg(0) & down_btn;
+            left_btn_reg <= left_btn_reg(0) & left_btn;
+            right_btn_reg <= right_btn_reg(0) & right_btn;
             
             -- 消抖计数
             if debounce_counter = DEBOUNCE_LIMIT then
@@ -65,22 +82,23 @@ begin
                 
                 case state_r is
                     when MENU =>
-                        -- 在菜单状态下处理难度选择
+                        -- 在菜单状态下处理难度选择并直接开始游戏
                         if diff_btn1_reg = "00" then
                             diff_r <= "00";  -- 简单
+                            state_r <= INIT_GAME;  -- 直接进入初始化状态
                         elsif diff_btn2_reg = "00" then
                             diff_r <= "01";  -- 中等
+                            state_r <= INIT_GAME;  -- 直接进入初始化状态
                         elsif diff_btn3_reg = "00" then
                             diff_r <= "10";  -- 困难
-                        end if;
-                        
-                        -- 开始游戏
-                        if start_btn_reg = "00" then
-                            state_r <= INIT_GAME;
+                            state_r <= INIT_GAME;  -- 直接进入初始化状态
                         end if;
 
                     when INIT_GAME =>
-                        state_r <= RUNNING;
+                        -- 等待方向键输入才进入RUNNING状态
+                        if up_btn_reg = "00" or down_btn_reg = "00" or left_btn_reg = "00" or right_btn_reg = "00" then
+                            state_r <= RUNNING;
+                        end if;
 
                     when RUNNING =>
                         if is_dead = '1' or is_win = '1' then

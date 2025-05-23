@@ -16,7 +16,7 @@ entity frame_generator is
     port (
         clk            : in  std_logic;
         rst_n          : in  std_logic;
-        general_state  : in  std_logic_vector(2 downto 0);  -- 游戏状态：000-菜单, 001-难度选择, 010-初始化, 011-运行中, 100-游戏结束
+        general_state  : in  std_logic_vector(1 downto 0);  -- 游戏状态：00-菜单, 01-初始化, 10-运行中, 11-游戏结束
         
         -- 游戏配置信息
         difficulty     : in  std_logic_vector(1 downto 0);  -- 游戏速度：00-慢, 01-中, 10-快, 11-超快
@@ -43,10 +43,18 @@ entity frame_generator is
         R_v_cnt        : in  unsigned(11 downto 0);         -- VGA 控制器提供的列像素计数
         W_active_flag  : in  std_logic;                     -- VGA有效显示区标志
         
+        -- ROM接口
+        menu_rom_data  : in  std_logic;                    -- ROM读出的菜单图像数据
+        gameover_rom_data : in std_logic;                  -- ROM读出的游戏结束图像数据
+        
         -- 输出接口
         pixel_color   : out std_logic_vector(2 downto 0); -- RGB颜色 (R+G+B)
         write_en      : out std_logic;                     -- 像素有效信号
-        frame_complete: out std_logic                      -- 帧完成信号
+        frame_complete: out std_logic;                      -- 帧完成信号
+        
+        -- ROM地址输出
+        menu_rom_addr : out std_logic_vector(19 downto 0);  -- 菜单ROM地址 (1024*600需要20位)
+        gameover_rom_addr : out std_logic_vector(19 downto 0) -- 游戏结束ROM地址
     );
 end frame_generator;
 
@@ -128,6 +136,7 @@ begin
         variable grid_x : integer;
         variable grid_y : integer;
         variable position : integer;
+        variable rom_addr_int : integer;
         
         -- 进程内部常量定义
         constant TITLE_START_X  : integer := SCREEN_WIDTH/2 - 80;
@@ -151,6 +160,8 @@ begin
         if rst_n = '0' then
             write_en <= '0';
             frame_complete <= '0';
+            menu_rom_addr <= (others => '0');
+            gameover_rom_addr <= (others => '0');
         elsif rising_edge(clk) then
             -- 获取当前像素位置
             h_pos := to_integer(R_h_cnt);
@@ -172,31 +183,33 @@ begin
                 -- 设置像素有效
                 write_en <= '1';
                 
+                -- 计算ROM地址 = y * SCREEN_WIDTH + x
+                rom_addr_int := v_pos * SCREEN_WIDTH + h_pos;
+                menu_rom_addr <= std_logic_vector(to_unsigned(rom_addr_int, 20));
+                gameover_rom_addr <= std_logic_vector(to_unsigned(rom_addr_int, 20));
+                
                 -- 根据游戏状态绘制不同内容
                 case general_state is
                     -- 主菜单
-                    when "000" =>
-                        -- 开始菜单内容，可以添加开始GreedySnake图片
-                        if (h_pos >= TITLE_START_X and h_pos < TITLE_END_X and v_pos >= TITLE_START_Y and v_pos < TITLE_END_Y) then
-                            pixel_color <= "001"; -- 蓝色标题 (R=0, G=0, B=F)
-                        end if;
-                    
-                    -- 难度选择
-                    when "001" =>
-                        -- 初始化界面内容
-                        if (h_pos >= PROGRESS_START_X and h_pos < PROGRESS_END_X and v_pos >= PROGRESS_START_Y and v_pos < PROGRESS_END_Y) then
-                            pixel_color <= "101"; -- 紫色进度条背景 (R=F, G=0, B=F)
+                    when "00" =>
+                        -- 使用ROM中的图像数据
+                        if menu_rom_data = '1' then
+                            -- 白色显示ROM中为1的像素
+                            pixel_color <= "111";  -- 全白色 (R=1, G=1, B=1)
+                        else
+                            -- 黑色显示ROM中为0的像素
+                            pixel_color <= "000";  -- 黑色背景 (R=0, G=0, B=0)
                         end if;
                     
                     -- 游戏初始化
-                    when "010" =>
+                    when "01" =>
                         -- 初始化界面内容
                         if (h_pos >= PROGRESS_START_X and h_pos < PROGRESS_END_X and v_pos >= PROGRESS_START_Y and v_pos < PROGRESS_END_Y) then
                             pixel_color <= "101"; -- 紫色进度条背景 (R=F, G=0, B=F)
                         end if;
                     
                     -- 游戏运行中
-                    when "011" =>
+                    when "10" =>
                         -- 游戏中的内容
                         
                         -- 4. 绘制蛇身（使用snake_map）
@@ -224,10 +237,14 @@ begin
                         end if;
                     
                     -- 游戏结束
-                    when "100" =>
-                        -- 游戏结束内容
-                        if (h_pos >= GAMEOVER_START_X and h_pos < GAMEOVER_END_X and v_pos >= GAMEOVER_START_Y and v_pos < GAMEOVER_END_Y) then
-                            pixel_color <= "100"; -- 红色游戏结束文字 (R=F, G=0, B=0)
+                    when "11" =>
+                        -- 使用GameOver ROM图像
+                        if gameover_rom_data = '1' then
+                            -- GameOver图像为1的像素用红色显示
+                            pixel_color <= "100";  -- 红色 (R=1, G=0, B=0)
+                        else
+                            -- GameOver图像为0的像素为黑色背景
+                            pixel_color <= "000";  -- 黑色背景 (R=0, G=0, B=0)
                         end if;
                     
                     -- 默认情况

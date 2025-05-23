@@ -23,7 +23,7 @@ entity snake_controller is
         snake_map     : out std_logic_vector(299 downto 0);  -- 输出蛇身位置图
         is_win        : out std_logic;   -- 游戏胜利信号
         is_dead       : out std_logic;   -- 游戏失败信号
-        flag_eat      : inout std_logic   -- 食物被吃掉的信号
+        flag_eat      : out std_logic   -- 食物被吃掉的信号
 
 
     );
@@ -50,6 +50,7 @@ architecture Behavioral of snake_controller is
     signal current_dir   : std_logic_vector(4 downto 0); --当前方向
     signal is_win_r      : std_logic;
     signal snake_map_r   : std_logic_vector(299 downto 0);  -- 20*15=300位，表示蛇身位置
+    signal flag_eat_r    : std_logic := '0';  -- 内部吃食物信号
     
 begin
     -- 移动控制
@@ -63,11 +64,15 @@ begin
             snake_len_r <= to_unsigned(LENGTH_INIT, 9);
             current_dir <= STOP;
             is_win_r <= '0';
+            flag_eat_r <= '0';
         elsif rising_edge(flag_update) then
+            flag_eat_r <= '0';  -- 默认每帧开始时重置吃食物信号
+            
             if general_state = "01" then  -- 游戏初始化
                 snake_len_r <= to_unsigned(LENGTH_INIT, 9);
                 current_dir <= STOP;
                 is_win_r <= '0';
+                flag_eat_r <= '0';
                 -- 初始化蛇身位置
                 for i in 0 to LENGTH_INIT-1 loop
                     snake_x_buf(i) <= to_unsigned(GRID_WIDTH/2 - i, 5);
@@ -81,7 +86,7 @@ begin
 
                 -- 每帧更新一次位置
                 -- 吃到食物增加一节
-                if flag_eat = '1' and snake_len_r < to_unsigned(MAX_SNAKE_LEN, 9) then
+                if flag_eat_r = '1' and snake_len_r < to_unsigned(MAX_SNAKE_LEN, 9) then
                     snake_len_r <= snake_len_r + 1;
 
                     -- 检查是否填满屏幕
@@ -107,8 +112,9 @@ begin
                     when others     => null;
                 end case;
                 
+                -- 检查是否吃到食物
                 if food_x = snake_x_buf(0) and food_y = snake_y_buf(0) then
-                    flag_eat <= '1';
+                    flag_eat_r <= '1';
                 end if;
             end if;
         end if;
@@ -140,9 +146,7 @@ begin
     -- 输出长度和坐标
     snake_length <= std_logic_vector(snake_len_r);
     is_win <= is_win_r;
-    
     snake_map <= snake_map_r;
-
-
+    flag_eat <= flag_eat_r;  -- 将内部信号连接到输出端口
 
 end Behavioral;
