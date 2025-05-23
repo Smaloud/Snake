@@ -17,15 +17,13 @@ entity snake_controller is
         flag_update   : in  std_logic;  -- 控制每帧移动
         food_x        : in  unsigned(4 downto 0);  -- 食物x坐标
         food_y        : in  unsigned(3 downto 0);   -- 食物y坐标
+        flag_food_ready : in std_logic;  -- 食物已准备好的信号
 
         snake_length  : out std_logic_vector(8 downto 0);  -- 扩展到12位，支持最大300
-
         snake_map     : out std_logic_vector(299 downto 0);  -- 输出蛇身位置图
         is_win        : out std_logic;   -- 游戏胜利信号
         is_dead       : out std_logic;   -- 游戏失败信号
         flag_eat      : out std_logic   -- 食物被吃掉的信号
-
-
     );
 end snake_controller;
 
@@ -66,8 +64,6 @@ begin
             is_win_r <= '0';
             flag_eat_r <= '0';
         elsif rising_edge(flag_update) then
-            flag_eat_r <= '0';  -- 默认每帧开始时重置吃食物信号
-            
             if general_state = "01" then  -- 游戏初始化
                 snake_len_r <= to_unsigned(LENGTH_INIT, 9);
                 current_dir <= STOP;
@@ -86,8 +82,12 @@ begin
 
                 -- 每帧更新一次位置
                 -- 吃到食物增加一节
+                if flag_eat_r = '1' and flag_food_ready = '1' and snake_len_r < to_unsigned(MAX_SNAKE_LEN, 9) then
+                    flag_eat_r <= '0';  -- 食物已处理，重置信号
+
                 if flag_eat_r = '1' and snake_len_r < to_unsigned(MAX_SNAKE_LEN, 9) then
                     snake_len_r <= snake_len_r + 1;
+                
 
                     -- 检查是否填满屏幕
                     if snake_len_r >= to_unsigned(MAX_SNAKE_LEN, 9) then
@@ -141,7 +141,6 @@ begin
             end if;
         end loop;
     end process;
-
 
     -- 输出长度和坐标
     snake_length <= std_logic_vector(snake_len_r);
