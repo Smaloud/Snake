@@ -1,0 +1,4 @@
+xpm_memory.sv,systemverilog,xpm,../../../../../../Xilnx02/Vivado/2020.2/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv,
+xpm_VCOMP.vhd,vhdl,xpm,../../../../../../Xilnx02/Vivado/2020.2/data/ip/xpm/xpm_VCOMP.vhd,
+blk_mem_gen_GameOver_sim_netlist.vhdl,vhdl,xil_defaultlib,../../../../project_1.gen/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver_sim_netlist.vhdl,
+glbl.v,Verilog,xil_defaultlib,glbl.v

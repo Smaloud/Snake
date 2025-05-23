@@ -1,6 +1,6 @@
 from PIL import Image
 
-def convert_jpg_to_coe(input_image_path, output_coe_path, width=1024, height=600):
+def convert_jpg_to_coe_rgb111(input_image_path, output_coe_path, width=1024, height=600):
     # 1. 打开图像并缩放到指定大小
     img = Image.open(input_image_path)
     img = img.resize((width, height))
@@ -16,13 +16,13 @@ def convert_jpg_to_coe(input_image_path, output_coe_path, width=1024, height=600
             for x in range(width):
                 r, g, b = img.getpixel((x, y))
 
-                # 提取高4位（RGB444）
-                r4 = r >> 4
-                g4 = g >> 4
-                b4 = b >> 4
+                # 将RGB每通道降为1位（取高位）
+                r1 = 1 if r > 127 else 0
+                g1 = 1 if g > 127 else 0
+                b1 = 1 if b > 127 else 0
 
-                rgb444 = (r4 << 8) | (g4 << 4) | b4
-                bin_str = format(rgb444, '012b')  # 12位二进制字符串
+                rgb111 = (r1 << 2) | (g1 << 1) | b1
+                bin_str = format(rgb111, '03b')  # 3位二进制字符串
                 f.write(bin_str)
 
                 count += 1
@@ -31,7 +31,7 @@ def convert_jpg_to_coe(input_image_path, output_coe_path, width=1024, height=600
                 else:
                     f.write(";\n")
 
-    print(f"✅ 已生成 .coe 文件：{output_coe_path}")
+    print(f"✅ 已生成 RGB111 .coe 文件：{output_coe_path}")
 
 # 示例调用
-convert_jpg_to_coe("GameOver.jpg", "GameOver_rom.coe")
+convert_jpg_to_coe_rgb111("GameOver.jpg", "GameOver_rom_rgb111.coe")
