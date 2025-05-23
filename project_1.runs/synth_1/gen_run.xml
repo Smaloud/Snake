@@ -1,60 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1747408159">
-  <File Type="PA-TCL" Name="collision_checker.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="collision_checker_drc_synth.rpt"/>
-  <File Type="REPORTS-TCL" Name="collision_checker_reports.tcl"/>
-  <File Type="RDS-RDS" Name="collision_checker.vds"/>
-  <File Type="RDS-UTIL" Name="collision_checker_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="collision_checker_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="collision_checker.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="collision_checker_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="collision_checker_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1747991445">
+  <File Type="PA-TCL" Name="snake_game_top.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="snake_game_top_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="snake_game_top_reports.tcl"/>
+  <File Type="RDS-RDS" Name="snake_game_top.vds"/>
+  <File Type="RDS-UTIL" Name="snake_game_top_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="snake_game_top_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="snake_game_top.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="snake_game_top_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="snake_game_top_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PSRCDIR/sources_1/new/collision_checker.vhd">
+    <File Path="$PSRCDIR/sources_1/new/difficulty_controller.vhd">
       <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/vga.vhd">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/snake_controller.vhd">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/food_generator.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/score_keeper.vhd">
+    <File Path="$PSRCDIR/sources_1/new/frame_generagor.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/framebuffer_rgb444.vhd">
+      <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/game_fsm.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/image_rom.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/key_handler.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/score_keeper.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/snake_controller.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/vga_simple.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/snake_game_top.vhd">
+      <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="collision_checker"/>
+      <Option Name="TopModule" Val="snake_game_top"/>
       <Option Name="TopAutoSet" Val="TRUE"/>
     </Config>
   </FileSet>

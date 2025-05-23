@@ -8,9 +8,9 @@ var WshShell = new ActiveXObject( "WScript.Shell" );
 var ProcEnv = WshShell.Environment( "Process" );
 var PathVal = ProcEnv("PATH");
 if ( PathVal.length == 0 ) {
-  PathVal = "G:/newforvivado/Vitis/2020.2/bin;G:/newforvivado/Vivado/2020.2/ids_lite/ISE/bin/nt64;G:/newforvivado/Vivado/2020.2/ids_lite/ISE/lib/nt64;G:/newforvivado/Vivado/2020.2/bin;";
+  PathVal = "E:/Xilnx02/Vitis/2020.2/bin;E:/Xilnx02/Vivado/2020.2/ids_lite/ISE/bin/nt64;E:/Xilnx02/Vivado/2020.2/ids_lite/ISE/lib/nt64;E:/Xilnx02/Vivado/2020.2/bin;";
 } else {
-  PathVal = "G:/newforvivado/Vitis/2020.2/bin;G:/newforvivado/Vivado/2020.2/ids_lite/ISE/bin/nt64;G:/newforvivado/Vivado/2020.2/ids_lite/ISE/lib/nt64;G:/newforvivado/Vivado/2020.2/bin;" + PathVal;
+  PathVal = "E:/Xilnx02/Vitis/2020.2/bin;E:/Xilnx02/Vivado/2020.2/ids_lite/ISE/bin/nt64;E:/Xilnx02/Vivado/2020.2/ids_lite/ISE/lib/nt64;E:/Xilnx02/Vivado/2020.2/bin;" + PathVal;
 }
 
 ProcEnv("PATH") = PathVal;
@@ -23,7 +23,7 @@ eval( EAInclude(ISEJScriptLib) );
 
 
 ISEStep( "vivado",
-         "-log collision_checker.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source collision_checker.tcl" );
+         "-log snake_game_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source snake_game_top.tcl" );
 
 
 

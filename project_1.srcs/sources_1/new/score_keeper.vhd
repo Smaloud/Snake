@@ -18,8 +18,8 @@ end score_keeper;
 
 architecture Behavioral of score_keeper is
     -- 内部信号
-    signal score_r      : unsigned(15 downto 0) := (others => '0');
-    signal high_score_r : unsigned(15 downto 0) := (others => '0');
+    signal score_r      : unsigned(11 downto 0) := (others => '0');
+    signal high_score_r : unsigned(11 downto 0) := (others => '0');
     
     -- 游戏状态常量
     constant GAME_START : std_logic_vector(1 downto 0) := "10";

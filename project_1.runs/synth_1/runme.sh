@@ -11,9 +11,9 @@ echo "Please update the PATH and LD_LIBRARY_PATH variables below, before executi
 exit
 
 if [ -z "$PATH" ]; then
-  PATH=G:/newforvivado/Vitis/2020.2/bin;G:/newforvivado/Vivado/2020.2/ids_lite/ISE/bin/nt64;G:/newforvivado/Vivado/2020.2/ids_lite/ISE/lib/nt64:G:/newforvivado/Vivado/2020.2/bin
+  PATH=E:/Xilnx02/Vitis/2020.2/bin;E:/Xilnx02/Vivado/2020.2/ids_lite/ISE/bin/nt64;E:/Xilnx02/Vivado/2020.2/ids_lite/ISE/lib/nt64:E:/Xilnx02/Vivado/2020.2/bin
 else
-  PATH=G:/newforvivado/Vitis/2020.2/bin;G:/newforvivado/Vivado/2020.2/ids_lite/ISE/bin/nt64;G:/newforvivado/Vivado/2020.2/ids_lite/ISE/lib/nt64:G:/newforvivado/Vivado/2020.2/bin:$PATH
+  PATH=E:/Xilnx02/Vitis/2020.2/bin;E:/Xilnx02/Vivado/2020.2/ids_lite/ISE/bin/nt64;E:/Xilnx02/Vivado/2020.2/ids_lite/ISE/lib/nt64:E:/Xilnx02/Vivado/2020.2/bin:$PATH
 fi
 export PATH
 
@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='D:/dsd/Snake/project_1.runs/synth_1'
+HD_PWD='E:/VivadoWorks/project_1/project_1.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log collision_checker.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source collision_checker.tcl
+EAStep vivado -log snake_game_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source snake_game_top.tcl
