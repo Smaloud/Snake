@@ -44,8 +44,8 @@ entity frame_generator is
         W_active_flag  : in  std_logic;                     -- VGA有效显示区标志
         
         -- ROM接口
-        menu_rom_data  : in  std_logic;                    -- ROM读出的菜单图像数据
-        gameover_rom_data : in std_logic;                  -- ROM读出的游戏结束图像数据
+        menu_rom_data  : in  std_logic_vector(0 downto 0);  -- ROM读出的菜单图像数据
+        gameover_rom_data : in std_logic_vector(0 downto 0);  -- ROM读出的游戏结束图像数据
         
         -- 输出接口
         pixel_color   : out std_logic_vector(2 downto 0); -- RGB颜色 (R+G+B)
@@ -193,7 +193,7 @@ begin
                     -- 主菜单
                     when "00" =>
                         -- 使用ROM中的图像数据
-                        if menu_rom_data = '1' then
+                        if menu_rom_data(0) = '1' then
                             -- 白色显示ROM中为1的像素
                             pixel_color <= "111";  -- 全白色 (R=1, G=1, B=1)
                         else
@@ -239,7 +239,7 @@ begin
                     -- 游戏结束
                     when "11" =>
                         -- 使用GameOver ROM图像
-                        if gameover_rom_data = '1' then
+                        if gameover_rom_data(0) = '1' then
                             -- GameOver图像为1的像素用红色显示
                             pixel_color <= "100";  -- 红色 (R=1, G=0, B=0)
                         else
