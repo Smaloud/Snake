@@ -14,9 +14,9 @@ end difficulty_controller;
 
 architecture Behavioral of difficulty_controller is
     -- 不同难度对应的速度分频系数（数值越大，移动越慢）
-    constant EASY_SPEED   : integer := 100000000;  -- 1Hz (1秒/格)
-    constant MEDIUM_SPEED : integer := 50000000;  -- 2Hz (0.5秒/格)
-    constant HARD_SPEED   : integer := 25000000;  -- 4Hz (0.25秒/格)
+    constant EASY_SPEED   : integer := 25000000;  -- 4Hz
+    constant MEDIUM_SPEED : integer := 12500000;  -- 8Hz
+    constant HARD_SPEED   : integer := 5000000;  -- 20Hz
     
     signal counter : unsigned(31 downto 0) := (others => '0');
     signal divider : unsigned(31 downto 0) := to_unsigned(EASY_SPEED, 32);

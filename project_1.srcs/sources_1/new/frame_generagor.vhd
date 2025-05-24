@@ -261,9 +261,15 @@ begin
                     when "01" | "10" =>
                         -- 游戏中的内容
                         
-                        -- 绘制蛇身（使用snake_map）
-                        -- 计算当前像素所在的网格位置
-                        if h_pos < GAME_AREA_END_X then  -- 只在游戏区域内检查蛇身
+                        -- 绘制游戏区域边框(白色)
+                        if (h_pos = 0 or h_pos = 1 or h_pos = GAME_AREA_END_X-1 or h_pos = GAME_AREA_END_X-2) and v_pos < GRID_ROWS * GRID_SIZE then
+                            -- 左右边框
+                            pixel_color <= "111"; -- 白色边框
+                        elsif (v_pos = 0 or v_pos = 1 or v_pos = GRID_ROWS * GRID_SIZE - 1 or v_pos = GRID_ROWS * GRID_SIZE - 2) and h_pos < GAME_AREA_END_X then
+                            -- 上下边框
+                            pixel_color <= "111"; -- 白色边框
+                        -- 绘制蛇身和游戏内容
+                        elsif h_pos < GAME_AREA_END_X then  -- 只在游戏区域内检查蛇身
                             -- 计算当前像素对应的网格索引
                             grid_x := h_pos / GRID_SIZE;
                             grid_y := v_pos / GRID_SIZE;
@@ -419,13 +425,13 @@ begin
                                             pixel_color <= "011"; -- 青色
                                         end if;
                                     when "10" => -- 快速：3/4长度
-                                        if h_pos < DIFF_START_X + 36 then
-                                            pixel_color <= "110"; -- 黄色
-                                        end if;
-                                    when "11" => -- 超快：4/4长度
                                         if h_pos < DIFF_START_X + 48 then
-                                            pixel_color <= "100"; -- 红色
+                                            pixel_color <= "100"; -- 黄色
                                         end if;
+                                    -- when "11" => -- 超快：4/4长度
+                                    --     if h_pos < DIFF_START_X + 48 then
+                                    --         pixel_color <= "100"; -- 红色
+                                    --     end if;
                                     when others =>
                                         null;
                                 end case;
@@ -437,7 +443,7 @@ begin
                         -- 使用GameOver ROM图像
                         if gameover_rom_data(0) = '1' then
                             -- GameOver图像为1的像素用红色显示
-                            pixel_color <= "100";  -- 红色 (R=1, G=0, B=0)
+                            pixel_color <= "111";  -- 红色 (R=1, G=0, B=0)
                         else
                             -- GameOver图像为0的像素为黑色背景
                             pixel_color <= "000";  -- 黑色背景 (R=0, G=0, B=0)
