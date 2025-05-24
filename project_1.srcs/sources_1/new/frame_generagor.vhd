@@ -50,12 +50,6 @@ entity frame_generator is
         -- 字体ROM接口
         font_row_data  : in  std_logic_vector(7 downto 0);  -- 字体ROM行数据
         
-        -- 文本显示接口
-        text_pixel_on  : in  std_logic;                     -- 文本像素是否点亮
-        text_type      : out std_logic_vector(1 downto 0);  -- 文本类型：00-SCORE, 01-HIGH, 10-LEVEL
-        text_x_pos     : out std_logic_vector(5 downto 0);  -- 文本内X坐标
-        text_y_pos     : out std_logic_vector(2 downto 0);  -- 文本内Y坐标
-        
         -- 输出接口
         pixel_color   : out std_logic_vector(2 downto 0); -- RGB颜色 (R+G+B)
         write_en      : out std_logic;                     -- 像素有效信号
@@ -80,40 +74,20 @@ architecture Behavioral of frame_generator is
     constant GRID_TOTAL    : integer := 300;       -- 总网格数
     constant MAX_SNAKE_LEN : integer := 300;                  -- 蛇的最大长度
     
-    -- 信息区布局常量
-    constant INFO_START_X  : integer := SCREEN_WIDTH - 220;  -- 信息区起始位置X
-    
     -- 分数显示位置常量
-    constant SCORE_START_X  : integer := INFO_START_X + 60;  -- 分数数字起始位置X
-    constant SCORE_START_Y  : integer := 30;                 -- 分数数字起始位置Y
-    constant SCORE_TITLE_X  : integer := INFO_START_X;       -- 分数标题起始位置X
-    constant SCORE_TITLE_Y  : integer := SCORE_START_Y;      -- 分数标题起始位置Y
+    constant SCORE_START_X  : integer := SCREEN_WIDTH - 120;
+    constant SCORE_START_Y  : integer := 20;
+    constant SCORE_DIGIT_WIDTH : integer := 12; -- 每个数字宽度（像素）
+    constant DIGIT_HEIGHT   : integer := 16;    -- 数字高度（像素）
     
     -- 最高分显示位置常量
-    constant HSCORE_START_X : integer := SCORE_START_X;      -- 最高分数字起始位置X
-    constant HSCORE_START_Y : integer := 90;                 -- 最高分数字起始位置Y
-    constant HSCORE_TITLE_X : integer := INFO_START_X;       -- 最高分标题起始位置X
-    constant HSCORE_TITLE_Y : integer := HSCORE_START_Y;     -- 最高分标题起始位置Y
+    constant HSCORE_START_X : integer := SCREEN_WIDTH - 120;
+    constant HSCORE_START_Y : integer := 50;
     
     -- 难度显示位置常量
-    constant DIFF_START_X   : integer := SCORE_START_X;      -- 难度数字起始位置X
-    constant DIFF_START_Y   : integer := 150;                -- 难度数字起始位置Y
-    constant DIFF_TITLE_X   : integer := INFO_START_X;       -- 难度标题起始位置X
-    constant DIFF_TITLE_Y   : integer := DIFF_START_Y;       -- 难度标题起始位置Y
-    
-    -- 字符显示参数
-    constant SCORE_DIGIT_WIDTH : integer := 18;              -- 每个数字宽度(像素)，放大1.5倍
-    constant DIGIT_HEIGHT      : integer := 24;              -- 数字高度(像素)，放大1.5倍
-    constant DIGIT_SCALE       : integer := 3;               -- 缩放因子: 1 ROM像素=3x3屏幕像素
-    
-    -- 文字显示常量
-    constant TEXT_WIDTH     : integer := 40;                 -- 文本宽度像素数
-    constant TEXT_HEIGHT    : integer := 8;                  -- 文本高度像素数
-    
-    -- 进度条尺寸
-    constant BAR_HEIGHT     : integer := 12;                 -- 难度进度条高度
-    constant BAR_WIDTH      : integer := 120;                -- 难度进度条总宽度
-    constant BAR_PADDING    : integer := 6;                  -- 难度进度条与数字的间距
+    constant DIFF_START_X   : integer := SCREEN_WIDTH - 120;
+    constant DIFF_START_Y   : integer := 80;
+    constant DIFF_TEXT_Y    : integer := DIFF_START_Y - 10; -- 难度标题文字位置
 
     -- BCD接口信号
     signal score_bcd      : std_logic_vector(15 downto 0);
@@ -244,9 +218,6 @@ begin
             gameover_rom_addr <= (others => '0');
             font_char_code <= (others => '0');
             font_row <= (others => '0');
-            text_type <= (others => '0');
-            text_x_pos <= (others => '0');
-            text_y_pos <= (others => '0');
         elsif rising_edge(clk) then
             -- 获取当前像素位置
             h_pos := to_integer(R_h_cnt);
@@ -325,13 +296,13 @@ begin
                                 -- 根据位置确定显示哪个数字
                                 case digit_index is
                                     when 0 => -- 千位
-                                        digit_value := score_bcd(15 downto 12);
+                                        digit_value := score(11 downto 8);
                                     when 1 => -- 百位
-                                        digit_value := score_bcd(11 downto 8);
+                                        digit_value := score(7 downto 4);
                                     when 2 => -- 十位
-                                        digit_value := score_bcd(7 downto 4);
+                                        digit_value := score(3 downto 0);
                                     when 3 => -- 个位
-                                        digit_value := score_bcd(3 downto 0);
+                                        digit_value := "0000";
                                     when others =>
                                         digit_value := "0000";
                                 end case;
@@ -340,27 +311,13 @@ begin
                                 x_offset := (h_pos - SCORE_START_X) mod SCORE_DIGIT_WIDTH;
                                 y_offset := v_pos - SCORE_START_Y;
                                 
-                                -- 设置字体ROM地址 - 使用缩放因子
+                                -- 设置字体ROM地址
                                 font_char_code <= digit_value;
-                                font_row <= std_logic_vector(to_unsigned(y_offset / DIGIT_SCALE, 4));
+                                font_row <= std_logic_vector(to_unsigned(y_offset, 4));
                                 
-                                -- 检查当前像素是否需要点亮（从字体ROM获取数据，应用缩放）
-                                if font_row_data(7 - ((x_offset / DIGIT_SCALE) * 8 / (SCORE_DIGIT_WIDTH/DIGIT_SCALE))) = '1' then
+                                -- 检查当前像素是否需要点亮（从字体ROM获取数据）
+                                if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
                                     pixel_color <= "111"; -- 白色显示数字
-                                end if;
-                                
-                            -- 显示"SCORE"文本标题
-                            elsif h_pos >= SCORE_TITLE_X and h_pos < SCORE_TITLE_X + TEXT_WIDTH and
-                                  v_pos >= SCORE_TITLE_Y and v_pos < SCORE_TITLE_Y + TEXT_HEIGHT then
-                                  
-                                -- 设置文本显示参数
-                                text_type <= "00";  -- SCORE文本
-                                text_x_pos <= std_logic_vector(to_unsigned(h_pos - SCORE_TITLE_X, 6));
-                                text_y_pos <= std_logic_vector(to_unsigned(v_pos - SCORE_TITLE_Y, 3));
-                                
-                                -- 使用外部模块显示文本
-                                if text_pixel_on = '1' then
-                                    pixel_color <= "011"; -- 青色显示文本
                                 end if;
                                 
                             -- 检查是否在最高分显示区域
@@ -373,13 +330,13 @@ begin
                                 -- 根据位置确定显示哪个数字
                                 case digit_index is
                                     when 0 => -- 千位
-                                        digit_value := high_score_bcd(15 downto 12);
+                                        digit_value := high_score(11 downto 8);
                                     when 1 => -- 百位
-                                        digit_value := high_score_bcd(11 downto 8);
+                                        digit_value := high_score(7 downto 4);
                                     when 2 => -- 十位
-                                        digit_value := high_score_bcd(7 downto 4);
+                                        digit_value := high_score(3 downto 0);
                                     when 3 => -- 个位
-                                        digit_value := high_score_bcd(3 downto 0);
+                                        digit_value := "0000";
                                     when others =>
                                         digit_value := "0000";
                                 end case;
@@ -388,85 +345,70 @@ begin
                                 x_offset := (h_pos - HSCORE_START_X) mod SCORE_DIGIT_WIDTH;
                                 y_offset := v_pos - HSCORE_START_Y;
                                 
-                                -- 设置字体ROM地址 - 使用缩放因子
+                                -- 设置字体ROM地址
                                 font_char_code <= digit_value;
-                                font_row <= std_logic_vector(to_unsigned(y_offset / DIGIT_SCALE, 4));
+                                font_row <= std_logic_vector(to_unsigned(y_offset, 4));
                                 
                                 -- 检查当前像素是否需要点亮（从字体ROM获取数据）
-                                if font_row_data(7 - ((x_offset / DIGIT_SCALE) * 8 / (SCORE_DIGIT_WIDTH/DIGIT_SCALE))) = '1' then
+                                if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
                                     pixel_color <= "110"; -- 黄色显示最高分
                                 end if;
                                 
-                            -- 显示"HIGH"文本标题
-                            elsif h_pos >= HSCORE_TITLE_X and h_pos < HSCORE_TITLE_X + TEXT_WIDTH and
-                                  v_pos >= HSCORE_TITLE_Y and v_pos < HSCORE_TITLE_Y + TEXT_HEIGHT then
-                                
-                                -- 设置文本显示参数
-                                text_type <= "01";  -- HIGH文本
-                                text_x_pos <= std_logic_vector(to_unsigned(h_pos - HSCORE_TITLE_X, 6));
-                                text_y_pos <= std_logic_vector(to_unsigned(v_pos - HSCORE_TITLE_Y, 3));
-                                
-                                -- 使用外部模块显示文本
-                                if text_pixel_on = '1' then
-                                    pixel_color <= "110"; -- 黄色显示文本
-                                end if;
-                                
                             -- 检查是否在难度显示区域
-                            elsif h_pos >= DIFF_START_X and h_pos < DIFF_START_X + 1*SCORE_DIGIT_WIDTH and
+                            elsif h_pos >= DIFF_START_X and h_pos < DIFF_START_X + 2*SCORE_DIGIT_WIDTH and
                                   v_pos >= DIFF_START_Y and v_pos < DIFF_START_Y + DIGIT_HEIGHT then
                                   
-                                -- 设置难度显示值 (1-3)
-                                case difficulty is
-                                    when "00" => digit_value := "0001"; -- 1 - 慢速
-                                    when "01" => digit_value := "0010"; -- 2 - 中速
-                                    when "10" | "11" => digit_value := "0011"; -- 3 - 快速 (注：没有难度4)
-                                    when others => digit_value := "0001";
-                                end case;
+                                -- 计算当前位于哪个字符位置（第一个字符固定为"L"，第二个字符是难度数字）
+                                digit_index := (h_pos - DIFF_START_X) / SCORE_DIGIT_WIDTH;
+                                
+                                -- 设置难度显示值
+                                if digit_index = 0 then
+                                    -- 第一位显示数字"0"，表示"L"的位置
+                                    digit_value := "0000";
+                                else
+                                    -- 第二位根据难度值设置
+                                    case difficulty is
+                                        when "00" => digit_value := "0001"; -- 1 - 慢速
+                                        when "01" => digit_value := "0010"; -- 2 - 中速
+                                        when "10" => digit_value := "0011"; -- 3 - 快速
+                                        when "11" => digit_value := "0100"; -- 4 - 超快
+                                        when others => digit_value := "0001";
+                                    end case;
+                                end if;
                                 
                                 -- 计算在当前数字内的偏移位置
                                 x_offset := (h_pos - DIFF_START_X) mod SCORE_DIGIT_WIDTH;
                                 y_offset := v_pos - DIFF_START_Y;
                                 
-                                -- 设置字体ROM地址 - 使用缩放因子
+                                -- 设置字体ROM地址
                                 font_char_code <= digit_value;
-                                font_row <= std_logic_vector(to_unsigned(y_offset / DIGIT_SCALE, 4));
+                                font_row <= std_logic_vector(to_unsigned(y_offset, 4));
                                 
                                 -- 检查当前像素是否需要点亮（从字体ROM获取数据）
-                                if font_row_data(7 - ((x_offset / DIGIT_SCALE) * 8 / (SCORE_DIGIT_WIDTH/DIGIT_SCALE))) = '1' then
+                                if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
                                     pixel_color <= "101"; -- 洋红色(紫色)显示难度
                                 end if;
                                 
-                            -- 显示"LEVEL"文本标题
-                            elsif h_pos >= DIFF_TITLE_X and h_pos < DIFF_TITLE_X + TEXT_WIDTH and
-                                  v_pos >= DIFF_TITLE_Y and v_pos < DIFF_TITLE_Y + TEXT_HEIGHT then
-                                  
-                                -- 设置文本显示参数
-                                text_type <= "10";  -- LEVEL文本
-                                text_x_pos <= std_logic_vector(to_unsigned(h_pos - DIFF_TITLE_X, 6));
-                                text_y_pos <= std_logic_vector(to_unsigned(v_pos - DIFF_TITLE_Y, 3));
-                                
-                                -- 使用外部模块显示文本
-                                if text_pixel_on = '1' then
-                                    pixel_color <= "101"; -- 洋红色显示文本
-                                end if;
-                                
                             -- 难度图形条显示（简单的条形图表示难度）
-                            elsif h_pos >= DIFF_START_X and h_pos < DIFF_START_X + BAR_WIDTH and
-                                  v_pos >= DIFF_START_Y + DIGIT_HEIGHT + BAR_PADDING and 
-                                  v_pos < DIFF_START_Y + DIGIT_HEIGHT + BAR_PADDING + BAR_HEIGHT then
+                            elsif h_pos >= DIFF_START_X and h_pos < DIFF_START_X + 48 and
+                                  v_pos >= DIFF_START_Y + DIGIT_HEIGHT + 5 and v_pos < DIFF_START_Y + DIGIT_HEIGHT + 15 then
                                 
                                 -- 根据难度值绘制不同长度的进度条
                                 case difficulty is
-                                    when "00" => -- 慢速：1/3长度
-                                        if h_pos < DIFF_START_X + BAR_WIDTH/3 then
+                                    when "00" => -- 慢速：1/4长度
+                                        if h_pos < DIFF_START_X + 12 then
                                             pixel_color <= "001"; -- 蓝色
                                         end if;
-                                    when "01" => -- 中速：2/3长度
-                                        if h_pos < DIFF_START_X + 2*BAR_WIDTH/3 then
+                                    when "01" => -- 中速：2/4长度
+                                        if h_pos < DIFF_START_X + 24 then
                                             pixel_color <= "011"; -- 青色
                                         end if;
-                                    when "10" | "11" => -- 快速：3/3长度 (两种都显示满格)
-                                        if h_pos < DIFF_START_X + BAR_WIDTH then
+                                    when "10" => -- 快速：3/4长度
+                                        if h_pos < DIFF_START_X + 36 then
+                                            pixel_color <= "110"; -- 黄色
+                                        end if;
+                                    when "11" => -- 超快：4/4长度
+                                        if h_pos < DIFF_START_X + 48 then
                                             pixel_color <= "100"; -- 红色
                                         end if;
                                     when others =>
