@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="blk_mem_gen_menu_synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1748063943">
+<GenRun Id="blk_mem_gen_menu_synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1748066158">
   <File Type="PA-TCL" Name="blk_mem_gen_menu.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="blk_mem_gen_menu_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="blk_mem_gen_menu_reports.tcl"/>

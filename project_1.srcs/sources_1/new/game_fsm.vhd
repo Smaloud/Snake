@@ -96,7 +96,7 @@ begin
 
                     when INIT_GAME =>
                         -- 等待方向键输入才进入RUNNING状态
-                        if up_btn_reg = "00" or down_btn_reg = "00" or left_btn_reg = "00" or right_btn_reg = "00" then
+                        if up_btn_reg = "11" or down_btn_reg = "11" or left_btn_reg = "11" or right_btn_reg = "11" then
                             state_r <= RUNNING;
                         end if;
 
@@ -106,7 +106,7 @@ begin
                         end if;
 
                     when GAME_OVER =>
-                        if back_btn_reg = "00" then
+                        if back_btn_reg = "11" then
                             state_r <= MENU;
                         end if;
 
