@@ -3,8 +3,8 @@
 // Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
 // Date        : Sat May 24 11:05:35 2025
 // Host        : DESKTOP-TFS410 running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub
-//               e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top blk_mem_gen_GameOver -prefix
+//               blk_mem_gen_GameOver_ blk_mem_gen_GameOver_stub.v
 // Design      : blk_mem_gen_GameOver
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a100tcsg324-1

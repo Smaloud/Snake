@@ -1,0 +1,337 @@
+
+*** Running vivado
+    with args -log snake_game_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source snake_game_top.tcl
+
+
+
+****** Vivado v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source snake_game_top.tcl -notrace
+Command: synth_design -top snake_game_top -part xc7a100tcsg324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 24816
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1018.785 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'snake_game_top' [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:30]
+INFO: [Synth 8-638] synthesizing module 'game_fsm' [E:/Snake/project_1.srcs/sources_1/new/game_fsm.vhd:29]
+INFO: [Synth 8-226] default block is never used [E:/Snake/project_1.srcs/sources_1/new/game_fsm.vhd:83]
+INFO: [Synth 8-256] done synthesizing module 'game_fsm' (1#1) [E:/Snake/project_1.srcs/sources_1/new/game_fsm.vhd:29]
+INFO: [Synth 8-638] synthesizing module 'difficulty_controller' [E:/Snake/project_1.srcs/sources_1/new/difficulty_controller.vhd:15]
+INFO: [Synth 8-256] done synthesizing module 'difficulty_controller' (2#1) [E:/Snake/project_1.srcs/sources_1/new/difficulty_controller.vhd:15]
+INFO: [Synth 8-638] synthesizing module 'key_handler' [E:/Snake/project_1.srcs/sources_1/new/key_handler.vhd:24]
+INFO: [Synth 8-256] done synthesizing module 'key_handler' (3#1) [E:/Snake/project_1.srcs/sources_1/new/key_handler.vhd:24]
+INFO: [Synth 8-638] synthesizing module 'snake_controller' [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:29]
+	Parameter SCREEN_WIDTH bound to: 800 - type: integer 
+	Parameter SCREEN_HEIGHT bound to: 600 - type: integer 
+	Parameter SQUARE_SIZE bound to: 40 - type: integer 
+	Parameter MAX_SNAKE_LEN bound to: 300 - type: integer 
+WARNING: [Synth 8-614] signal 'snake_map_r' is read in the process but is not in the sensitivity list [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:185]
+INFO: [Synth 8-256] done synthesizing module 'snake_controller' (4#1) [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:29]
+INFO: [Synth 8-638] synthesizing module 'food_generator' [E:/Snake/project_1.srcs/sources_1/new/food_generator.vhd:24]
+	Parameter SCREEN_WIDTH bound to: 800 - type: integer 
+	Parameter SCREEN_HEIGHT bound to: 600 - type: integer 
+	Parameter SQUARE_SIZE bound to: 40 - type: integer 
+	Parameter MAX_SNAKE_LEN bound to: 300 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'food_generator' (5#1) [E:/Snake/project_1.srcs/sources_1/new/food_generator.vhd:24]
+INFO: [Synth 8-638] synthesizing module 'score_keeper' [E:/Snake/project_1.srcs/sources_1/new/score_keeper.vhd:19]
+INFO: [Synth 8-256] done synthesizing module 'score_keeper' (6#1) [E:/Snake/project_1.srcs/sources_1/new/score_keeper.vhd:19]
+INFO: [Synth 8-3491] module 'blk_mem_gen_menu' declared at 'E:/Snake/project_1.runs/synth_1/.Xil/Vivado-28688-DESKTOP-TFS410/realtime/blk_mem_gen_menu_stub.vhdl:5' bound to instance 'menu_rom_inst' of component 'blk_mem_gen_menu' [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:165]
+INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_menu' [E:/Snake/project_1.runs/synth_1/.Xil/Vivado-28688-DESKTOP-TFS410/realtime/blk_mem_gen_menu_stub.vhdl:14]
+INFO: [Synth 8-3491] module 'blk_mem_gen_GameOver' declared at 'E:/Snake/project_1.runs/synth_1/.Xil/Vivado-28688-DESKTOP-TFS410/realtime/blk_mem_gen_GameOver_stub.vhdl:5' bound to instance 'gameover_rom_inst' of component 'blk_mem_gen_gameover' [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:173]
+INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_GameOver' [E:/Snake/project_1.runs/synth_1/.Xil/Vivado-28688-DESKTOP-TFS410/realtime/blk_mem_gen_GameOver_stub.vhdl:14]
+INFO: [Synth 8-638] synthesizing module 'frame_generator' [E:/Snake/project_1.srcs/sources_1/new/frame_generagor.vhd:61]
+	Parameter SCREEN_WIDTH bound to: 1024 - type: integer 
+	Parameter SCREEN_HEIGHT bound to: 600 - type: integer 
+	Parameter ADDR_WIDTH bound to: 20 - type: integer 
+	Parameter COLOR_DEPTH bound to: 3 - type: integer 
+	Parameter SNAKE_SIZE bound to: 40 - type: integer 
+INFO: [Synth 8-226] default block is never used [E:/Snake/project_1.srcs/sources_1/new/frame_generagor.vhd:192]
+INFO: [Synth 8-256] done synthesizing module 'frame_generator' (7#1) [E:/Snake/project_1.srcs/sources_1/new/frame_generagor.vhd:61]
+INFO: [Synth 8-638] synthesizing module 'vga_simple' [E:/Snake/project_1.srcs/sources_1/new/vga_simple.vhd:25]
+INFO: [Synth 8-256] done synthesizing module 'vga_simple' (8#1) [E:/Snake/project_1.srcs/sources_1/new/vga_simple.vhd:25]
+INFO: [Synth 8-256] done synthesizing module 'snake_game_top' (9#1) [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:30]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 1368.281 ; gain = 349.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1368.281 ; gain = 349.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1368.281 ; gain = 349.496
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.072 . Memory (MB): peak = 1368.281 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver/blk_mem_gen_GameOver_in_context.xdc] for cell 'gameover_rom_inst'
+Finished Parsing XDC File [e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver/blk_mem_gen_GameOver_in_context.xdc] for cell 'gameover_rom_inst'
+Parsing XDC File [e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu/blk_mem_gen_menu_in_context.xdc] for cell 'menu_rom_inst'
+Finished Parsing XDC File [e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu/blk_mem_gen_menu_in_context.xdc] for cell 'menu_rom_inst'
+Parsing XDC File [E:/Snake/Nexys-4-DDR-Master.xdc]
+Finished Parsing XDC File [E:/Snake/Nexys-4-DDR-Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [E:/Snake/Nexys-4-DDR-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/snake_game_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/snake_game_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1368.281 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.023 . Memory (MB): peak = 1368.281 ; gain = 0.000
+WARNING: [Timing 38-316] Clock period '20.000' specified during out-of-context synthesis of instance 'gameover_rom_inst' at clock pin 'clka' is different from the actual clock period '10.000', this can lead to different synthesis results.
+WARNING: [Timing 38-316] Clock period '20.000' specified during out-of-context synthesis of instance 'menu_rom_inst' at clock pin 'clka' is different from the actual clock period '10.000', this can lead to different synthesis results.
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1368.281 ; gain = 349.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1368.281 ; gain = 349.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for gameover_rom_inst. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for menu_rom_inst. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1368.281 ; gain = 349.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1368.281 ; gain = 349.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   31 Bit       Adders := 2     
+	   2 Input   19 Bit       Adders := 2     
+	   2 Input   12 Bit       Adders := 3     
+	   2 Input    9 Bit       Adders := 3     
+	   2 Input    5 Bit       Adders := 4     
+	   2 Input    4 Bit       Adders := 4     
++---XORs : 
+	   4 Input      1 Bit         XORs := 1     
++---Registers : 
+	              300 Bit    Registers := 1     
+	               32 Bit    Registers := 1     
+	               20 Bit    Registers := 1     
+	               19 Bit    Registers := 2     
+	               16 Bit    Registers := 1     
+	               12 Bit    Registers := 4     
+	                9 Bit    Registers := 2     
+	                5 Bit    Registers := 303   
+	                4 Bit    Registers := 304   
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 14    
+	                1 Bit    Registers := 7     
++---Multipliers : 
+	               4x31  Multipliers := 2     
++---Muxes : 
+	   2 Input  300 Bit        Muxes := 3     
+	   4 Input   27 Bit        Muxes := 1     
+	   2 Input   19 Bit        Muxes := 2     
+	   2 Input   12 Bit        Muxes := 3     
+	   2 Input    9 Bit        Muxes := 5     
+	   4 Input    5 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 4     
+	   5 Input    5 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 1     
+	   5 Input    4 Bit        Muxes := 1     
+	  10 Input    3 Bit        Muxes := 1     
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 17    
+	   5 Input    1 Bit        Muxes := 1     
+	   4 Input    1 Bit        Muxes := 301   
+	   3 Input    1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+DSP Report: Generating DSP pos_to_index0, operation Mode is: (A:0x14)*B.
+DSP Report: operator pos_to_index0 is absorbed into DSP pos_to_index0.
+DSP Report: operator pos_to_index0 is absorbed into DSP pos_to_index0.
+DSP Report: Generating DSP pos_to_index0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator pos_to_index0 is absorbed into DSP pos_to_index0.
+DSP Report: operator pos_to_index0 is absorbed into DSP pos_to_index0.
+DSP Report: Generating DSP pos_to_index0, operation Mode is: (A:0x14)*B.
+DSP Report: operator pos_to_index0 is absorbed into DSP pos_to_index0.
+DSP Report: operator pos_to_index0 is absorbed into DSP pos_to_index0.
+DSP Report: Generating DSP pos_to_index0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator pos_to_index0 is absorbed into DSP pos_to_index0.
+DSP Report: operator pos_to_index0 is absorbed into DSP pos_to_index0.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:36 . Memory (MB): peak = 1368.281 ; gain = 349.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping	Report (see note below)
++-----------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name      | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++-----------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|snake_controller | (A:0x14)*B     | 5      | 6      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|snake_controller | (PCIN>>17)+A*B | 15     | 5      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|snake_controller | (A:0x14)*B     | 5      | 6      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|snake_controller | (PCIN>>17)+A*B | 15     | 5      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++-----------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:42 ; elapsed = 00:00:42 . Memory (MB): peak = 1368.281 ; gain = 349.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:48 ; elapsed = 00:00:48 . Memory (MB): peak = 1368.281 ; gain = 349.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:50 ; elapsed = 00:00:50 . Memory (MB): peak = 1388.738 ; gain = 369.953
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:52 ; elapsed = 00:00:52 . Memory (MB): peak = 1402.426 ; gain = 383.641
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:52 ; elapsed = 00:00:52 . Memory (MB): peak = 1402.426 ; gain = 383.641
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1402.426 ; gain = 383.641
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1402.426 ; gain = 383.641
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1402.426 ; gain = 383.641
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1402.426 ; gain = 383.641
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+---------------------+----------+
+|      |BlackBox name        |Instances |
++------+---------------------+----------+
+|1     |blk_mem_gen_menu     |         1|
+|2     |blk_mem_gen_GameOver |         1|
++------+---------------------+----------+
+
+Report Cell Usage: 
++------+--------------------------+------+
+|      |Cell                      |Count |
++------+--------------------------+------+
+|1     |blk_mem_gen_GameOver_bbox |     1|
+|2     |blk_mem_gen_menu_bbox     |     1|
+|3     |BUFG                      |     2|
+|4     |CARRY4                    |   111|
+|5     |DSP48E1                   |     4|
+|6     |LUT1                      |    36|
+|7     |LUT2                      |   329|
+|8     |LUT3                      |    99|
+|9     |LUT4                      |   162|
+|10    |LUT5                      |   237|
+|11    |LUT6                      |  2602|
+|12    |MUXF7                     |   562|
+|13    |MUXF8                     |   222|
+|14    |FDCE                      |   189|
+|15    |FDPE                      |    52|
+|16    |FDRE                      |  3005|
+|17    |FDSE                      |     3|
+|18    |IBUF                      |    10|
+|19    |OBUF                      |    14|
++------+--------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1402.426 ; gain = 383.641
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:35 ; elapsed = 00:00:51 . Memory (MB): peak = 1402.426 ; gain = 383.641
+Synthesis Optimization Complete : Time (s): cpu = 00:00:53 ; elapsed = 00:00:53 . Memory (MB): peak = 1402.426 ; gain = 383.641
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.056 . Memory (MB): peak = 1414.434 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 899 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'snake_game_top' is not ideal for floorplanning, since the cellview 'snake_controller' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1414.434 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+39 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:56 ; elapsed = 00:00:58 . Memory (MB): peak = 1414.434 ; gain = 395.648
+INFO: [Common 17-1381] The checkpoint 'E:/Snake/project_1.runs/synth_1/snake_game_top.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file snake_game_top_utilization_synth.rpt -pb snake_game_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat May 24 13:34:04 2025...

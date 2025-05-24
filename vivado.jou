@@ -2,89 +2,29 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Fri May 23 22:28:53 2025
-# Process ID: 10308
+# Start of session at: Sat May 24 13:17:47 2025
+# Process ID: 9608
 # Current directory: E:/Snake
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8248 E:\Snake\project_1.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent7900 E:\Snake\project_1.xpr
 # Log file: E:/Snake/vivado.log
 # Journal file: E:/Snake\vivado.jou
 #-----------------------------------------------------------
 start_gui
 open_project E:/Snake/project_1.xpr
 update_compile_order -fileset sources_1
-set_property -dict [list CONFIG.Write_Width_A {1} CONFIG.Read_Width_A {1} CONFIG.Write_Width_B {1} CONFIG.Read_Width_B {1} CONFIG.Coe_File {E:/Snake/image.coe}] [get_ips blk_mem_gen_GameOver]
-generate_target all [get_files  E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci]
-catch { config_ip_cache -export [get_ips -all blk_mem_gen_GameOver] }
-export_ip_user_files -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -no_script -sync -force -quiet
-reset_run blk_mem_gen_GameOver_synth_1
-launch_runs blk_mem_gen_GameOver_synth_1 -jobs 10
-wait_on_run blk_mem_gen_GameOver_synth_1
-wait_on_run blk_mem_gen_GameOver_synth_1
-export_simulation -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -directory E:/Snake/project_1.ip_user_files/sim_scripts -ip_user_files_dir E:/Snake/project_1.ip_user_files -ipstatic_source_dir E:/Snake/project_1.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/Snake/project_1.cache/compile_simlib/modelsim} {questa=E:/Snake/project_1.cache/compile_simlib/questa} {riviera=E:/Snake/project_1.cache/compile_simlib/riviera} {activehdl=E:/Snake/project_1.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
-update_compile_order -fileset sources_1
-launch_runs synth_1 -jobs 18
-wait_on_run synth_1
-set_property -dict [list CONFIG.Coe_File {E:/Snake/Snake.coe}] [get_ips blk_mem_gen_GameOver]
-generate_target all [get_files  E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci]
-catch { config_ip_cache -export [get_ips -all blk_mem_gen_GameOver] }
-export_ip_user_files -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -no_script -sync -force -quiet
-reset_run blk_mem_gen_GameOver_synth_1
-launch_runs blk_mem_gen_GameOver_synth_1 -jobs 18
-wait_on_run blk_mem_gen_GameOver_synth_1
-wait_on_run blk_mem_gen_GameOver_synth_1
-export_simulation -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -directory E:/Snake/project_1.ip_user_files/sim_scripts -ip_user_files_dir E:/Snake/project_1.ip_user_files -ipstatic_source_dir E:/Snake/project_1.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/Snake/project_1.cache/compile_simlib/modelsim} {questa=E:/Snake/project_1.cache/compile_simlib/questa} {riviera=E:/Snake/project_1.cache/compile_simlib/riviera} {activehdl=E:/Snake/project_1.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
-export_ip_user_files -of_objects  [get_files E:/Snake/GameOver_rom_rgb111.coe] -no_script -reset -force -quiet
-remove_files  E:/Snake/GameOver_rom_rgb111.coe
-export_ip_user_files -of_objects  [get_files e:/Snake/image.coe] -no_script -reset -force -quiet
-remove_files  e:/Snake/image.coe
-reset_run synth_1
-launch_runs synth_1 -jobs 18
+launch_runs synth_1 -jobs 20
 wait_on_run synth_1
 reset_run synth_1
-launch_runs synth_1 -jobs 18
+launch_runs synth_1 -jobs 20
 wait_on_run synth_1
-launch_runs impl_1 -jobs 18
+launch_runs impl_1 -jobs 20
 wait_on_run impl_1
-update_compile_order -fileset sources_1
-reset_run synth_1
-launch_runs synth_1 -jobs 18
-wait_on_run synth_1
-launch_simulation
-launch_simulation
-set_property -dict [list CONFIG.Coe_File {E:/Snake/GameOver_rom_binary.coe}] [get_ips blk_mem_gen_GameOver]
-generate_target all [get_files  E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci]
-catch { config_ip_cache -export [get_ips -all blk_mem_gen_GameOver] }
-export_ip_user_files -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -no_script -sync -force -quiet
-reset_run blk_mem_gen_GameOver_synth_1
-launch_runs blk_mem_gen_GameOver_synth_1 -jobs 20
-wait_on_run blk_mem_gen_GameOver_synth_1
-wait_on_run blk_mem_gen_GameOver_synth_1
-export_simulation -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -directory E:/Snake/project_1.ip_user_files/sim_scripts -ip_user_files_dir E:/Snake/project_1.ip_user_files -ipstatic_source_dir E:/Snake/project_1.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/Snake/project_1.cache/compile_simlib/modelsim} {questa=E:/Snake/project_1.cache/compile_simlib/questa} {riviera=E:/Snake/project_1.cache/compile_simlib/riviera} {activehdl=E:/Snake/project_1.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
-create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name blk_mem_gen_menu
-set_property -dict [list CONFIG.Component_Name {blk_mem_gen_menu} CONFIG.Memory_Type {Single_Port_ROM} CONFIG.Write_Width_A {1} CONFIG.Write_Depth_A {700000} CONFIG.Read_Width_A {1} CONFIG.Enable_A {Always_Enabled} CONFIG.Write_Width_B {1} CONFIG.Read_Width_B {1} CONFIG.Register_PortA_Output_of_Memory_Primitives {false} CONFIG.Load_Init_File {true} CONFIG.Coe_File {E:/Snake/Start_rom_binary.coe} CONFIG.Port_A_Write_Rate {0}] [get_ips blk_mem_gen_menu]
-generate_target {instantiation_template} [get_files e:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci]
-generate_target all [get_files  e:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci]
-catch { config_ip_cache -export [get_ips -all blk_mem_gen_menu] }
-export_ip_user_files -of_objects [get_files e:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci] -no_script -sync -force -quiet
-create_ip_run [get_files -of_objects [get_fileset sources_1] e:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci]
-launch_runs blk_mem_gen_menu_synth_1 -jobs 20
-wait_on_run blk_mem_gen_menu_synth_1
-wait_on_run blk_mem_gen_menu_synth_1
-export_simulation -of_objects [get_files e:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci] -directory E:/Snake/project_1.ip_user_files/sim_scripts -ip_user_files_dir E:/Snake/project_1.ip_user_files -ipstatic_source_dir E:/Snake/project_1.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/Snake/project_1.cache/compile_simlib/modelsim} {questa=E:/Snake/project_1.cache/compile_simlib/questa} {riviera=E:/Snake/project_1.cache/compile_simlib/riviera} {activehdl=E:/Snake/project_1.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
-launch_simulation
-close_project
-open_project E:/Snake/project_1.xpr
-update_compile_order -fileset sources_1
-export_ip_user_files -of_objects  [get_files E:/Snake/Snake.coe] -no_script -reset -force -quiet
-remove_files  E:/Snake/Snake.coe
-export_ip_user_files -of_objects  [get_files E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd] -no_script -reset -force -quiet
-remove_files  E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd
-export_ip_user_files -of_objects  [get_files E:/Snake/project_1.srcs/sources_1/new/image_rom.vhd] -no_script -reset -force -quiet
-remove_files  E:/Snake/project_1.srcs/sources_1/new/image_rom.vhd
-add_files -fileset constrs_1 -norecurse E:/Snake/Nexys-4-DDR-Master.xdc
-launch_simulation
-reset_project -exclude ip
-reset_project -exclude_ips
-launch_simulation
-launch_simulation
-launch_simulation
+open_run synth_1 -name synth_1
+report_utilization -name utilization_1
+launch_runs impl_1 -to_step write_bitstream -jobs 20
+wait_on_run impl_1
+refresh_design
+close_design
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream -jobs 20
+wait_on_run impl_1

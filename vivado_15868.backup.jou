@@ -1,0 +1,67 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sat May 24 11:56:07 2025
+# Process ID: 15868
+# Current directory: E:/Snake
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent1532 E:\Snake\project_1.xpr
+# Log file: E:/Snake/vivado.log
+# Journal file: E:/Snake\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/Snake/project_1.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+source snake_game_top.tcl
+launch_runs synth_1 -jobs 20
+wait_on_run synth_1
+close_sim
+launch_runs impl_1 -jobs 20
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 20
+wait_on_run impl_1
+set_property -dict [list CONFIG.Write_Depth_A {620000}] [get_ips blk_mem_gen_GameOver]
+generate_target all [get_files  E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci]
+catch { config_ip_cache -export [get_ips -all blk_mem_gen_GameOver] }
+export_ip_user_files -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -no_script -sync -force -quiet
+reset_run blk_mem_gen_GameOver_synth_1
+launch_runs blk_mem_gen_GameOver_synth_1 -jobs 20
+wait_on_run blk_mem_gen_GameOver_synth_1
+wait_on_run blk_mem_gen_GameOver_synth_1
+export_simulation -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -directory E:/Snake/project_1.ip_user_files/sim_scripts -ip_user_files_dir E:/Snake/project_1.ip_user_files -ipstatic_source_dir E:/Snake/project_1.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/Snake/project_1.cache/compile_simlib/modelsim} {questa=E:/Snake/project_1.cache/compile_simlib/questa} {riviera=E:/Snake/project_1.cache/compile_simlib/riviera} {activehdl=E:/Snake/project_1.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+set_property -dict [list CONFIG.Write_Depth_A {620000}] [get_ips blk_mem_gen_menu]
+generate_target all [get_files  E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci]
+catch { config_ip_cache -export [get_ips -all blk_mem_gen_menu] }
+export_ip_user_files -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci] -no_script -sync -force -quiet
+reset_run blk_mem_gen_menu_synth_1
+launch_runs blk_mem_gen_menu_synth_1 -jobs 20
+wait_on_run blk_mem_gen_menu_synth_1
+wait_on_run blk_mem_gen_menu_synth_1
+export_simulation -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci] -directory E:/Snake/project_1.ip_user_files/sim_scripts -ip_user_files_dir E:/Snake/project_1.ip_user_files -ipstatic_source_dir E:/Snake/project_1.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/Snake/project_1.cache/compile_simlib/modelsim} {questa=E:/Snake/project_1.cache/compile_simlib/questa} {riviera=E:/Snake/project_1.cache/compile_simlib/riviera} {activehdl=E:/Snake/project_1.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+reset_run synth_1
+launch_runs synth_1 -jobs 20
+wait_on_run synth_1
+launch_runs impl_1 -jobs 20
+wait_on_run impl_1
+set_property -dict [list CONFIG.Write_Depth_A {700000}] [get_ips blk_mem_gen_menu]
+generate_target all [get_files  E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci]
+catch { config_ip_cache -export [get_ips -all blk_mem_gen_menu] }
+catch { [ delete_ip_run [get_ips -all blk_mem_gen_menu] ] }
+export_ip_user_files -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci]
+set_property -dict [list CONFIG.Write_Depth_A {700000}] [get_ips blk_mem_gen_GameOver]
+generate_target all [get_files  E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci]
+catch { config_ip_cache -export [get_ips -all blk_mem_gen_GameOver] }
+catch { [ delete_ip_run [get_ips -all blk_mem_gen_GameOver] ] }
+export_ip_user_files -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci]
+update_compile_order -fileset sources_1
+open_run synth_1 -name synth_1
+report_utilization -name utilization_1
+synth_design -rtl -rtl_skip_mlo -name rtl_1
+current_design synth_1
+close_design
+close_design
