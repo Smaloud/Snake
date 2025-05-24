@@ -29,54 +29,59 @@ architecture Behavioral of key_handler is
     constant FACE_LEFT : std_logic_vector(4 downto 0) := "01000";
     constant FACE_RIGHT: std_logic_vector(4 downto 0) := "10000";
     
-    -- 消抖计数器和寄存器
-    constant DEBOUNCE_LIMIT : integer := 500000;  -- 5ms@100MHz
-    signal debounce_counter : integer range 0 to DEBOUNCE_LIMIT := 0;
-    
-    -- 按键状态寄存器
-    signal btn_up_reg    : std_logic_vector(1 downto 0) := "11";
-    signal btn_down_reg  : std_logic_vector(1 downto 0) := "11";
-    signal btn_left_reg  : std_logic_vector(1 downto 0) := "11";
-    signal btn_right_reg : std_logic_vector(1 downto 0) := "11";
-    
     -- 输出方向寄存器
     signal move_state_r  : std_logic_vector(4 downto 0) := STOP;
     
+    -- 按键状态寄存器
+    signal btn_up_r     : std_logic := '0';
+    signal btn_down_r   : std_logic := '0';
+    signal btn_left_r   : std_logic := '0';
+    signal btn_right_r  : std_logic := '0';
+    
 begin
-    -- 按键消抖和方向控制过程
+    -- 按键状态更新过程
     process(clk, rst_n)
     begin
         if rst_n = '0' then
-            btn_up_reg <= "11";
-            btn_down_reg <= "11";
-            btn_left_reg <= "11";
-            btn_right_reg <= "11";
-            debounce_counter <= 0;
+            btn_up_r <= '0';
+            btn_down_r <= '0';
+            btn_left_r <= '0';
+            btn_right_r <= '0';
             move_state_r <= STOP;
             
         elsif rising_edge(clk) then
-            -- 移位寄存器采样按键状态
-            btn_up_reg <= btn_up_reg(0) & btn_up;
-            btn_down_reg <= btn_down_reg(0) & btn_down;
-            btn_left_reg <= btn_left_reg(0) & btn_left;
-            btn_right_reg <= btn_right_reg(0) & btn_right;
+            -- 更新按键状态
+            if btn_up = '1' then
+                btn_up_r <= '1';
+                btn_down_r <= '0';
+                btn_left_r <= '0';
+                btn_right_r <= '0';
+            elsif btn_down = '1' then
+                btn_up_r <= '0';
+                btn_down_r <= '1';
+                btn_left_r <= '0';
+                btn_right_r <= '0';
+            elsif btn_left = '1' then
+                btn_up_r <= '0';
+                btn_down_r <= '0';
+                btn_left_r <= '1';
+                btn_right_r <= '0';
+            elsif btn_right = '1' then
+                btn_up_r <= '0';
+                btn_down_r <= '0';
+                btn_left_r <= '0';
+                btn_right_r <= '1';
+            end if;
             
-            -- 消抖计数
-            if debounce_counter = DEBOUNCE_LIMIT then
-                debounce_counter <= 0;
-                
-                -- 检测按键并更新方向（防止180度转向）
-                if btn_up_reg = "00" and current_dir /= FACE_DOWN then
-                    move_state_r <= FACE_UP;
-                elsif btn_down_reg = "00" and current_dir /= FACE_UP then
-                    move_state_r <= FACE_DOWN;
-                elsif btn_left_reg = "00" and current_dir /= FACE_RIGHT then
-                    move_state_r <= FACE_LEFT;
-                elsif btn_right_reg = "00" and current_dir /= FACE_LEFT then
-                    move_state_r <= FACE_RIGHT;
-                end if;
-            else
-                debounce_counter <= debounce_counter + 1;
+            -- 根据按键状态更新方向（防止180度转向）
+            if btn_up_r = '1' and current_dir /= FACE_DOWN then
+                move_state_r <= FACE_UP;
+            elsif btn_down_r = '1' and current_dir /= FACE_UP then
+                move_state_r <= FACE_DOWN;
+            elsif btn_left_r = '1' and current_dir /= FACE_RIGHT then
+                move_state_r <= FACE_LEFT;
+            elsif btn_right_r = '1' and current_dir /= FACE_LEFT then
+                move_state_r <= FACE_RIGHT;
             end if;
         end if;
     end process;

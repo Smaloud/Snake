@@ -31,91 +31,49 @@ architecture Behavioral of game_fsm is
     type state_type is (MENU, INIT_GAME, RUNNING, GAME_OVER);
     signal state_r : state_type := MENU;
     signal diff_r  : std_logic_vector(1 downto 0) := "00";  -- 默认简单难度
-    
-    -- 消抖计数器
-    constant DEBOUNCE_LIMIT : integer := 500000;  -- 5ms@100MHz
-    signal debounce_counter : integer range 0 to DEBOUNCE_LIMIT := 0;
-    
-    -- 按键状态寄存器
-    signal diff_btn1_reg : std_logic_vector(1 downto 0) := "11";
-    signal diff_btn2_reg : std_logic_vector(1 downto 0) := "11";
-    signal diff_btn3_reg : std_logic_vector(1 downto 0) := "11";
-    signal back_btn_reg  : std_logic_vector(1 downto 0) := "11";
-    
-    -- 方向键状态寄存器
-    signal up_btn_reg    : std_logic_vector(1 downto 0) := "11";
-    signal down_btn_reg  : std_logic_vector(1 downto 0) := "11";
-    signal left_btn_reg  : std_logic_vector(1 downto 0) := "11";
-    signal right_btn_reg : std_logic_vector(1 downto 0) := "11";
 
 begin
-    -- 按键消抖和状态控制过程
+    -- 状态控制过程
     process(clk, rst_n)
     begin
         if rst_n = '0' then
             state_r <= MENU;
             diff_r <= "00";
-            debounce_counter <= 0;
-            diff_btn1_reg <= "11";
-            diff_btn2_reg <= "11";
-            diff_btn3_reg <= "11";
-            back_btn_reg <= "11";
-            up_btn_reg <= "11";
-            down_btn_reg <= "11";
-            left_btn_reg <= "11";
-            right_btn_reg <= "11";
 
         elsif rising_edge(clk) then
-            -- 移位寄存器采样按键状态
-            diff_btn1_reg <= diff_btn1_reg(0) & diff_btn1;
-            diff_btn2_reg <= diff_btn2_reg(0) & diff_btn2;
-            diff_btn3_reg <= diff_btn3_reg(0) & diff_btn3;
-            back_btn_reg <= back_btn_reg(0) & back_btn;
-            up_btn_reg <= up_btn_reg(0) & up_btn;
-            down_btn_reg <= down_btn_reg(0) & down_btn;
-            left_btn_reg <= left_btn_reg(0) & left_btn;
-            right_btn_reg <= right_btn_reg(0) & right_btn;
-            
-            -- 消抖计数
-            if debounce_counter = DEBOUNCE_LIMIT then
-                debounce_counter <= 0;
-                
-                case state_r is
-                    when MENU =>
-                        -- 在菜单状态下处理难度选择并直接开始游戏
-                        if diff_btn1_reg = "00" then
-                            diff_r <= "00";  -- 简单
-                            state_r <= INIT_GAME;  -- 直接进入初始化状态
-                        elsif diff_btn2_reg = "00" then
-                            diff_r <= "01";  -- 中等
-                            state_r <= INIT_GAME;  -- 直接进入初始化状态
-                        elsif diff_btn3_reg = "00" then
-                            diff_r <= "10";  -- 困难
-                            state_r <= INIT_GAME;  -- 直接进入初始化状态
-                        end if;
+            case state_r is
+                when MENU =>
+                    -- 在菜单状态下处理难度选择并直接开始游戏
+                    if diff_btn1 = '1' then
+                        diff_r <= "00";  -- 简单
+                        state_r <= INIT_GAME;  -- 直接进入初始化状态
+                    elsif diff_btn2 = '1' then
+                        diff_r <= "01";  -- 中等
+                        state_r <= INIT_GAME;  -- 直接进入初始化状态
+                    elsif diff_btn3 = '1' then
+                        diff_r <= "10";  -- 困难
+                        state_r <= INIT_GAME;  -- 直接进入初始化状态
+                    end if;
 
-                    when INIT_GAME =>
-                        -- 等待方向键输入才进入RUNNING状态
-                        if up_btn_reg = "11" or down_btn_reg = "11" or left_btn_reg = "11" or right_btn_reg = "11" then
-                            state_r <= RUNNING;
-                        end if;
+                when INIT_GAME =>
+                    -- 等待方向键输入才进入RUNNING状态
+                    if up_btn = '1' or down_btn = '1' or left_btn = '1' or right_btn = '1' then
+                        state_r <= RUNNING;
+                    end if;
 
-                    when RUNNING =>
-                        if is_dead = '1' or is_win = '1' then
-                            state_r <= GAME_OVER;
-                        end if;
+                when RUNNING =>
+                    if is_dead = '1' or is_win = '1' then
+                        state_r <= GAME_OVER;
+                    end if;
 
-                    when GAME_OVER =>
-                        if back_btn_reg = "11" then
-                            state_r <= MENU;
-                        end if;
-
-                    when others =>
+                when GAME_OVER =>
+                    if back_btn = '1' then
                         state_r <= MENU;
-                end case;
-            else
-                debounce_counter <= debounce_counter + 1;
-            end if;
+                    end if;
+
+                when others =>
+                    state_r <= MENU;
+            end case;
         end if;
     end process;
 
