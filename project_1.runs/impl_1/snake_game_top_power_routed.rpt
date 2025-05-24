@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Sat May 24 15:22:55 2025
+| Date             : Sat May 24 19:00:55 2025
 | Host             : LAPTOP-FMHA2MNQ running 64-bit major release  (build 9200)
 | Command          : report_power -file snake_game_top_power_routed.rpt -pb snake_game_top_power_summary_routed.pb -rpx snake_game_top_power_routed.rpx
 | Design           : snake_game_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.161        |
+| Total On-Chip Power (W)  | 0.155        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.062        |
+| Dynamic (W)              | 0.056        |
 | Device Static (W)        | 0.099        |
 | Effective TJA (C/W)      | 4.6          |
 | Max Ambient (C)          | 84.3         |
@@ -52,20 +52,20 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.004 |        3 |       --- |             --- |
-| Slice Logic    |     0.020 |     8978 |       --- |             --- |
-|   LUT as Logic |     0.019 |     3860 |     63400 |            6.09 |
-|   F7/F8 Muxes  |    <0.001 |     1329 |     63400 |            2.10 |
-|   CARRY4       |    <0.001 |       99 |     15850 |            0.62 |
-|   Register     |    <0.001 |     3286 |    126800 |            2.59 |
+| Clocks         |     0.006 |        3 |       --- |             --- |
+| Slice Logic    |     0.016 |     8007 |       --- |             --- |
+|   LUT as Logic |     0.015 |     3373 |     63400 |            5.32 |
+|   F7/F8 Muxes  |    <0.001 |      770 |     63400 |            1.21 |
+|   CARRY4       |    <0.001 |      106 |     15850 |            0.67 |
+|   Register     |    <0.001 |     3373 |    126800 |            2.66 |
 |   BUFG         |    <0.001 |        2 |        32 |            6.25 |
-|   Others       |     0.000 |       94 |       --- |             --- |
-| Signals        |     0.031 |     6071 |       --- |             --- |
+|   Others       |     0.000 |      101 |       --- |             --- |
+| Signals        |     0.028 |     6099 |       --- |             --- |
 | Block RAM      |     0.004 |       43 |       135 |           31.85 |
-| DSPs           |     0.002 |        6 |       240 |            2.50 |
+| DSPs           |     0.001 |        4 |       240 |            1.67 |
 | I/O            |    <0.001 |       24 |       210 |           11.43 |
 | Static Power   |     0.099 |          |           |                 |
-| Total          |     0.161 |          |           |                 |
+| Total          |     0.155 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.077 |       0.061 |      0.016 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.071 |       0.055 |      0.016 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.018 |       0.000 |      0.018 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.004 |       0.000 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -144,17 +144,18 @@ Table of Contents
 +-------------------------+-----------+
 | Name                    | Power (W) |
 +-------------------------+-----------+
-| snake_game_top          |     0.062 |
+| snake_game_top          |     0.056 |
 |   food_generator_inst   |     0.002 |
-|   frame_generator_inst  |     0.003 |
+|   frame_generator_inst  |     0.002 |
 |   game_fsm_inst         |     0.003 |
 |   gameover_rom_inst     |     0.003 |
 |     U0                  |     0.003 |
 |       inst_blk_mem_gen  |     0.003 |
+|   key_handler_inst      |     0.002 |
 |   menu_rom_inst         |     0.003 |
 |     U0                  |     0.003 |
 |       inst_blk_mem_gen  |     0.003 |
-|   snake_controller_inst |     0.045 |
+|   snake_controller_inst |     0.037 |
 |   vga_inst              |     0.001 |
 +-------------------------+-----------+
 

@@ -91,6 +91,7 @@ OPTRACE "Adding files" START { }
 add_files E:/VivadoWorks/project_1/GameOver_rom_binary.coe
 add_files E:/VivadoWorks/project_1/Start_rom_binary.coe
 read_vhdl -library xil_defaultlib {
+  E:/VivadoWorks/TopLevel/TopLevel.srcs/sources_1/new/ButtonDebounce.vhd
   E:/VivadoWorks/project_1/project_1.srcs/sources_1/new/difficulty_controller.vhd
   E:/VivadoWorks/project_1/project_1.srcs/sources_1/new/food_generator.vhd
   E:/VivadoWorks/project_1/project_1.srcs/sources_1/new/frame_generagor.vhd
