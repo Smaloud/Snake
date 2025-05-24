@@ -84,11 +84,11 @@ begin
                 -- 吃到食物增加一节
                 if flag_eat_r = '1' and flag_food_ready = '1' and snake_len_r < to_unsigned(MAX_SNAKE_LEN, 9) then
                     flag_eat_r <= '0';  -- 食物已处理，重置信号
-
+                end if;
+                
                 if flag_eat_r = '1' and snake_len_r < to_unsigned(MAX_SNAKE_LEN, 9) then
                     snake_len_r <= snake_len_r + 1;
                 
-
                     -- 检查是否填满屏幕
                     if snake_len_r >= to_unsigned(MAX_SNAKE_LEN, 9) then
                         is_win_r <= '1';
