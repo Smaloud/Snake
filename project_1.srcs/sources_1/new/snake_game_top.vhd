@@ -69,6 +69,12 @@ architecture Behavioral of snake_game_top is
     signal font_row       : std_logic_vector(3 downto 0);   -- 字符行
     signal font_row_data  : std_logic_vector(7 downto 0);   -- 字符行数据
     
+    -- 文本显示相关信号
+    signal text_type     : std_logic_vector(1 downto 0);   -- 文本类型
+    signal text_x_pos    : std_logic_vector(5 downto 0);   -- 文本内X坐标
+    signal text_y_pos    : std_logic_vector(2 downto 0);   -- 文本内Y坐标
+    signal text_pixel_on : std_logic;                      -- 文本像素是否点亮
+    
     -- ROM IP核组件声明
     component blk_mem_gen_menu
         port (
@@ -101,6 +107,17 @@ architecture Behavioral of snake_game_top is
         port(
             bin_in  : in  std_logic_vector(11 downto 0);
             bcd_out : out std_logic_vector(15 downto 0)
+        );
+    end component;
+    
+    -- 文本显示模块声明
+    component text_display
+        port(
+            clk       : in  std_logic;
+            text_type : in  std_logic_vector(1 downto 0);
+            x_pos     : in  std_logic_vector(5 downto 0);
+            y_pos     : in  std_logic_vector(2 downto 0);
+            pixel_on  : out std_logic
         );
     end component;
     
@@ -211,6 +228,16 @@ begin
         row_data  => font_row_data
     );
     
+    -- 文本显示模块实例化
+    text_display_inst : text_display
+    port map (
+        clk       => clk,
+        text_type => text_type,
+        x_pos     => text_x_pos,
+        y_pos     => text_y_pos,
+        pixel_on  => text_pixel_on
+    );
+    
     -- 分数二进制转BCD实例化
     score_bcd_inst : bin_to_bcd
     port map (
@@ -245,6 +272,10 @@ begin
         menu_rom_data  => menu_rom_data,
         gameover_rom_data => gameover_rom_data,
         font_row_data  => font_row_data,
+        text_pixel_on  => text_pixel_on,
+        text_type      => text_type,
+        text_x_pos     => text_x_pos,
+        text_y_pos     => text_y_pos,
         pixel_color    => pixel_color,
         write_en       => write_en,
         frame_complete => frame_complete,
