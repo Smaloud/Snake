@@ -1,0 +1,2004 @@
+/*
+
+Xilinx Vivado v2020.2 (64-bit) [Major: 2020, Minor: 2]
+SW Build: 3064766 on Wed Nov 18 09:12:45 MST 2020
+IP Build: 3064653 on Wed Nov 18 14:17:31 MST 2020
+
+Process ID (PID): 10308
+License: Customer
+Mode: GUI Mode
+
+Current time: 	Fri May 23 22:29:02 CST 2025
+Time zone: 	China Standard Time (Asia/Shanghai)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 20
+
+Screen size: 1920x1080
+Screen resolution (DPI): 100
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+Scale size: 12
+
+Java version: 	11.0.2 64-bit
+Java home: 	C:/Xilinx/Vivado/2020.2/tps/win64/jre11.0.2
+Java executable location: 	C:/Xilinx/Vivado/2020.2/tps/win64/jre11.0.2/bin/java.exe
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	Administrator
+User home directory: C:/Users/Administrator
+User working directory: E:/Snake
+User country: 	CN
+User language: 	zh
+User locale: 	zh_CN
+
+RDI_BASEROOT: C:/Xilinx/Vivado
+HDI_APPROOT: C:/Xilinx/Vivado/2020.2
+RDI_DATADIR: C:/Xilinx/Vivado/2020.2/data
+RDI_BINDIR: C:/Xilinx/Vivado/2020.2/bin
+
+Vivado preferences file location: C:/Users/Administrator/AppData/Roaming/Xilinx/Vivado/2020.2/vivado.xml
+Vivado preferences directory: C:/Users/Administrator/AppData/Roaming/Xilinx/Vivado/2020.2/
+Vivado layouts directory: C:/Users/Administrator/AppData/Roaming/Xilinx/Vivado/2020.2/data/layouts
+PlanAhead jar file location: 	C:/Xilinx/Vivado/2020.2/lib/classes/planAhead.jar
+Vivado log file location: 	E:/Snake/vivado.log
+Vivado journal file location: 	E:/Snake/vivado.jou
+Engine tmp dir: 	E:/Snake/.Xil/Vivado-10308-DESKTOP-TFS410
+
+Xilinx Environment Variables
+----------------------------
+XILINX: C:/Xilinx/Vivado/2020.2/ids_lite/ISE
+XILINX_DSP: C:/Xilinx/Vivado/2020.2/ids_lite/ISE
+XILINX_HLS: C:/Xilinx/Vitis_HLS/2020.2
+XILINX_PLANAHEAD: C:/Xilinx/Vivado/2020.2
+XILINX_VIVADO: C:/Xilinx/Vivado/2020.2
+XILINX_VIVADO_HLS: C:/Xilinx/Vivado/2020.2
+
+
+GUI allocated memory:	156 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,026 MB
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// TclEventType: PROJECT_OPEN_DIALOG
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// bz (cr):  Open Project : addNotify
+// Opening Vivado Project: E:\Snake\project_1.xpr. Version: Vivado v2020.2 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// Tcl Message: open_project E:/Snake/project_1.xpr 
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 121 MB (+124231kb) [00:00:05]
+// [Engine Memory]: 1,026 MB (+923941kb) [00:00:05]
+// WARNING: HEventQueue.dispatchEvent() is taking  1196 ms.
+// Tcl Message: open_project E:/Snake/project_1.xpr 
+// Tcl Message: INFO: [Project 1-313] Project file moved from 'E:/VivadoWorks/project_1' since last save. 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'. 
+// Project name: project_1; location: E:/Snake; part: xc7a100tcsg324-1
+dismissDialog("Open Project"); // bz
+// Tcl Command: 'rdi::info_commands {device::*}'
+// Tcl Command: 'rdi::info_commands {debug::*}'
+// Tcl Command: 'rdi::info_commands {*}'
+// HMemoryUtils.trashcanNow. Engine heap size: 1,026 MB. GUI used memory: 69 MB. Current time: 5/23/25, 10:29:03 PM CST
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 1, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), game_fsm_inst : game_fsm(Behavioral) (game_fsm.vhd)]", 2, false, false, false, false, false, true); // D - Double Click
+// [GUI Memory]: 128 MB (+1337kb) [00:00:14]
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 1); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 2, false); // D
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 1); // D
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 1); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 2, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 2, false, false, false, false, false, true); // D - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// TclEventType: LOAD_FEATURE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+setText("Defines the PortA Write Width(DINA)", "1"); // B
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+// Elapsed time: 22 seconds
+selectButton(PAResourceEtoH.HACGCCoeFileWidget_BROWSE, "Browse"); // a
+setFileChooser("E:/Snake/image.coe");
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Re-customize IP"); // r
+// [Engine Memory]: 1,083 MB (+6176kb) [00:01:15]
+// [GUI Memory]: 138 MB (+3249kb) [00:01:15]
+// r (cr): Re-customize IP: addNotify
+// bz (r):  Re-customize IP : addNotify
+// Tcl Message: set_property -dict [list CONFIG.Write_Width_A {1} CONFIG.Read_Width_A {1} CONFIG.Write_Width_B {1} CONFIG.Read_Width_B {1} CONFIG.Coe_File {E:/Snake/image.coe}] [get_ips blk_mem_gen_GameOver] 
+// Tcl Message: INFO: [IP_Flow 19-3484] Absolute path of file 'e:/Snake/image.coe' provided. It will be converted relative to IP Instance files '../../../../image.coe' 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILESET_UPDATE_IP
+// aI (cr): Generate Output Products: addNotify
+dismissDialog("Re-customize IP"); // bz
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 86 MB. Current time: 5/23/25, 10:30:13 PM CST
+selectButton(PAResourceQtoS.SimpleOutputProductDialog_GENERATE_OUTPUT_PRODUCTS_IMMEDIATELY, "Generate"); // a
+// bz (cr):  Managing Output Products : addNotify
+// Tcl Message: generate_target all [get_files  E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] 
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'blk_mem_gen_GameOver'... INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'blk_mem_gen_GameOver'... 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'blk_mem_gen_GameOver'... INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'blk_mem_gen_GameOver'... INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'blk_mem_gen_GameOver'... 
+// Tcl Message: generate_target: Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1102.215 ; gain = 0.000 
+// Tcl Message: catch { config_ip_cache -export [get_ips -all blk_mem_gen_GameOver] } 
+// Tcl Message: export_ip_user_files -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -no_script -sync -force -quiet 
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run blk_mem_gen_GameOver_synth_1 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs blk_mem_gen_GameOver_synth_1 -jobs 10 
+// Tcl Message: [Fri May 23 22:30:30 2025] Launched blk_mem_gen_GameOver_synth_1... Run output will be captured here: E:/Snake/project_1.runs/blk_mem_gen_GameOver_synth_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: INFO: [Vivado 12-4357] Exporting simulation files for 'blk_mem_gen_GameOver'... please wait for 'blk_mem_gen_GameOver_synth_1' run to finish... 
+// Tcl Message: wait_on_run blk_mem_gen_GameOver_synth_1 
+// Tcl Message: [Fri May 23 22:30:31 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: [Fri May 23 22:30:36 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Fri May 23 22:30:41 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Fri May 23 22:30:46 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Fri May 23 22:30:56 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Fri May 23 22:31:06 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// Tcl Message: [Fri May 23 22:31:11 2025] blk_mem_gen_GameOver_synth_1 finished 
+// Tcl Message: wait_on_run: Time (s): cpu = 00:00:01 ; elapsed = 00:00:40 . Memory (MB): peak = 1102.215 ; gain = 0.000 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: export_simulation -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -directory E:/Snake/project_1.ip_user_files/sim_scripts -ip_user_files_dir E:/Snake/project_1.ip_user_files -ipstatic_source_dir E:/Snake/project_1.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/Snake/project_1.cache/compile_simlib/modelsim} {questa=E:/Snake/project_1.cache/compile_simlib/questa} {riviera=E:/Snake/project_1.cache/compile_simlib/riviera} {activehdl=E:/Snake/project_1.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// Elapsed time: 62 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 1, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), game_fsm_inst : game_fsm(Behavioral) (game_fsm.vhd)]", 2, false, false, false, false, false, true); // D - Double Click
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("snake_game_top.vhd", 381, 96); // bP
+selectCodeEditor("snake_game_top.vhd", 316, 109, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 194, 155); // bP
+selectCodeEditor("snake_game_top.vhd", 194, 155, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 82, 161); // bP
+selectCodeEditor("snake_game_top.vhd", 186, 79, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 82, 77); // bP
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 1); // D
+// Elapsed time: 126 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Utility Sources]", 6, true, false, false, false, true, false); // D - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Utility Sources]", 6, true, false, false, false, true, false); // D - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Utility Sources]", 6, true, false, false, false, true, false); // D - Popup Trigger - Node
+selectCodeEditor("snake_game_top.vhd", 163, 130); // bP
+selectCodeEditor("snake_game_top.vhd", 142, 138); // bP
+selectCodeEditor("snake_game_top.vhd", 137, 139, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 95, 146); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 403 seconds
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // h
+// Elapsed time: 14 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 14, false); // u
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// f (cr): Launch Runs: addNotify
+selectComboBox(PAResourceItoN.NumJobsChooser_NUMBER_OF_JOBS, "18", 17); // e
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// bz (cr):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_1 -jobs 18 
+// Tcl Message: [Fri May 23 22:40:39 2025] Launched synth_1... Run output will be captured here: E:/Snake/project_1.runs/synth_1/runme.log 
+// 'k' command handler elapsed time: 4 seconds
+dismissDialog("Starting Design Runs"); // bz
+// TclEventType: RUN_STATUS_CHANGE
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Utility Sources]", 7, true, false, false, false, true, false); // D - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Utility Sources]", 7, true, false, false, false, true, false); // D - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Utility Sources]", 7, true, false, false, false, true, false); // D - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Utility Sources]", 7, true, false, false, false, true, false); // D - Popup Trigger - Node
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// ag (cr): Synthesis Failed: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // ag
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Vivado 12-172] File or Directory 'E:/Snake/GameOver_rom_rgb111.coe' does not exist. ]", 2, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Vivado 12-172] File or Directory 'E:/Snake/GameOver_rom_rgb111.coe' does not exist. ]", 2, false, false, false, false, false, true); // ah - Double Click
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Vivado 12-172] File or Directory 'E:/Snake/GameOver_rom_rgb111.coe' does not exist. ]", 2, false, false, false, false, true, false); // ah - Popup Trigger
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 3, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 3, false, false, false, false, false, true); // D - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectButton(PAResourceEtoH.HACGCCoeFileWidget_BROWSE, "Browse"); // a
+dismissFileChooser();
+// Elapsed time: 10 seconds
+dismissDialog("Re-customize IP"); // r
+// [GUI Memory]: 146 MB (+1086kb) [00:12:23]
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 3, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 3, false, false, false, false, false, true); // D - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectButton(PAResourceEtoH.HACGCCoeFileWidget_BROWSE, "Browse"); // a
+dismissFileChooser();
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+// Elapsed time: 40 seconds
+selectButton(PAResourceEtoH.HACGCCoeFileWidget_BROWSE, "Browse"); // a
+setFileChooser("E:/Snake/image.coe");
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 54 seconds
+selectButton(PAResourceEtoH.HACGCCoeFileWidget_BROWSE, "Browse"); // a
+setFileChooser("E:/Snake/Snake.coe");
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Re-customize IP"); // r
+// Tcl Message: set_property -dict [list CONFIG.Coe_File {E:/Snake/Snake.coe}] [get_ips blk_mem_gen_GameOver] 
+// Tcl Message: INFO: [IP_Flow 19-3484] Absolute path of file 'e:/Snake/Snake.coe' provided. It will be converted relative to IP Instance files '../../../../Snake.coe' 
+// r (cr): Re-customize IP: addNotify
+// bz (r):  Re-customize IP : addNotify
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILESET_UPDATE_IP
+// aI (cr): Generate Output Products: addNotify
+dismissDialog("Re-customize IP"); // bz
+// TclEventType: FILE_SET_CHANGE
+selectButton(PAResourceQtoS.SimpleOutputProductDialog_GENERATE_OUTPUT_PRODUCTS_IMMEDIATELY, "Generate"); // a
+// bz (cr):  Managing Output Products : addNotify
+// Tcl Message: generate_target all [get_files  E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] 
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'blk_mem_gen_GameOver'... INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'blk_mem_gen_GameOver'... 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'blk_mem_gen_GameOver'... INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'blk_mem_gen_GameOver'... INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'blk_mem_gen_GameOver'... 
+// Tcl Message: generate_target: Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1102.215 ; gain = 0.000 
+// Tcl Message: catch { config_ip_cache -export [get_ips -all blk_mem_gen_GameOver] } 
+// Tcl Message: export_ip_user_files -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -no_script -sync -force -quiet 
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run blk_mem_gen_GameOver_synth_1 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs blk_mem_gen_GameOver_synth_1 -jobs 18 
+// Tcl Message: [Fri May 23 22:43:57 2025] Launched blk_mem_gen_GameOver_synth_1... Run output will be captured here: E:/Snake/project_1.runs/blk_mem_gen_GameOver_synth_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: INFO: [Vivado 12-4357] Exporting simulation files for 'blk_mem_gen_GameOver'... please wait for 'blk_mem_gen_GameOver_synth_1' run to finish... 
+// Tcl Message: wait_on_run blk_mem_gen_GameOver_synth_1 
+// Tcl Message: [Fri May 23 22:43:57 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: [Fri May 23 22:44:02 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Fri May 23 22:44:07 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Fri May 23 22:44:12 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Fri May 23 22:44:22 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Fri May 23 22:44:32 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// Tcl Message: [Fri May 23 22:44:37 2025] blk_mem_gen_GameOver_synth_1 finished 
+// Tcl Message: wait_on_run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:40 . Memory (MB): peak = 1102.215 ; gain = 0.000 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// Tcl Message: export_simulation -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -directory E:/Snake/project_1.ip_user_files/sim_scripts -ip_user_files_dir E:/Snake/project_1.ip_user_files -ipstatic_source_dir E:/Snake/project_1.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/Snake/project_1.cache/compile_simlib/modelsim} {questa=E:/Snake/project_1.cache/compile_simlib/questa} {riviera=E:/Snake/project_1.cache/compile_simlib/riviera} {activehdl=E:/Snake/project_1.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet 
+// Elapsed time: 196 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+selectCodeEditor("snake_game_top.vhd", 179, 359, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 106, 374); // bP
+selectCodeEditor("snake_game_top.vhd", 130, 348); // bP
+selectCodeEditor("snake_game_top.vhd", 130, 348, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 74, 343); // bP
+selectCodeEditor("snake_game_top.vhd", 78, 343, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 39, 343); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("snake_game_top.vhd", 53, 342, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 27, 342); // bP
+selectCodeEditor("snake_game_top.vhd", 47, 344, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 24, 344); // bP
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 2); // D
+// Elapsed time: 15 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), vga_inst : vga_simple(Behavioral) (vga_simple.vhd)]", 11, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), vga_inst : vga_simple(Behavioral) (vga_simple.vhd)]", 11, false, false, false, false, false, true); // D - Double Click
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+// RDIResource.RDIViews_PROPERTIES: Source File Properties: close view
+// Elapsed time: 62 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files]", 13); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, GameOver_rom_rgb111.coe]", 14, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, GameOver_rom_rgb111.coe]", 14, false, false, false, false, true, false); // D - Popup Trigger
+selectMenuItem(RDIResourceCommand.RDICommands_DELETE, "Remove File from Project..."); // ak
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// aE (cr): Remove Sources: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Remove Sources"); // aE
+// Tcl Message: export_ip_user_files -of_objects  [get_files E:/Snake/GameOver_rom_rgb111.coe] -no_script -reset -force -quiet 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: remove_files  E:/Snake/GameOver_rom_rgb111.coe 
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, image.coe]", 16, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, image.coe]", 16, false, false, false, false, true, false); // D - Popup Trigger
+selectMenuItem(RDIResourceCommand.RDICommands_DELETE, "Remove File from Project..."); // ak
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// aE (cr): Remove Sources: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Remove Sources"); // aE
+// Tcl Message: export_ip_user_files -of_objects  [get_files e:/Snake/image.coe] -no_script -reset -force -quiet 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: remove_files  e:/Snake/image.coe 
+selectCodeEditor("snake_game_top.vhd", 227, 56); // bP
+selectCodeEditor("snake_game_top.vhd", 225, 56, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 134, 72); // bP
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 14, false); // u
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bz (cr):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f (cr): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// bz (cr):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_1 -jobs 18 
+// Tcl Message: [Fri May 23 22:48:44 2025] Launched synth_1... Run output will be captured here: E:/Snake/project_1.runs/synth_1/runme.log 
+dismissDialog("Starting Design Runs"); // bz
+// TclEventType: RUN_STATUS_CHANGE
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), frame_generator_inst : frame_generator(Behavioral) (frame_generagor.vhd)]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), frame_generator_inst : frame_generator(Behavioral) (frame_generagor.vhd)]", 9, false, false, false, false, false, true); // D - Double Click
+selectCodeEditor("frame_generagor.vhd", 276, 147); // bP
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+selectCodeEditor("frame_generagor.vhd", 268, 147, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("frame_generagor.vhd", 213, 149); // bP
+selectCodeEditor("frame_generagor.vhd", 200, 158); // bP
+// ag (cr): Synthesis Failed: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // ag
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-211] could not evaluate expression: OTHERS in array aggregate without constraining context [E:/Snake/project_1.srcs/sources_1/new/vga_simple.vhd:71]. ]", 2, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\vga_simple.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-285] failed synthesizing module 'vga_simple' [E:/Snake/project_1.srcs/sources_1/new/vga_simple.vhd:25]. ]", 3, true); // ah - Node
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\vga_simple.vhd;-;;-;16;-;line;-;25;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-211] could not evaluate expression: OTHERS in array aggregate without constraining context [E:/Snake/project_1.srcs/sources_1/new/vga_simple.vhd:71]. ]", 2, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\vga_simple.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectCodeEditor("vga_simple.vhd", 240, 200); // bP
+selectCodeEditor("vga_simple.vhd", 240, 200, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("vga_simple.vhd", 240, 200); // bP
+selectCodeEditor("vga_simple.vhd", 240, 200); // bP
+selectCodeEditor("vga_simple.vhd", 239, 200, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("vga_simple.vhd", 225, 203); // bP
+// [GUI Memory]: 154 MB (+683kb) [00:20:44]
+// Elapsed time: 43 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-211] could not evaluate expression: OTHERS in array aggregate without constraining context [E:/Snake/project_1.srcs/sources_1/new/vga_simple.vhd:71]. ]", 2, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-211] could not evaluate expression: OTHERS in array aggregate without constraining context [E:/Snake/project_1.srcs/sources_1/new/vga_simple.vhd:71]. ]", 2, false, false, false, false, true, false); // ah - Popup Trigger
+// Elapsed time: 87 seconds
+selectCodeEditor("vga_simple.vhd", 212, 202); // bP
+typeControlKey((HResource) null, "vga_simple.vhd", 'v'); // bP
+selectCodeEditor("vga_simple.vhd", 209, 294); // bP
+typeControlKey((HResource) null, "vga_simple.vhd", 'v'); // bP
+selectCodeEditor("vga_simple.vhd", 206, 388); // bP
+typeControlKey((HResource) null, "vga_simple.vhd", 'v'); // bP
+selectCodeEditor("vga_simple.vhd", 215, 296); // bP
+selectCodeEditor("vga_simple.vhd", 213, 295); // bP
+selectCodeEditor("vga_simple.vhd", 206, 390); // bP
+selectCodeEditor("vga_simple.vhd", 213, 391); // bP
+selectCodeEditor("vga_simple.vhd", 330, 402); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 14, false); // u
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bz (cr):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f (cr): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// bz (cr):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_1 -jobs 18 
+// Tcl Message: [Fri May 23 22:51:47 2025] Launched synth_1... Run output will be captured here: E:/Snake/project_1.runs/synth_1/runme.log 
+dismissDialog("Starting Design Runs"); // bz
+// TclEventType: RUN_STATUS_CHANGE
+// Elapsed time: 105 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Utility Sources]", 17, true, false, false, false, true, false); // D - Popup Trigger - Node
+// Elapsed time: 75 seconds
+selectCodeEditor("vga_simple.vhd", 186, 111); // bP
+selectCodeEditor("vga_simple.vhd", 74, 277); // bP
+selectCodeEditor("vga_simple.vhd", 74, 277, false, false, false, false, true); // bP - Double Click
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// ag (cr): Synthesis Completed: addNotify
+// Elapsed time: 175 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// Run Command: PAResourceCommand.PACommandNames_RUN_IMPLEMENTATION
+// f (cr): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// bz (cr):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -jobs 18 
+// Tcl Message: [Fri May 23 22:57:50 2025] Launched impl_1... Run output will be captured here: E:/Snake/project_1.runs/impl_1/runme.log 
+dismissDialog("Starting Design Runs"); // bz
+// TclEventType: RUN_STATUS_CHANGE
+// Elapsed time: 18 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'snake_controller_inst/flag_eat_reg/Q' [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 2, true); // ah - Node
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_controller.vhd;-;;-;16;-;line;-;86;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 3, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_controller.vhd;-;;-;16;-;line;-;86;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 3, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_controller.vhd;-;;-;16;-;line;-;86;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 3, false, false, false, false, false, true); // ah - Double Click
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'snake_controller_inst/flag_eat_reg/Q' [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 2, true); // ah - Node
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_controller.vhd;-;;-;16;-;line;-;86;-;;-;16;-;"); // ah
+selectCodeEditor("snake_controller.vhd", 573, 93); // bP
+selectCodeEditor("snake_controller.vhd", 573, 93, false, false, false, false, true); // bP - Double Click
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// ag (cr): Implementation Failed: addNotify
+// Elapsed time: 10 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Implementation Failed"); // ag
+// Elapsed time: 17 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Implementation, Opt Design, DRC, Netlist, Net, [DRC MDRV-1] Multiple Driver Nets: Net framebuffer_inst/frame_ready has multiple drivers: framebuffer_inst/frame_ready_reg/Q, and framebuffer_inst/frame_ready_reg__0/Q.. ]", 9, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Implementation, Opt Design, DRC, Netlist, Net, [DRC MDRV-1] Multiple Driver Nets: Net framebuffer_inst/frame_ready has multiple drivers: framebuffer_inst/frame_ready_reg/Q, and framebuffer_inst/frame_ready_reg__0/Q.. ]", 9, false, false, false, false, false, true); // ah - Double Click
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 3, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'snake_controller_inst/flag_eat_reg/Q' [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 2, true, false, false, false, true, false); // ah - Popup Trigger - Node
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'snake_controller_inst/flag_eat_reg/Q' [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 2, true); // ah - Node
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'snake_controller_inst/flag_eat_reg/Q' [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 2, true); // ah - Node
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'snake_controller_inst/flag_eat_reg/Q' [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 2, true); // ah - Node
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_controller.vhd;-;;-;16;-;line;-;86;-;;-;16;-;"); // ah
+selectCodeEditor("snake_controller.vhd", 503, 90); // bP
+selectCodeEditor("snake_controller.vhd", 503, 90, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_controller.vhd", 503, 90); // bP
+selectCodeEditor("snake_controller.vhd", 539, 87); // bP
+selectCodeEditor("snake_controller.vhd", 59, 80); // bP
+selectCodeEditor("snake_controller.vhd", 59, 80, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_controller.vhd", 59, 80); // bP
+selectCodeEditor("snake_controller.vhd", 51, 84); // bP
+selectCodeEditor("snake_controller.vhd", 51, 84, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 25, 87); // bP
+selectCodeEditor("snake_controller.vhd", 25, 87, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_controller.vhd", 25, 87); // bP
+selectCodeEditor("snake_controller.vhd", 41, 85); // bP
+selectCodeEditor("snake_controller.vhd", 121, 81); // bP
+selectCodeEditor("snake_controller.vhd", 121, 81, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_controller.vhd", 121, 81); // bP
+selectCodeEditor("snake_controller.vhd", 100, 84); // bP
+selectCodeEditor("snake_controller.vhd", 100, 84, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 40, 86); // bP
+selectCodeEditor("snake_controller.vhd", 42, 85, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 10, 85); // bP
+selectCodeEditor("snake_controller.vhd", 59, 83); // bP
+selectCodeEditor("snake_controller.vhd", 59, 83, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_controller.vhd", 59, 83); // bP
+selectCodeEditor("snake_controller.vhd", 55, 83); // bP
+selectCodeEditor("snake_controller.vhd", 91, 79); // bP
+// Elapsed time: 30 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints]", 15); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints]", 15, true); // D - Node
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints]", 15); // D
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'snake_controller_inst/flag_eat_reg/Q' [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 2, true, false, false, false, true, false); // ah - Popup Trigger - Node
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 95 MB. Current time: 5/23/25, 11:00:14 PM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 87 MB. Current time: 5/23/25, 11:30:14 PM CST
+// Elapsed time: 2506 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 12, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 12, false, false, false, false, true, false); // D - Popup Trigger
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 12, false); // D
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 12); // D
+// A (cr): Show IP Hierarchy: addNotify
+dismissDialog("Show IP Hierarchy"); // A
+selectCodeEditor("snake_controller.vhd", 82, 75); // bP
+selectCodeEditor("snake_controller.vhd", 57, 85); // bP
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 2); // D
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 2); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 3, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 3, false); // D
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 86 MB. Current time: 5/24/25, 12:00:14 AM CST
+// Elapsed time: 1632 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 3, false, false, false, false, true, false); // D - Popup Trigger
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 3, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Utility Sources]", 7, true, false, false, false, true, false); // D - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Utility Sources]", 7, true, false, false, false, true, false); // D - Popup Trigger - Node
+// Elapsed time: 355 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'snake_controller_inst/flag_eat_reg/Q' [E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd:86]. ]", 2, true); // ah - Node
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_controller.vhd;-;;-;16;-;line;-;86;-;;-;16;-;"); // ah
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 493 seconds
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // h
+selectCodeEditor("snake_controller.vhd", 44, 83); // bP
+selectCodeEditor("snake_controller.vhd", 44, 83, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 14, 83); // bP
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 14, false); // u
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bz (cr):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f (cr): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// bz (cr):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_1 -jobs 18 
+// Tcl Message: [Sat May 24 00:23:18 2025] Launched synth_1... Run output will be captured here: E:/Snake/project_1.runs/synth_1/runme.log 
+dismissDialog("Starting Design Runs"); // bz
+// TclEventType: RUN_STATUS_CHANGE
+selectCodeEditor("snake_controller.vhd", 113, 118, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 109, 97); // bP
+selectCodeEditor("snake_controller.vhd", 154, 94); // bP
+selectCodeEditor("snake_controller.vhd", 154, 94, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 100, 104); // bP
+selectCodeEditor("snake_controller.vhd", 100, 104, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 90, 106); // bP
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+selectCodeEditor("snake_controller.vhd", 180, 106, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 131, 105); // bP
+selectCodeEditor("snake_controller.vhd", 131, 105, false, false, false, true, false); // bP - Popup Trigger
+// ag (cr): Synthesis Failed: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // ag
+selectCodeEditor("snake_controller.vhd", 157, 102); // bP
+selectCodeEditor("snake_controller.vhd", 157, 102, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_controller.vhd", 156, 102); // bP
+selectCodeEditor("snake_controller.vhd", 157, 102, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 110, 99); // bP
+selectCodeEditor("snake_controller.vhd", 135, 96, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 120, 98); // bP
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Vivado 12-172] File or Directory 'e:/Snake/Snake.coe' does not exist. ]", 2, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Vivado 12-172] File or Directory 'e:/Snake/Snake.coe' does not exist. ]", 2, false, false, false, false, false, true); // ah - Double Click
+selectTab((HResource) null, (HResource) null, "Log", 2); // aK
+selectTab((HResource) null, (HResource) null, "Messages", 1); // aK
+// Elapsed time: 307 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, synth_1, [Vivado 12-172] File or Directory 'e:/Snake/Snake.coe' does not exist. ]", 2, false, false, false, false, true, false); // ah - Popup Trigger
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 85 MB. Current time: 5/24/25, 12:30:15 AM CST
+// Elapsed time: 1026 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ak
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cr):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// Tcl Message: launch_simulation 
+// Tcl Message: Command: launch_simulation  
+// Tcl Message: INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator... INFO: [Vivado 12-5682] Launching behavioral simulation in 'E:/Snake/project_1.sim/sim_1/behav/xsim' INFO: [Vivado 12-4795] Using compiled simulation libraries for IPs INFO: [SIM-utils-51] Simulation object is 'sim_1' INFO: [USF-XSim-7] Finding pre-compiled libraries... INFO: [USF-XSim-11] File 'C:/Xilinx/Vivado/2020.2/data/xsim/xsim.ini' copied to run dir:'E:/Snake/project_1.sim/sim_1/behav/xsim' INFO: [SIM-utils-54] Inspecting design source files for 'snake_game_top' in fileset 'sim_1'... INFO: [SIM-utils-43] Exported 'E:/Snake/project_1.sim/sim_1/behav/xsim/blk_mem_gen_GameOver.mif' 
+// Tcl Message: INFO: [USF-XSim-97] Finding global include files... INFO: [USF-XSim-98] Fetching design files from 'sim_1'... INFO: [USF-XSim-2] XSim::Compile design INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'E:/Snake/project_1.sim/sim_1/behav/xsim' 
+// Tcl Message: "xvhdl --incr --relax -prj snake_game_top_vhdl.prj" 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '3' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'E:/Snake/project_1.sim/sim_1/behav/xsim' 
+// Tcl Message: "xelab -wto 08696370ced04502b18347e0e1035ed3 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot snake_game_top_behav xil_defaultlib.snake_game_top -log elaborate.log" 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds INFO: [USF-XSim-99] Step results log file:'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:05 . Memory (MB): peak = 1102.215 ; gain = 0.000 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 14 seconds
+// Elapsed time: 14 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+// a (cr): Critical Messages: addNotify
+dismissDialog("Critical Messages"); // a
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:78]. ]", 9, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;78;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 255, 202); // bP
+selectCodeEditor("snake_game_top.vhd", 255, 202, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 255, 202); // bP
+selectCodeEditor("snake_game_top.vhd", 255, 202); // bP
+selectCodeEditor("snake_game_top.vhd", 255, 202); // bP
+selectCodeEditor("snake_game_top.vhd", 255, 202, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 255, 202); // bP
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:78]. ]", 10, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;78;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:78]. ]", 10, false, false, false, false, false, true); // ah - Double Click
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:78]. ]", 10, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:78]. ]", 10, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;78;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 285, 196); // bP
+selectCodeEditor("snake_game_top.vhd", 285, 196, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 285, 196); // bP
+selectCodeEditor("snake_game_top.vhd", 285, 196); // bP
+selectCodeEditor("snake_game_top.vhd", 285, 196); // bP
+selectCodeEditor("snake_game_top.vhd", 285, 196); // bP
+selectCodeEditor("snake_game_top.vhd", 285, 196, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 285, 196); // bP
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 85 MB. Current time: 5/24/25, 1:00:15 AM CST
+// WARNING: HEventQueue.dispatchEvent() is taking  1395 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 85 MB. Current time: 5/24/25, 1:30:17 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 84 MB. Current time: 5/24/25, 2:00:17 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 84 MB. Current time: 5/24/25, 2:30:17 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 84 MB. Current time: 5/24/25, 3:00:18 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 84 MB. Current time: 5/24/25, 3:30:18 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,104 MB. GUI used memory: 84 MB. Current time: 5/24/25, 4:00:18 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 4:30:19 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 5:00:19 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 5:30:19 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 6:00:20 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 6:30:20 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 7:00:20 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 7:30:21 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 8:00:21 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 8:30:21 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 9:00:22 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 9:30:22 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 10:00:22 AM CST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,106 MB. GUI used memory: 84 MB. Current time: 5/24/25, 10:30:23 AM CST
+// Elapsed time: 35741 seconds
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // h
+// Elapsed time: 11 seconds
+selectCodeEditor("snake_game_top.vhd", 430, 134); // bP
+selectCodeEditor("snake_game_top.vhd", 381, 138, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 250, 138); // bP
+selectCodeEditor("snake_game_top.vhd", 256, 112); // bP
+selectCodeEditor("snake_game_top.vhd", 233, 137); // bP
+selectCodeEditor("snake_game_top.vhd", 257, 121); // bP
+selectCodeEditor("snake_game_top.vhd", 258, 134); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 62 seconds
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // h
+selectCodeEditor("snake_game_top.vhd", 302, 161, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 90, 99); // bP
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Syntax Error Files]", 1); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Syntax Error Files, snake_controller.vhd]", 2, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Syntax Error Files, snake_controller.vhd]", 2, false, false, false, false, false, true); // D - Double Click
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // h
+selectCodeEditor("snake_controller.vhd", 186, 16); // bP
+selectCodeEditor("snake_controller.vhd", 186, 16, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 125, 30); // bP
+// Elapsed time: 15 seconds
+selectCodeEditor("snake_controller.vhd", 50, 179); // bP
+selectCodeEditor("snake_controller.vhd", 50, 179, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_controller.vhd", 94, 187); // bP
+// Elapsed time: 128 seconds
+selectCodeEditor("snake_controller.vhd", 28, 289); // bP
+selectCodeEditor("snake_controller.vhd", 28, 289, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_controller.vhd", 28, 289); // bP
+selectCodeEditor("snake_controller.vhd", 446, 201); // bP
+selectCodeEditor("snake_controller.vhd", 200, 211); // bP
+// Elapsed time: 26 seconds
+selectCodeEditor("snake_controller.vhd", 183, 218); // bP
+selectCodeEditor("snake_controller.vhd", 212, 215); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("snake_controller.vhd", 343, 144, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 306, 138); // bP
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false, false, false, false, true, false); // D - Popup Trigger
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false); // D
+selectCodeEditor("snake_controller.vhd", 228, 108); // bP
+selectCodeEditor("snake_controller.vhd", 196, 128, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_controller.vhd", 115, 136); // bP
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ak
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cr):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// Tcl Message: launch_simulation 
+// Tcl Message: Command: launch_simulation  
+// Tcl Message: INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator... INFO: [Vivado 12-5682] Launching behavioral simulation in 'E:/Snake/project_1.sim/sim_1/behav/xsim' INFO: [Vivado 12-4795] Using compiled simulation libraries for IPs INFO: [SIM-utils-51] Simulation object is 'sim_1' INFO: [USF-XSim-7] Finding pre-compiled libraries... INFO: [USF-XSim-11] File 'C:/Xilinx/Vivado/2020.2/data/xsim/xsim.ini' copied to run dir:'E:/Snake/project_1.sim/sim_1/behav/xsim' INFO: [SIM-utils-54] Inspecting design source files for 'snake_game_top' in fileset 'sim_1'... INFO: [SIM-utils-43] Exported 'E:/Snake/project_1.sim/sim_1/behav/xsim/blk_mem_gen_GameOver.mif' 
+// Tcl Message: INFO: [USF-XSim-97] Finding global include files... INFO: [USF-XSim-98] Fetching design files from 'sim_1'... INFO: [USF-XSim-2] XSim::Compile design INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'E:/Snake/project_1.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj snake_game_top_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "E:/Snake/project_1.srcs/sources_1/new/food_generator.vhd" into library xil_defaultlib INFO: [VRFC 10-3107] analyzing entity 'food_generator' INFO: [VRFC 10-163] Analyzing VHDL file "E:/Snake/project_1.srcs/sources_1/new/snake_controller.vhd" into library xil_defaultlib INFO: [VRFC 10-3107] analyzing entity 'snake_controller' INFO: [VRFC 10-163] Analyzing VHDL file "E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd" into library xil_defaultlib INFO: [VRFC 10-3107] analyzing entity 'snake_game_top' 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '2' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'E:/Snake/project_1.sim/sim_1/behav/xsim' 
+// Tcl Message: "xelab -wto 08696370ced04502b18347e0e1035ed3 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot snake_game_top_behav xil_defaultlib.snake_game_top -log elaborate.log" Vivado Simulator 2020.2 Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved. Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 08696370ced04502b18347e0e1035ed3 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot snake_game_top_behav xil_defaultlib.snake_game_top -log elaborate.log  Using 2 slave threads. 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 5 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+// a (cr): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f
+dismissDialog("Critical Messages"); // a
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:79]. ]", 10, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:79]. ]", 10, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;79;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 245, 168); // bP
+selectCodeEditor("snake_game_top.vhd", 245, 168, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 145, 162); // bP
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:79]. ]", 11, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;79;-;;-;16;-;"); // ah
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, false, false, false, false, false, true); // D - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+dismissDialog("Re-customize IP"); // r
+selectCodeEditor("snake_game_top.vhd", 161, 147); // bP
+selectCodeEditor("snake_game_top.vhd", 161, 147, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 80, 215); // bP
+selectCodeEditor("snake_game_top.vhd", 80, 215, false, false, false, false, true); // bP - Double Click
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10); // D
+// A (cr): Show IP Hierarchy: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Show IP Hierarchy"); // A
+selectCodeEditor("snake_game_top.vhd", 256, 223); // bP
+selectCodeEditor("snake_game_top.vhd", 256, 223, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 217, 220); // bP
+selectCodeEditor("snake_game_top.vhd", 249, 220); // bP
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd)]", 11, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd)]", 11, true, false, false, false, false, true); // D - Double Click - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd), U0 : blk_mem_gen_v8_4_4(xilinx)]", 12, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd), U0 : blk_mem_gen_v8_4_4(xilinx)]", 12, false, false, false, false, false, true); // D - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd)]", 11, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd)]", 11, true, false, false, false, false, true); // D - Double Click - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd)]", 11, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd)]", 11, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd)]", 11, true); // D - Node
+selectCodeEditor("blk_mem_gen_GameOver.vhd", 299, 231); // G
+selectCodeEditor("blk_mem_gen_GameOver.vhd", 299, 231, false, false, false, true, false); // G - Popup Trigger
+selectCodeEditor("blk_mem_gen_GameOver.vhd", 244, 237); // G
+selectCodeEditor("blk_mem_gen_GameOver.vhd", 324, 241); // G
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_controller.vhd", 4); // m
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "vga_simple.vhd", 3); // m
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:79]. ]", 10, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;79;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 314, 221); // bP
+selectCodeEditor("snake_game_top.vhd", 314, 221, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 259, 226); // bP
+selectCodeEditor("snake_game_top.vhd", 260, 226, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 246, 226); // bP
+selectCodeEditor("snake_game_top.vhd", 246, 226, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 220, 227); // bP
+selectCodeEditor("snake_game_top.vhd", 262, 227, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 234, 227); // bP
+selectCodeEditor("snake_game_top.vhd", 307, 206, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 239, 210); // bP
+selectCodeEditor("snake_game_top.vhd", 242, 227, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 188, 226); // bP
+selectCodeEditor("snake_game_top.vhd", 230, 222); // bP
+// Elapsed time: 313 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+dismissDialog("Re-customize IP"); // r
+// Elapsed time: 27 seconds
+selectCodeEditor("snake_game_top.vhd", 335, 224); // bP
+// HMemoryUtils.trashcanNow. Engine heap size: 1,121 MB. GUI used memory: 92 MB. Current time: 5/24/25, 11:00:23 AM CST
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 586 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+dismissDialog("Re-customize IP"); // r
+selectCodeEditor("snake_game_top.vhd", 306, 135); // bP
+selectCodeEditor("snake_game_top.vhd", 286, 133, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 205, 131); // bP
+selectCodeEditor("snake_game_top.vhd", 191, 145); // bP
+selectCodeEditor("snake_game_top.vhd", 191, 145, false, false, false, false, true); // bP - Double Click
+typeControlKey((HResource) null, "snake_game_top.vhd", 'c'); // bP
+typeControlKey((HResource) null, "snake_game_top.vhd", 'c'); // bP
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true, false, false, false, true, false); // D - Popup Trigger - Node
+selectMenu(PAResourceQtoS.SrcMenu_IP_DOCUMENTATION, "IP Documentation"); // ah
+selectMenu(PAResourceQtoS.SrcMenu_IP_DOCUMENTATION, "IP Documentation"); // ah
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // ah
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // ah
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // ah
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // ah
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+setText("Component Name", "blk_mem_gen_GameOver"); // B
+// Elapsed time: 10 seconds
+dismissDialog("Re-customize IP"); // r
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectButton(PAResourceEtoH.HACGCCoeFileWidget_BROWSE, "Browse"); // a
+setFileChooser("E:/Snake/GameOver_rom_binary.coe");
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Re-customize IP"); // r
+// Tcl Message: set_property -dict [list CONFIG.Coe_File {E:/Snake/GameOver_rom_binary.coe}] [get_ips blk_mem_gen_GameOver] 
+// Tcl Message: INFO: [IP_Flow 19-3484] Absolute path of file 'e:/Snake/GameOver_rom_binary.coe' provided. It will be converted relative to IP Instance files '../../../../GameOver_rom_binary.coe' 
+// r (cr): Re-customize IP: addNotify
+// bz (r):  Re-customize IP : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 1,125 MB. GUI used memory: 102 MB. Current time: 5/24/25, 11:04:33 AM CST
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILESET_UPDATE_IP
+// aI (cr): Generate Output Products: addNotify
+dismissDialog("Re-customize IP"); // bz
+// TclEventType: FILE_SET_CHANGE
+selectComboBox(PAResourceItoN.NumJobsChooser_NUMBER_OF_JOBS, "20", 19); // e
+selectButton(PAResourceQtoS.SimpleOutputProductDialog_GENERATE_OUTPUT_PRODUCTS_IMMEDIATELY, "Generate"); // a
+// bz (cr):  Managing Output Products : addNotify
+// Tcl Message: generate_target all [get_files  E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] 
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'blk_mem_gen_GameOver'... INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'blk_mem_gen_GameOver'... 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'blk_mem_gen_GameOver'... INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'blk_mem_gen_GameOver'... INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'blk_mem_gen_GameOver'... 
+// Tcl Message: generate_target: Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 1129.027 ; gain = 0.000 
+// Tcl Message: catch { config_ip_cache -export [get_ips -all blk_mem_gen_GameOver] } 
+// Tcl Message: export_ip_user_files -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -no_script -sync -force -quiet 
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run blk_mem_gen_GameOver_synth_1 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs blk_mem_gen_GameOver_synth_1 -jobs 20 
+// Tcl Message: [Sat May 24 11:04:55 2025] Launched blk_mem_gen_GameOver_synth_1... Run output will be captured here: E:/Snake/project_1.runs/blk_mem_gen_GameOver_synth_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: INFO: [Vivado 12-4357] Exporting simulation files for 'blk_mem_gen_GameOver'... please wait for 'blk_mem_gen_GameOver_synth_1' run to finish... 
+// Tcl Message: wait_on_run blk_mem_gen_GameOver_synth_1 
+// Tcl Message: [Sat May 24 11:04:55 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: [Sat May 24 11:05:00 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Sat May 24 11:05:05 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Sat May 24 11:05:10 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Sat May 24 11:05:20 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Sat May 24 11:05:30 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// Tcl Message: [Sat May 24 11:05:40 2025] Waiting for blk_mem_gen_GameOver_synth_1 to finish... 
+// Tcl Message: [Sat May 24 11:05:40 2025] blk_mem_gen_GameOver_synth_1 finished 
+// Tcl Message: wait_on_run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:45 . Memory (MB): peak = 1129.027 ; gain = 0.000 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// Tcl Message: export_simulation -of_objects [get_files E:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.xci] -directory E:/Snake/project_1.ip_user_files/sim_scripts -ip_user_files_dir E:/Snake/project_1.ip_user_files -ipstatic_source_dir E:/Snake/project_1.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/Snake/project_1.cache/compile_simlib/modelsim} {questa=E:/Snake/project_1.cache/compile_simlib/questa} {riviera=E:/Snake/project_1.cache/compile_simlib/riviera} {activehdl=E:/Snake/project_1.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet 
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// Elapsed time: 81 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false, false, false, false, false, true); // D - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false, false, false, false, false, true); // D - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false, false, false, false, true, false); // D - Popup Trigger
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : xil_defaultlib.blk_mem_gen_menu]", 9, false); // D
+selectCodeEditor("snake_game_top.vhd", 175, 204); // bP
+selectCodeEditor("snake_game_top.vhd", 175, 204, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 210, 199); // bP
+selectCodeEditor("snake_game_top.vhd", 159, 47); // bP
+selectCodeEditor("snake_game_top.vhd", 159, 47, false, false, false, false, true); // bP - Double Click
+typeControlKey((HResource) null, "snake_game_top.vhd", 'c'); // bP
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager, IP Catalog]", 4, false); // u
+// Run Command: PAResourceCommand.PACommandNames_CORE_GEN
+// [GUI Memory]: 161 MB (+128kb) [12:37:19]
+setText("PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE_SEARCH_FIELD", "rom"); // OverlayTextField
+applyEnter(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, (String) null); // L
+// PAPropertyPanels.initPanels (C:/Xilinx/Vivado/2020.2/data) elapsed time: 0.2s
+// [GUI Memory]: 170 MB (+954kb) [12:37:20]
+// [Engine Memory]: 1,142 MB (+5135kb) [12:37:20]
+selectTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "Block Memory Generator ; AXI4 ; Production ; Included ; xilinx.com:ip:blk_mem_gen:8.4", 5, "Block Memory Generator", 0, false); // L
+expandTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "Block Memory Generator ; AXI4 ; Production ; Included ; xilinx.com:ip:blk_mem_gen:8.4", 5); // L
+selectTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "Block Memory Generator ; AXI4 ; Production ; Included ; xilinx.com:ip:blk_mem_gen:8.4", 5, "Block Memory Generator", 0, false, false, false, false, false, true); // L - Double Click
+// Run Command: PAResourceCommand.PACommandNames_CUSTOMIZE_CORE
+// r (cr): Customize IP: addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 1,169 MB. GUI used memory: 107 MB. Current time: 5/24/25, 11:06:18 AM CST
+selectComboBox("Memory Type (Memory_Type)", "Single Port ROM", 3); // E
+setText("Component Name", "blk_mem_gen_menu"); // B
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectCheckBox((HResource) null, "Primitives Output Register", false); // g: FALSE
+selectComboBox("Enable Port Type (Enable_A)", "Always Enabled", 0); // E
+setText("Defines the PortA Write Width(DINA)", "1"); // B
+setText("Write Depth", "700000"); // B
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectCheckBox((HResource) null, "Load Init File", true); // g: TRUE
+selectButton(PAResourceEtoH.HACGCCoeFileWidget_BROWSE, "Browse"); // a
+setFileChooser("E:/Snake/Start_rom_binary.coe");
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// TclEventType: CREATE_IP_CORE
+dismissDialog("Customize IP"); // r
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name blk_mem_gen_menu 
+// bz (cr):  Customize IP : addNotify
+// Tcl Message: set_property -dict [list CONFIG.Component_Name {blk_mem_gen_menu} CONFIG.Memory_Type {Single_Port_ROM} CONFIG.Write_Width_A {1} CONFIG.Write_Depth_A {700000} CONFIG.Read_Width_A {1} CONFIG.Enable_A {Always_Enabled} CONFIG.Write_Width_B {1} CONFIG.Read_Width_B {1} CONFIG.Register_PortA_Output_of_Memory_Primitives {false} CONFIG.Load_Init_File {true} CONFIG.Coe_File {E:/Snake/Start_rom_binary.coe} CONFIG.Port_A_Write_Rate {0}] [get_ips blk_mem_gen_menu] 
+// Tcl Message: INFO: [IP_Flow 19-3484] Absolute path of file 'e:/Snake/Start_rom_binary.coe' provided. It will be converted relative to IP Instance files '../../../../Start_rom_binary.coe' 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILESET_UPDATE_IP
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: generate_target {instantiation_template} [get_files e:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci] 
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'blk_mem_gen_menu'... 
+// aI (cr): Generate Output Products: addNotify
+dismissDialog("Customize IP"); // bz
+// TclEventType: FILE_SET_CHANGE
+selectButton(PAResourceQtoS.SimpleOutputProductDialog_GENERATE_OUTPUT_PRODUCTS_IMMEDIATELY, "Generate"); // a
+// bz (cr):  Managing Output Products : addNotify
+// Tcl Message: generate_target all [get_files  e:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci] 
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'blk_mem_gen_menu'... 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'blk_mem_gen_menu'... INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'blk_mem_gen_menu'... INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'blk_mem_gen_menu'... 
+// Tcl Message: generate_target: Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 1149.594 ; gain = 0.000 
+// Tcl Message: catch { config_ip_cache -export [get_ips -all blk_mem_gen_menu] } 
+// Tcl Message: export_ip_user_files -of_objects [get_files e:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci] -no_script -sync -force -quiet 
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// Tcl Message: create_ip_run [get_files -of_objects [get_fileset sources_1] e:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci] 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs blk_mem_gen_menu_synth_1 -jobs 20 
+// Tcl Message: [Sat May 24 11:07:18 2025] Launched blk_mem_gen_menu_synth_1... Run output will be captured here: E:/Snake/project_1.runs/blk_mem_gen_menu_synth_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: INFO: [Vivado 12-4357] Exporting simulation files for 'blk_mem_gen_menu'... please wait for 'blk_mem_gen_menu_synth_1' run to finish... 
+// Tcl Message: wait_on_run blk_mem_gen_menu_synth_1 
+// Tcl Message: [Sat May 24 11:07:18 2025] Waiting for blk_mem_gen_menu_synth_1 to finish... 
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: [Sat May 24 11:07:23 2025] Waiting for blk_mem_gen_menu_synth_1 to finish... 
+// Tcl Message: [Sat May 24 11:07:28 2025] Waiting for blk_mem_gen_menu_synth_1 to finish... 
+// Tcl Message: [Sat May 24 11:07:33 2025] Waiting for blk_mem_gen_menu_synth_1 to finish... 
+// Tcl Message: [Sat May 24 11:07:43 2025] Waiting for blk_mem_gen_menu_synth_1 to finish... 
+// Tcl Message: [Sat May 24 11:07:53 2025] Waiting for blk_mem_gen_menu_synth_1 to finish... 
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// Tcl Message: [Sat May 24 11:07:58 2025] blk_mem_gen_menu_synth_1 finished 
+// Tcl Message: wait_on_run: Time (s): cpu = 00:00:01 ; elapsed = 00:00:40 . Memory (MB): peak = 1149.594 ; gain = 0.000 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: export_simulation -of_objects [get_files e:/Snake/project_1.srcs/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.xci] -directory E:/Snake/project_1.ip_user_files/sim_scripts -ip_user_files_dir E:/Snake/project_1.ip_user_files -ipstatic_source_dir E:/Snake/project_1.ip_user_files/ipstatic -lib_map_path [list {modelsim=E:/Snake/project_1.cache/compile_simlib/modelsim} {questa=E:/Snake/project_1.cache/compile_simlib/questa} {riviera=E:/Snake/project_1.cache/compile_simlib/riviera} {activehdl=E:/Snake/project_1.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// Elapsed time: 65 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 9); // D
+// A (cr): Show IP Hierarchy: addNotify
+selectCheckBox(RDIResource.MessageWithOptionDialog_DONT_SHOW_THIS_DIALOG_AGAIN, "Don't show this dialog again", true); // g: TRUE
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Show IP Hierarchy"); // A
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 9, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 9, true); // D - Node
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci), blk_mem_gen_menu(blk_mem_gen_menu_arch) (blk_mem_gen_menu.vhd)]", 10); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 9, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 2, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 2, true, false, false, false, false, true); // D - Double Click - Node
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // v
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_game_top.vhd", 1); // m
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_game_top.vhd", 1); // m
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_game_top.vhd", 1); // m
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_game_top.vhd", 1); // m
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_game_top.vhd", 1); // m
+closeView(PAResourceOtoP.PAViews_IP_CATALOG, "IP Catalog"); // W
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ak
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cr):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// Tcl Message: launch_simulation 
+// Tcl Message: Command: launch_simulation  
+// Tcl Message: INFO: [USF-XSim-97] Finding global include files... INFO: [USF-XSim-98] Fetching design files from 'sim_1'... INFO: [USF-XSim-2] XSim::Compile design INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'E:/Snake/project_1.sim/sim_1/behav/xsim' 
+// Tcl Message: "xvhdl --incr --relax -prj snake_game_top_vhdl.prj" 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '3' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'E:/Snake/project_1.sim/sim_1/behav/xsim' 
+// Tcl Message: "xelab -wto 08696370ced04502b18347e0e1035ed3 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot snake_game_top_behav xil_defaultlib.snake_game_top -log elaborate.log" Vivado Simulator 2020.2 Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved. Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 08696370ced04502b18347e0e1035ed3 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot snake_game_top_behav xil_defaultlib.snake_game_top -log elaborate.log  Using 2 slave threads. 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: Starting static elaboration ERROR: [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71] ERROR: [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71] ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit snake_game_top in library work failed. 
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds INFO: [USF-XSim-99] Step results log file:'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: launch_simulation: Time (s): cpu = 00:00:00 ; elapsed = 00:00:05 . Memory (MB): peak = 1149.594 ; gain = 0.000 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 9 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+// a (cr): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f
+dismissDialog("Critical Messages"); // a
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 7, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 274, 207); // bP
+selectCodeEditor("snake_game_top.vhd", 274, 207, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 247, 203); // bP
+selectCodeEditor("snake_game_top.vhd", 247, 203, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 230, 202); // bP
+// Elapsed time: 15 seconds
+selectCodeEditor("snake_game_top.vhd", 234, 190); // bP
+selectCodeEditor("snake_game_top.vhd", 234, 190, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 224, 192); // bP
+selectCodeEditor("snake_game_top.vhd", 252, 197, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 237, 195); // bP
+selectCodeEditor("snake_game_top.vhd", 282, 201, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 257, 196); // bP
+selectCodeEditor("snake_game_top.vhd", 257, 196, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 250, 198); // bP
+selectCodeEditor("snake_game_top.vhd", 250, 198, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 250, 198); // bP
+selectCodeEditor("snake_game_top.vhd", 271, 199, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 244, 200); // bP
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 7, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+// Elapsed time: 110 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 7, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 7, false, false, false, false, true, false); // ah - Popup Trigger
+// Elapsed time: 17 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false, false, false, false, true, false); // ah - Popup Trigger
+// Elapsed time: 385 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 2); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 10, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+dismissDialog("Re-customize IP"); // r
+// [GUI Memory]: 180 MB (+816kb) [12:49:04]
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 9, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 9, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+dismissDialog("Re-customize IP"); // r
+// Elapsed time: 10 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 12, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 12, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+dismissDialog("Re-customize IP"); // r
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 12); // D
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 12); // D
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 12); // D
+dismissDialog("Re-customize IP"); // r
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd)]", 13, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci), blk_mem_gen_GameOver(blk_mem_gen_GameOver_arch) (blk_mem_gen_GameOver.vhd)]", 13, true, false, false, false, false, true); // D - Double Click - Node
+selectCodeEditor("blk_mem_gen_GameOver.vhd", 364, 202); // G
+selectCodeEditor("blk_mem_gen_GameOver.vhd", 298, 172); // G
+typeControlKey((HResource) null, "blk_mem_gen_GameOver.vhd", 'c'); // G
+selectCodeEditor("blk_mem_gen_GameOver.vhd", 298, 172); // G
+// Elapsed time: 121 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [XSIM 43-3321] Static elaboration of top level VHDL design unit snake_game_top in library work failed.. ]", 9, false, false, false, false, true, false); // ah - Popup Trigger
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [XSIM 43-3321] Static elaboration of top level VHDL design unit snake_game_top in library work failed.. ]", 9, false, false, false, false, true, false); // ah - Popup Trigger
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+// [GUI Memory]: 191 MB (+2810kb) [12:51:55]
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // ac
+selectButton(PAResourceTtoZ.TaskBanner_CLOSE, (String) null); // k
+closeTask("Project Manager", "Project Manager", "DesignTask.PROJECT_MANAGER");
+// Run Command: PAResourceCommand.PACommandNames_CLOSE_PROJECT
+// A (cr): Close Project: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// bz (cr):  Close Project : addNotify
+// TclEventType: PROJECT_CLOSE
+dismissDialog("Close Project"); // A
+// HMemoryUtils.trashcanNow. Engine heap size: 1,171 MB. GUI used memory: 157 MB. Current time: 5/24/25, 11:20:57 AM CST
+// Tcl Message: close_project 
+dismissDialog("Close Project"); // bz
+selectList(PAResourceQtoS.SyntheticaGettingStartedView_RECENT_PROJECTS, "E:/Snake/project_1.xpr", 0); // r
+// Opening Vivado Project: E:/Snake/project_1.xpr. Version: Vivado v2020.2 
+// bz (cr):  Open Project : addNotify
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project E:/Snake/project_1.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'. 
+// Project name: project_1; location: E:/Snake; part: xc7a100tcsg324-1
+dismissDialog("Open Project"); // bz
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // ac
+// a (cr): Critical Messages: addNotify
+dismissMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // ac
+// Tcl Message: update_compile_order -fileset sources_1 
+dismissMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // ac
+selectList(PAResourceAtoD.CmdMsgDialog_MESSAGES, "[Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.", 0); // b
+selectList(PAResourceAtoD.CmdMsgDialog_MESSAGES, "[Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.", 0, false, false, false, false, true); // b - Double Click
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Critical Messages"); // a
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. ]", 2, true); // ah - Node
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. ]", 2, true); // ah - Node
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. ]", 2, true); // ah - Node
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. ]", 2, true, false, false, false, false, true); // ah - Double Click - Node
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd)]", 2); // D
+floatFrame(RDIResource.RDIViews_PROPERTIES, "Properties"); // az
+// RDIResource.RDIViews_PROPERTIES: Properties: float view
+// RDIResource.RDIViews_PROPERTIES: Properties: close view
+closeFrame(RDIResource.RDIViews_PROPERTIES, "Properties"); // az
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. ]", 2, true); // ah - Node
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. ]", 2, true, false, false, false, false, true); // ah - Double Click - Node
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. , [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/image_rom.vhd'.. ]", 3, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. , [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/image_rom.vhd'.. ]", 3, false, false, false, false, false, true); // ah - Double Click
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. , [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/image_rom.vhd'.. ]", 3, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. , [Project 1-19] Could not find the file 'E:/Snake/Snake.coe'.. ]", 4, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. , [Project 1-19] Could not find the file 'E:/Snake/Snake.coe'.. ]", 4, false, false, false, false, false, true); // ah - Double Click
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. , [Project 1-19] Could not find the file 'E:/Snake/Snake.coe'.. ]", 4, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Vivado Commands, General Messages, [Project 1-19] Could not find the file 'E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd'.. , [Project 1-19] Could not find the file 'E:/Snake/Snake.coe'.. ]", 4, false, false, false, false, false, true); // ah - Double Click
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files]", 13); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, Snake.coe]", 15, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, Snake.coe]", 15, false, false, false, false, true, false); // D - Popup Trigger
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // ah
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // ah
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // ah
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // ah
+selectMenuItem(RDIResourceCommand.RDICommands_DELETE, "Remove File from Project..."); // ak
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// aE (cr): Remove Sources: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Remove Sources"); // aE
+// Tcl Message: export_ip_user_files -of_objects  [get_files E:/Snake/Snake.coe] -no_script -reset -force -quiet 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: remove_files  E:/Snake/Snake.coe 
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints]", 16); // D
+// Elapsed time: 76 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files]", 1); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files, framebuffer_rgb444.vhd]", 2, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files, framebuffer_rgb444.vhd]", 2, false, false, false, false, true, false); // D - Popup Trigger
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files, framebuffer_rgb444.vhd]", 2, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files, framebuffer_rgb444.vhd]", 2, false, false, false, false, true, false); // D - Popup Trigger
+selectMenuItem(RDIResourceCommand.RDICommands_DELETE, "Remove File from Project..."); // ak
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// aE (cr): Remove Sources: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Remove Sources"); // aE
+// Tcl Message: export_ip_user_files -of_objects  [get_files E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd] -no_script -reset -force -quiet 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: remove_files  E:/Snake/project_1.srcs/sources_1/new/framebuffer_rgb444.vhd 
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files, image_rom.vhd]", 3, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files, image_rom.vhd]", 3, false, false, false, false, true, false); // D - Popup Trigger
+selectMenuItem(RDIResourceCommand.RDICommands_DELETE, "Remove File from Project..."); // ak
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// aE (cr): Remove Sources: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Remove Sources"); // aE
+// Tcl Message: export_ip_user_files -of_objects  [get_files E:/Snake/project_1.srcs/sources_1/new/image_rom.vhd] -no_script -reset -force -quiet 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: remove_files  E:/Snake/project_1.srcs/sources_1/new/image_rom.vhd 
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files]", 1); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints, constrs_1]", 17, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints]", 16, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints]", 15, true, false, false, false, true, false); // D - Popup Trigger - Node
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // ah
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // ah
+selectMenuItem(PAResourceCommand.PACommandNames_ADD_SOURCES, "Add Sources..."); // ak
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c (cr): Add Sources: addNotify
+selectButton("NEXT", "Next >"); // JButton
+selectButton(PAResourceAtoD.ConstraintsChooserPanel_ADD_FILES, "Add Files"); // a
+setFileChooser("E:/Snake/Nexys-4-DDR-Master.xdc");
+selectButton("FINISH", "Finish"); // JButton
+// 'g' command handler elapsed time: 6 seconds
+dismissDialog("Add Sources"); // c
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files -fileset constrs_1 -norecurse E:/Snake/Nexys-4-DDR-Master.xdc 
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints, constrs_1]", 16); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints, constrs_1, Nexys-4-DDR-Master.xdc]", 17, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints, constrs_1, Nexys-4-DDR-Master.xdc]", 17, false, false, false, false, false, true); // D - Double Click
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Nexys-4-DDR-Master.xdc", 1); // m
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+// Elapsed time: 17 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ak
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cr):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// Tcl Message: launch_simulation 
+// Tcl Message: Command: launch_simulation  
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj snake_game_top_vhdl.prj" 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'E:/Snake/project_1.sim/sim_1/behav/xsim' 
+// Tcl Message: "xelab -wto 08696370ced04502b18347e0e1035ed3 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot snake_game_top_behav xil_defaultlib.snake_game_top -log elaborate.log" Vivado Simulator 2020.2 Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved. Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 08696370ced04502b18347e0e1035ed3 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot snake_game_top_behav xil_defaultlib.snake_game_top -log elaborate.log  Using 2 slave threads. 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: Starting static elaboration ERROR: [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71] ERROR: [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71] ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit snake_game_top in library work failed. 
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds INFO: [USF-XSim-99] Step results log file:'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 25 seconds
+// Elapsed time: 25 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+// a (cr): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f
+dismissDialog("Critical Messages"); // a
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 7, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 158, 243); // bP
+selectCodeEditor("snake_game_top.vhd", 161, 241); // bP
+selectCodeEditor("snake_game_top.vhd", 161, 241, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 161, 241); // bP
+// Elapsed time: 48 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false, false, false, false, false, true); // ah - Double Click
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 7, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 7, false, false, false, false, false, true); // ah - Double Click
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 85, 198); // bP
+selectCodeEditor("snake_game_top.vhd", 238, 194); // bP
+selectCodeEditor("snake_game_top.vhd", 238, 194, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 221, 193); // bP
+selectCodeEditor("snake_game_top.vhd", 257, 202, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 217, 205); // bP
+selectCodeEditor("snake_game_top.vhd", 446, 194); // bP
+// Elapsed time: 73 seconds
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_CHECKPOINT, "Checkpoint"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_IP, "IP"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_TEXT_EDITOR, "Text Editor"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_EXPORT, "Export"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_TEXT_EDITOR, "Text Editor"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_PROJECT, "Open Recent"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_PROJECT, "Open Recent"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_IP, "IP"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_CHECKPOINT, "Checkpoint"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // ah
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_EDIT, "Edit"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_SETTINGS, "Settings"); // ah
+selectMenuItem(PAResourceCommand.PACommandNames_GOTO_PROJECT_MANAGER, "Project Manager"); // ak
+dismissMenu(PAResourceItoN.MainMenuMgr_FLOW, "Flow"); // ac
+// Run Command: PAResourceCommand.PACommandNames_GOTO_PROJECT_MANAGER
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m
+selectMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // ac
+// Elapsed time: 24 seconds
+dismissMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_CHECKPOINT, "Checkpoint"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_IP, "IP"); // ah
+selectMenu(PAResourceItoN.MainMenuMgr_TEXT_EDITOR, "Text Editor"); // ah
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // ac
+selectMenu(RDIResource.MainWinMenuMgr_LAYOUT, "Layout"); // ac
+dismissMenu(RDIResource.MainWinMenuMgr_LAYOUT, "Layout"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_WINDOW, "Window"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_WINDOW, "Window"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_REPORTS, "Reports"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_REPORTS, "Reports"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_WINDOW, "Window"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_WINDOW, "Window"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_REPORTS, "Reports"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_REPORTS, "Reports"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_TOOLS, "Tools"); // ac
+selectMenu(PAResourceItoN.MainMenuMgr_REPORTS, "Reports"); // ac
+dismissMenu(PAResourceItoN.MainMenuMgr_REPORTS, "Reports"); // ac
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_game_top.vhd", 1); // m
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 9, false, false, false, false, false, true); // D - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // bi
+// [Engine Memory]: 1,209 MB (+10558kb) [12:58:45]
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+// HMemoryUtils.trashcanNow. Engine heap size: 1,209 MB. GUI used memory: 128 MB. Current time: 5/24/25, 11:27:43 AM CST
+dismissDialog("Re-customize IP"); // r
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 9, false, false, false, false, false, true); // D - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+dismissDialog("Re-customize IP"); // r
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, false, false, false, false, false, true); // D - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+dismissDialog("Re-customize IP"); // r
+// Elapsed time: 33 seconds
+selectCodeEditor("snake_game_top.vhd", 239, 214, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 123, 232); // bP
+selectCodeEditor("snake_game_top.vhd", 128, 229); // bP
+selectCodeEditor("snake_game_top.vhd", 142, 217); // bP
+selectCodeEditor("snake_game_top.vhd", 103, 152); // bP
+selectCodeEditor("snake_game_top.vhd", 195, 142); // bP
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, Start_rom_binary.coe]", 14, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, Start_rom_binary.coe]", 14, false, false, false, false, false, true); // D - Double Click
+// [GUI Memory]: 283 MB (+85381kb) [12:59:45]
+// [Engine Memory]: 1,298 MB (+30039kb) [12:59:45]
+// [GUI Memory]: 308 MB (+11385kb) [12:59:45]
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, Start_rom_binary.coe]", 14, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, Start_rom_binary.coe]", 14, false, false, false, false, false, true); // D - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, GameOver_rom_binary.coe]", 13, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, GameOver_rom_binary.coe]", 13, false, false, false, false, false, true); // D - Double Click
+// [GUI Memory]: 422 MB (+104251kb) [12:59:46]
+// [Engine Memory]: 1,461 MB (+102654kb) [12:59:46]
+// HMemoryUtils.trashcanNow. Engine heap size: 1,476 MB. GUI used memory: 380 MB. Current time: 5/24/25, 11:28:43 AM CST
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GameOver_rom_binary.coe", 2); // m
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GameOver_rom_binary.coe", 2); // m
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+selectCodeEditor("snake_game_top.vhd", 279, 145); // bP
+selectCodeEditor("snake_game_top.vhd", 279, 145, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 212, 148); // bP
+selectCodeEditor("snake_game_top.vhd", 212, 148, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 127, 148); // bP
+selectCodeEditor("snake_game_top.vhd", 166, 142); // bP
+selectCodeEditor("snake_game_top.vhd", 253, 137, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 166, 136); // bP
+selectCodeEditor("snake_game_top.vhd", 277, 143); // bP
+// [Engine Memory]: 1,534 MB (+64kb) [13:00:00]
+// Elapsed time: 20 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager, Settings]", 1, false); // u
+// Run Command: RDIResourceCommand.RDICommands_SETTINGS
+// d (cr): Settings: addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 1,553 MB. GUI used memory: 154 MB. Current time: 5/24/25, 11:29:13 AM CST
+dismissDialog("Settings"); // d
+// Elapsed time: 25 seconds
+selectTab((HResource) null, (HResource) null, "Tcl Console", 0); // aK
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 349, 171); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 327, 188); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 338, 197); // dS
+// Elapsed time: 19 seconds
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 391, 194, false, false, false, true, false); // dS - Popup Trigger
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 226, 198); // dS
+typeControlKey(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, "RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR", 'v'); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 213, 194, false, false, false, true, false); // dS - Popup Trigger
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 78, 213); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 99, 195, false, false, false, true, false); // dS - Popup Trigger
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 16, 211); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 72, 199); // dS
+selectTab((HResource) null, (HResource) null, "Messages", 1); // aK
+selectTab((HResource) null, (HResource) null, "Tcl Console", 0); // aK
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "reset_project -exclude ip", true); // l
+// Tcl Command: 'reset_project -exclude ip'
+// Tcl Command: 'reset_project -exclude ip'
+// Tcl Message: reset_project -exclude ip 
+// Tcl Message: ERROR: reset_project: option is ambiguous and matches 'exclude_ips', 'exclude_runs', and 'exclude_sim_runs' 
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 219, 198); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 219, 198, false, false, false, false, true); // dS - Double Click
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 219, 198); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 237, 170); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 237, 170, false, false, false, false, true); // dS - Double Click
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 237, 170); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 228, 185); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 228, 185, false, false, false, false, true); // dS - Double Click
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 228, 185); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 422, 169); // dS
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 144, 215); // dS
+// Tcl Command: 'rdi::match_options {reset_project} {ex}'
+// Tcl Command: 'rdi::match_options {reset_project} {e}'
+// Tcl Command: 'rdi::info_commands {reset_project*}'
+// Tcl Command: 'rdi::match_options {reset_project} {}'
+// Elapsed time: 21 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "reset_project -exclude_ips", true); // l
+// Tcl Command: 'reset_project -exclude_ips'
+// Tcl Command: 'reset_project -exclude_ips'
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: reset_project -exclude_ips 
+// Elapsed time: 15 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ak
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cr):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// Tcl Message: launch_simulation 
+// Tcl Message: Command: launch_simulation  
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj snake_game_top_vhdl.prj" 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'E:/Snake/project_1.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 3 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+// a (cr): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f
+dismissDialog("Critical Messages"); // a
+selectTab((HResource) null, (HResource) null, "Messages", 1); // aK
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 298, 290); // bP
+selectCodeEditor("snake_game_top.vhd", 275, 287, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 148, 261); // bP
+selectCodeEditor("snake_game_top.vhd", 114, 271); // bP
+selectCodeEditor("snake_game_top.vhd", 52, 275); // bP
+selectCodeEditor("snake_game_top.vhd", 89, 275); // bP
+selectCodeEditor("snake_game_top.vhd", 83, 275, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 64, 280); // bP
+selectCodeEditor("snake_game_top.vhd", 119, 272, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 74, 278); // bP
+selectCodeEditor("snake_game_top.vhd", 98, 279, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 70, 275); // bP
+selectCodeEditor("snake_game_top.vhd", 90, 259); // bP
+selectCodeEditor("snake_game_top.vhd", 90, 259, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 189, 199); // bP
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 9, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 9, false, false, false, false, false, true); // ah - Double Click
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8); // D
+// TclEventType: DG_GRAPH_STALE
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, false, false, false, false, false, true); // D - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+dismissDialog("Re-customize IP"); // r
+selectCodeEditor("snake_game_top.vhd", 71, 256); // bP
+selectCodeEditor("snake_game_top.vhd", 71, 256, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 83, 255); // bP
+selectCodeEditor("snake_game_top.vhd", 83, 255, false, false, false, false, true); // bP - Double Click
+// Elapsed time: 13 seconds
+selectCodeEditor("snake_game_top.vhd", 126, 215); // bP
+selectCodeEditor("snake_game_top.vhd", 126, 215, false, false, false, false, true); // bP - Double Click
+typeControlKey((HResource) null, "snake_game_top.vhd", 'c'); // bP
+// Elapsed time: 11 seconds
+setText(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "menu_rom_data"); // l
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 245, 194); // bP
+selectCodeEditor("snake_game_top.vhd", 245, 194, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 245, 194); // bP
+selectCodeEditor("snake_game_top.vhd", 240, 198); // bP
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci), blk_mem_gen_menu(blk_mem_gen_menu_arch) (blk_mem_gen_menu.vhd)]", 9, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci), blk_mem_gen_menu(blk_mem_gen_menu_arch) (blk_mem_gen_menu.vhd)]", 9, true, false, false, false, false, true); // D - Double Click - Node
+selectCodeEditor("blk_mem_gen_menu.vhd", 188, 125); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 192, 146); // G
+setText(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "douta", true); // l
+applyEnter(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "douta"); // l
+applyEnter(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "douta"); // l
+applyEnter(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "douta"); // l
+applyEnter(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "douta"); // l
+applyEnter(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "douta"); // l
+applyEnter(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "douta"); // l
+applyEnter(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "douta"); // l
+applyEnter(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "douta"); // l
+selectCodeEditor("blk_mem_gen_menu.vhd", 236, 73); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 238, 86); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 238, 86, false, false, false, false, true); // G - Double Click
+selectCodeEditor("blk_mem_gen_menu.vhd", 309, 83); // G
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_game_top.vhd", 1); // m
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+dismissDialog("Re-customize IP"); // r
+selectCodeEditor("snake_game_top.vhd", 245, 204); // bP
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, GameOver_rom_binary.coe]", 13, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, GameOver_rom_binary.coe]", 13, false, false, false, false, false, true); // D - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Coefficient Files, GameOver_rom_binary.coe]", 13, false); // D
+selectCodeEditor("GameOver_rom_binary.coe", 307, 78); // bP
+selectCodeEditor("GameOver_rom_binary.coe", 307, 54); // bP
+selectCodeEditor("GameOver_rom_binary.coe", 142, 15); // bP
+selectCodeEditor("GameOver_rom_binary.coe", 142, 15, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("GameOver_rom_binary.coe", 186, 14); // bP
+selectCodeEditor("GameOver_rom_binary.coe", 141, 12); // bP
+selectCodeEditor("GameOver_rom_binary.coe", 141, 12, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("GameOver_rom_binary.coe", 213, 17); // bP
+selectCodeEditor("GameOver_rom_binary.coe", 213, 17, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("GameOver_rom_binary.coe", 163, 12); // bP
+selectCodeEditor("GameOver_rom_binary.coe", 204, 20); // bP
+selectCodeEditor("GameOver_rom_binary.coe", 162, 11); // bP
+typeControlKey((HResource) null, "GameOver_rom_binary.coe", 'c'); // bP
+// Elapsed time: 12 seconds
+selectCodeEditor("GameOver_rom_binary.coe", 554, 41); // bP
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "blk_mem_gen_menu.vhd", 2); // m
+selectCodeEditor("blk_mem_gen_menu.vhd", 315, 119); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 307, 100); // G
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+// Elapsed time: 15 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 237, 193); // bP
+selectCodeEditor("snake_game_top.vhd", 237, 193, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 79, 199); // bP
+selectCodeEditor("snake_game_top.vhd", 79, 199, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 79, 199); // bP
+selectCodeEditor("snake_game_top.vhd", 79, 199, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 79, 199); // bP
+selectCodeEditor("snake_game_top.vhd", 86, 199); // bP
+selectCodeEditor("snake_game_top.vhd", 86, 199, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 93, 203); // bP
+selectCodeEditor("snake_game_top.vhd", 93, 203, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 138, 130); // bP
+selectCodeEditor("snake_game_top.vhd", 138, 130, false, false, false, false, true); // bP - Double Click
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "blk_mem_gen_menu.vhd", 2); // m
+selectCodeEditor("blk_mem_gen_menu.vhd", 33, 80); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 260, 86); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 293, 86); // G
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false, false, false, false, true, false); // ah - Popup Trigger
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 9, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 9, false, false, false, false, true, false); // ah - Popup Trigger
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false, false, false, false, true, false); // ah - Popup Trigger
+selectMenu(PAResourceItoN.MsgTreePanel_MESSAGE_SEVERITY, "Message Severity"); // ah
+// Elapsed time: 16 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_game_top.vhd", 1); // m
+selectCodeEditor("snake_game_top.vhd", 269, 113); // bP
+typeControlKey((HResource) null, "snake_game_top.vhd", 'c'); // bP
+selectCodeEditor("snake_game_top.vhd", 269, 119); // bP
+// Elapsed time: 30 seconds
+selectCodeEditor("snake_game_top.vhd", 240, 211); // bP
+selectCodeEditor("snake_game_top.vhd", 205, 195); // bP
+selectCodeEditor("snake_game_top.vhd", 238, 197, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 221, 198); // bP
+selectCodeEditor("snake_game_top.vhd", 245, 198); // bP
+selectCodeEditor("snake_game_top.vhd", 235, 200, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 221, 200); // bP
+// Elapsed time: 21 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 9, false); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 9, false, false, false, false, true, false); // ah - Popup Trigger
+selectMenu(PAResourceItoN.MsgTreePanel_MESSAGE_SEVERITY, "Message Severity"); // ah
+// Elapsed time: 11 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+// Elapsed time: 26 seconds
+dismissDialog("Re-customize IP"); // r
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "blk_mem_gen_menu.vhd", 2); // m
+selectCodeEditor("blk_mem_gen_menu.vhd", 327, 128); // G
+typeControlKey((HResource) null, "blk_mem_gen_menu.vhd", 'c'); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 358, 111); // G
+// Elapsed time: 128 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 252, 192); // bP
+selectCodeEditor("snake_game_top.vhd", 252, 192, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 252, 192); // bP
+// Elapsed time: 33 seconds
+selectCodeEditor("snake_game_top.vhd", 199, 135); // bP
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "blk_mem_gen_menu.vhd", 2); // m
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_game_top.vhd", 1); // m
+selectCodeEditor("snake_game_top.vhd", 161, 138); // bP
+selectCodeEditor("snake_game_top.vhd", 91, 199); // bP
+selectCodeEditor("snake_game_top.vhd", 91, 199, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 143, 129); // bP
+selectCodeEditor("snake_game_top.vhd", 163, 87); // bP
+selectCodeEditor("snake_game_top.vhd", 150, 113); // bP
+selectCodeEditor("snake_game_top.vhd", 150, 113, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 56, 218); // bP
+selectCodeEditor("snake_game_top.vhd", 56, 218, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 181, 227); // bP
+selectCodeEditor("snake_game_top.vhd", 181, 222); // bP
+selectCodeEditor("snake_game_top.vhd", 181, 222, false, false, false, false, true); // bP - Double Click
+// Elapsed time: 16 seconds
+selectButton(RDIResource.HCodeEditor_CLOSE, (String) null); // k
+selectCodeEditor("snake_game_top.vhd", 289, 69); // bP
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "blk_mem_gen_menu.vhd", 2); // m
+selectCodeEditor("blk_mem_gen_menu.vhd", 278, 212); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 275, 212, false, false, false, true, false); // G - Popup Trigger
+selectCodeEditor("blk_mem_gen_menu.vhd", 174, 221); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 202, 204); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 99, 255); // G
+typeControlKey((HResource) null, "blk_mem_gen_menu.vhd", 'c'); // G
+selectCodeEditor("blk_mem_gen_menu.vhd", 326, 230); // G
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "snake_game_top.vhd", 1); // m
+selectCodeEditor("snake_game_top.vhd", 193, 201); // bP
+selectCodeEditor("snake_game_top.vhd", 193, 201, false, false, false, false, true); // bP - Double Click
+typeControlKey((HResource) null, "snake_game_top.vhd", 'v'); // bP
+selectCodeEditor("snake_game_top.vhd", 232, 232); // bP
+selectCodeEditor("snake_game_top.vhd", 232, 232, false, false, false, false, true); // bP - Double Click
+typeControlKey((HResource) null, "snake_game_top.vhd", 'v'); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("snake_game_top.vhd", 132, 140); // bP
+selectCodeEditor("snake_game_top.vhd", 132, 140, false, false, false, false, true); // bP - Double Click
+// Elapsed time: 12 seconds
+selectCodeEditor("snake_game_top.vhd", 183, 135); // bP
+selectCodeEditor("snake_game_top.vhd", 183, 135, false, false, false, false, true); // bP - Double Click
+typeControlKey((HResource) null, "snake_game_top.vhd", 'v'); // bP
+selectCodeEditor("snake_game_top.vhd", 177, 284); // bP
+selectCodeEditor("snake_game_top.vhd", 177, 282, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("snake_game_top.vhd", 177, 302); // bP
+selectCodeEditor("snake_game_top.vhd", 177, 302, false, false, false, false, true); // bP - Double Click
+typeControlKey((HResource) null, "snake_game_top.vhd", 'v'); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("snake_game_top.vhd", 89, 66); // bP
+selectCodeEditor("snake_game_top.vhd", 89, 66, false, false, false, false, true); // bP - Double Click
+// Elapsed time: 15 seconds
+selectCodeEditor("snake_game_top.vhd", 111, 225); // bP
+selectCodeEditor("snake_game_top.vhd", 111, 225, false, false, false, false, true); // bP - Double Click
+// Elapsed time: 15 seconds
+selectCodeEditor("snake_game_top.vhd", 263, 271); // bP
+// Elapsed time: 11 seconds
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+selectCodeEditor("snake_game_top.vhd", 400, 82); // bP
+typeControlKey(null, null, 'z');
+selectCodeEditor("snake_game_top.vhd", 320, 142); // bP
+selectCodeEditor("snake_game_top.vhd", 296, 172, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 101, 159); // bP
+selectCodeEditor("snake_game_top.vhd", 110, 144); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("snake_game_top.vhd", 220, 147, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 111, 151); // bP
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ak
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cr):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// Tcl Message: launch_simulation 
+// Tcl Message: Command: launch_simulation  
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj snake_game_top_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd" into library xil_defaultlib INFO: [VRFC 10-3107] analyzing entity 'snake_game_top' 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'E:/Snake/project_1.sim/sim_1/behav/xsim' 
+// Tcl Message: "xelab -wto 08696370ced04502b18347e0e1035ed3 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot snake_game_top_behav xil_defaultlib.snake_game_top -log elaborate.log" 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds INFO: [USF-XSim-99] Step results log file:'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 4 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+// a (cr): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f
+dismissDialog("Critical Messages"); // a
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 7, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 7, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;71;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:71]. ]", 7, false); // ah
+selectCodeEditor("snake_game_top.vhd", 139, 267); // bP
+selectCodeEditor("snake_game_top.vhd", 139, 306); // bP
+selectCodeEditor("snake_game_top.vhd", 187, 290); // bP
+selectCodeEditor("snake_game_top.vhd", 190, 301); // bP
+selectCodeEditor("snake_game_top.vhd", 110, 309); // bP
+selectCodeEditor("snake_game_top.vhd", 123, 288); // bP
+selectCodeEditor("snake_game_top.vhd", 119, 289); // bP
+typeControlKey((HResource) null, "snake_game_top.vhd", 'v'); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ak
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cr):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// Tcl Message: launch_simulation 
+// Tcl Message: Command: launch_simulation  
+// Tcl Message: INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator... 
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: PACKAGER_MESSAGE_RESET
+// TclEventType: PACKAGER_UNLOAD_CORE
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj snake_game_top_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd" into library xil_defaultlib INFO: [VRFC 10-3107] analyzing entity 'snake_game_top' 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'E:/Snake/project_1.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'E:/Snake/project_1.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:05 . Memory (MB): peak = 1645.699 ; gain = 0.000 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 9 seconds
+selectButton("OptionPane.button", "OK"); // JButton
+// a (cr): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f
+dismissDialog("Critical Messages"); // a
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:81]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;81;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:81]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;81;-;;-;16;-;"); // ah
+selectCodeEditor("snake_game_top.vhd", 168, 251); // bP
+selectCodeEditor("snake_game_top.vhd", 165, 254); // bP
+selectCodeEditor("snake_game_top.vhd", 116, 67); // bP
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+dismissDialog("Re-customize IP"); // r
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 9, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 9, false, false, false, false, false, true); // D - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // bi
+dismissDialog("Re-customize IP"); // r
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), menu_rom_inst : blk_mem_gen_menu (blk_mem_gen_menu.xci)]", 8, true, false, false, false, false, true); // D - Double Click - Node
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Port A Options", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Other Options", 2); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Power Estimation", 1); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "IP Symbol", 0); // bi
+selectTab(PAResourceEtoH.HACGCTabbedPane_TABBED_PANE, (HResource) null, "Basic", 0); // bi
+dismissDialog("Re-customize IP"); // r
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 11, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, snake_game_top(Behavioral) (snake_game_top.vhd), gameover_rom_inst : blk_mem_gen_GameOver (blk_mem_gen_GameOver.xci)]", 11, false, false, false, false, false, true); // D - Double Click
+// Run Command: PAResourceCommand.PACommandNames_RECUSTOMIZE_CORE
+// r (cr): Re-customize IP: addNotify
+dismissDialog("Re-customize IP"); // r
+selectCodeEditor("snake_game_top.vhd", 163, 172); // bP
+selectCodeEditor("snake_game_top.vhd", 151, 181, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 69, 189); // bP
+selectCodeEditor("snake_game_top.vhd", 72, 180, false, false, false, true, false); // bP - Popup Trigger
+selectCodeEditor("snake_game_top.vhd", 64, 180); // bP
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-3290] entity port 'douta' does not match with type std_logic of component port [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:81]. ]", 8, false); // ah
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;E:\Snake\project_1.srcs\sources_1\new\snake_game_top.vhd;-;;-;16;-;line;-;81;-;;-;16;-;"); // ah
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Simulation, sim_1, [VRFC 10-664] expression has 9 elements ; expected 1 [E:/Snake/project_1.srcs/sources_1/new/snake_game_top.vhd:81]. ]", 9, false); // ah
+selectCodeEditor("snake_game_top.vhd", 238, 309); // bP
