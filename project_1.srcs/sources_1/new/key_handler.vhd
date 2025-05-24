@@ -7,16 +7,16 @@ entity key_handler is
         clk           : in  std_logic;
         rst_n         : in  std_logic;
 
-        -- 物理按键输入（低电平有效�?
+        -- 物理按键输入（低电平有效）
         btn_up        : in  std_logic;
         btn_down      : in  std_logic;
         btn_left      : in  std_logic;
         btn_right     : in  std_logic;
 
-        -- 当前方向状�?�（用于防止180度转向）
+        -- 当前方向状态（用于防止180度转向）
         current_dir   : in  std_logic_vector(4 downto 0);
 
-        -- 输出到snake_controller的移动状�?
+        -- 输出到snake_controller的移动状态
         move_state    : out std_logic_vector(4 downto 0)
     );
 end key_handler;
@@ -40,14 +40,14 @@ architecture Behavioral of key_handler is
 
 begin
 
-    -- 实例化按键消抖模块（每个按键�?个）
+    -- 实例化按键消抖模块（每个按键一个）
     up_debounce_inst : entity work.ButtonDebounce
         generic map (
             DEBOUNCE_DELAY => 500000  -- 5ms@100MHz
         )
         port map (
             clk     => clk,
-            btn_in  =>  btn_up,  -- 按键低电平有�? �? 反转
+            btn_in  => btn_up,  -- 按键低电平有效 → 反转
             btn_out => btn_up_clean
         );
 
@@ -55,7 +55,7 @@ begin
         generic map (DEBOUNCE_DELAY => 500000)
         port map (
             clk     => clk,
-            btn_in  =>  btn_down,
+            btn_in  => btn_down,
             btn_out => btn_down_clean
         );
 
@@ -63,7 +63,7 @@ begin
         generic map (DEBOUNCE_DELAY => 500000)
         port map (
             clk     => clk,
-            btn_in  =>  btn_left,
+            btn_in  => btn_left,
             btn_out => btn_left_clean
         );
 
@@ -71,7 +71,7 @@ begin
         generic map (DEBOUNCE_DELAY => 500000)
         port map (
             clk     => clk,
-            btn_in  =>  btn_right,
+            btn_in  => btn_right,
             btn_out => btn_right_clean
         );
 
@@ -81,7 +81,7 @@ begin
         if rst_n = '0' then
             move_state_r <= STOP;
         elsif rising_edge(clk) then
-            -- 注意加上防止 180 度反向判�?
+            -- 注意加上防止 180 度反向判断
             if btn_up_clean = '1' and current_dir /= FACE_DOWN then
                 move_state_r <= FACE_UP;
             elsif btn_down_clean = '1' and current_dir /= FACE_UP then

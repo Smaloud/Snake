@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1748084314">
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1748090475">
   <File Type="PA-TCL" Name="snake_game_top.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="snake_game_top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="snake_game_top_reports.tcl"/>
@@ -17,7 +17,19 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/bin_to_bcd.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/difficulty_controller.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/font_rom.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>

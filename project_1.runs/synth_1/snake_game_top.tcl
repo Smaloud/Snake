@@ -71,7 +71,6 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 5
-set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-1
 
@@ -92,7 +91,9 @@ add_files E:/VivadoWorks/project_1/GameOver_rom_binary.coe
 add_files E:/VivadoWorks/project_1/Start_rom_binary.coe
 read_vhdl -library xil_defaultlib {
   E:/VivadoWorks/TopLevel/TopLevel.srcs/sources_1/new/ButtonDebounce.vhd
+  E:/VivadoWorks/project_1/project_1.srcs/sources_1/new/bin_to_bcd.vhd
   E:/VivadoWorks/project_1/project_1.srcs/sources_1/new/difficulty_controller.vhd
+  E:/VivadoWorks/project_1/project_1.srcs/sources_1/new/font_rom.vhd
   E:/VivadoWorks/project_1/project_1.srcs/sources_1/new/food_generator.vhd
   E:/VivadoWorks/project_1/project_1.srcs/sources_1/new/frame_generagor.vhd
   E:/VivadoWorks/project_1/project_1.srcs/sources_1/new/game_fsm.vhd
