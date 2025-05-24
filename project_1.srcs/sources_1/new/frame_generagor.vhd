@@ -83,6 +83,11 @@ architecture Behavioral of frame_generator is
     -- 最高分显示位置常量
     constant HSCORE_START_X : integer := SCREEN_WIDTH - 120;
     constant HSCORE_START_Y : integer := 50;
+    
+    -- 难度显示位置常量
+    constant DIFF_START_X   : integer := SCREEN_WIDTH - 120;
+    constant DIFF_START_Y   : integer := 80;
+    constant DIFF_TEXT_Y    : integer := DIFF_START_Y - 10; -- 难度标题文字位置
 
     -- BCD接口信号
     signal score_bcd      : std_logic_vector(15 downto 0);
@@ -348,6 +353,67 @@ begin
                                 if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
                                     pixel_color <= "110"; -- 黄色显示最高分
                                 end if;
+                                
+                            -- 检查是否在难度显示区域
+                            elsif h_pos >= DIFF_START_X and h_pos < DIFF_START_X + 2*SCORE_DIGIT_WIDTH and
+                                  v_pos >= DIFF_START_Y and v_pos < DIFF_START_Y + DIGIT_HEIGHT then
+                                  
+                                -- 计算当前位于哪个字符位置（第一个字符固定为"L"，第二个字符是难度数字）
+                                digit_index := (h_pos - DIFF_START_X) / SCORE_DIGIT_WIDTH;
+                                
+                                -- 设置难度显示值
+                                if digit_index = 0 then
+                                    -- 第一位显示数字"0"，表示"L"的位置
+                                    digit_value := "0000";
+                                else
+                                    -- 第二位根据难度值设置
+                                    case difficulty is
+                                        when "00" => digit_value := "0001"; -- 1 - 慢速
+                                        when "01" => digit_value := "0010"; -- 2 - 中速
+                                        when "10" => digit_value := "0011"; -- 3 - 快速
+                                        when "11" => digit_value := "0100"; -- 4 - 超快
+                                        when others => digit_value := "0001";
+                                    end case;
+                                end if;
+                                
+                                -- 计算在当前数字内的偏移位置
+                                x_offset := (h_pos - DIFF_START_X) mod SCORE_DIGIT_WIDTH;
+                                y_offset := v_pos - DIFF_START_Y;
+                                
+                                -- 设置字体ROM地址
+                                font_char_code <= digit_value;
+                                font_row <= std_logic_vector(to_unsigned(y_offset, 4));
+                                
+                                -- 检查当前像素是否需要点亮（从字体ROM获取数据）
+                                if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
+                                    pixel_color <= "101"; -- 洋红色(紫色)显示难度
+                                end if;
+                                
+                            -- 难度图形条显示（简单的条形图表示难度）
+                            elsif h_pos >= DIFF_START_X and h_pos < DIFF_START_X + 48 and
+                                  v_pos >= DIFF_START_Y + DIGIT_HEIGHT + 5 and v_pos < DIFF_START_Y + DIGIT_HEIGHT + 15 then
+                                
+                                -- 根据难度值绘制不同长度的进度条
+                                case difficulty is
+                                    when "00" => -- 慢速：1/4长度
+                                        if h_pos < DIFF_START_X + 12 then
+                                            pixel_color <= "001"; -- 蓝色
+                                        end if;
+                                    when "01" => -- 中速：2/4长度
+                                        if h_pos < DIFF_START_X + 24 then
+                                            pixel_color <= "011"; -- 青色
+                                        end if;
+                                    when "10" => -- 快速：3/4长度
+                                        if h_pos < DIFF_START_X + 36 then
+                                            pixel_color <= "110"; -- 黄色
+                                        end if;
+                                    when "11" => -- 超快：4/4长度
+                                        if h_pos < DIFF_START_X + 48 then
+                                            pixel_color <= "100"; -- 红色
+                                        end if;
+                                    when others =>
+                                        null;
+                                end case;
                             end if;
                         end if;
                     
