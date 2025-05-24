@@ -135,22 +135,19 @@ begin
     ------------------------------------------------------------------
     -- D. 同步信号（负极性）
     ------------------------------------------------------------------
-    O_hs <= '0' when (to_integer(h_cnt) >= C_H_FRONT) and
-                     (to_integer(h_cnt) <  C_H_FRONT + C_H_SYNC)
+    O_hs <= '0' when (to_integer(h_cnt) >= C_H_FRONT + C_H_ACT) and
+                     (to_integer(h_cnt) <  C_H_FRONT + C_H_SYNC + C_H_ACT)
             else '1';
 
-    O_vs <= '0' when (to_integer(v_cnt) >= C_V_FRONT) and
-                     (to_integer(v_cnt) <  C_V_FRONT + C_V_SYNC)
+    O_vs <= '0' when (to_integer(v_cnt) >= C_V_FRONT + C_V_ACT) and
+                     (to_integer(v_cnt) <  C_V_FRONT + C_V_SYNC + C_V_ACT)
             else '1';
 
     ------------------------------------------------------------------
     -- E. 有效区标志
     ------------------------------------------------------------------
     active_flag_r <= '1' when
-                   (to_integer(h_cnt) >= H_BEFORE) and
-                   (to_integer(h_cnt) <  H_AFTER)  and
-                   (to_integer(v_cnt) >= V_BEFORE) and
-                   (to_integer(v_cnt) <  V_AFTER)
+                        h_cnt < C_H_ACT and v_cnt < C_V_ACT
                    else '0';
 
     ------------------------------------------------------------------

@@ -1,8 +1,8 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Sat May 24 13:34:34 2025
-| Host         : DESKTOP-TFS410 running 64-bit major release  (build 9200)
+| Date         : Sat May 24 15:22:18 2025
+| Host         : LAPTOP-FMHA2MNQ running 64-bit major release  (build 9200)
 | Command      : report_drc -file snake_game_top_drc_opted.rpt -pb snake_game_top_drc_opted.pb -rpx snake_game_top_drc_opted.rpx
 | Design       : snake_game_top
 | Device       : xc7a100tcsg324-1
@@ -24,15 +24,15 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 55
+             Violations found: 61
 +-----------+----------+-----------------------------------------------------+------------+
 | Rule      | Severity | Description                                         | Violations |
 +-----------+----------+-----------------------------------------------------+------------+
 | CFGBVS-1  | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties | 1          |
 | CHECK-3   | Warning  | Report rule limit reached                           | 2          |
-| DPIP-1    | Warning  | Input pipelining                                    | 4          |
-| DPOP-1    | Warning  | PREG Output pipelining                              | 4          |
-| DPOP-2    | Warning  | MREG Output pipelining                              | 4          |
+| DPIP-1    | Warning  | Input pipelining                                    | 6          |
+| DPOP-1    | Warning  | PREG Output pipelining                              | 6          |
+| DPOP-2    | Warning  | MREG Output pipelining                              | 6          |
 | REQP-1839 | Warning  | RAMB36 async control check                          | 20         |
 | REQP-1840 | Warning  | RAMB18 async control check                          | 20         |
 +-----------+----------+-----------------------------------------------------+------------+
@@ -82,6 +82,16 @@ Input pipelining
 DSP snake_controller_inst/pos_to_index0__2 input snake_controller_inst/pos_to_index0__2/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
+DPIP-1#5 Warning
+Input pipelining  
+DSP snake_controller_inst/pos_to_index0__3 input snake_controller_inst/pos_to_index0__3/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#6 Warning
+Input pipelining  
+DSP snake_controller_inst/pos_to_index0__4 input snake_controller_inst/pos_to_index0__4/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
 DPOP-1#1 Warning
 PREG Output pipelining  
 DSP snake_controller_inst/pos_to_index0 output snake_controller_inst/pos_to_index0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
@@ -102,6 +112,16 @@ PREG Output pipelining
 DSP snake_controller_inst/pos_to_index0__2 output snake_controller_inst/pos_to_index0__2/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
 Related violations: <none>
 
+DPOP-1#5 Warning
+PREG Output pipelining  
+DSP snake_controller_inst/pos_to_index0__3 output snake_controller_inst/pos_to_index0__3/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+Related violations: <none>
+
+DPOP-1#6 Warning
+PREG Output pipelining  
+DSP snake_controller_inst/pos_to_index0__4 output snake_controller_inst/pos_to_index0__4/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+Related violations: <none>
+
 DPOP-2#1 Warning
 MREG Output pipelining  
 DSP snake_controller_inst/pos_to_index0 multiplier stage snake_controller_inst/pos_to_index0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
@@ -120,6 +140,16 @@ Related violations: <none>
 DPOP-2#4 Warning
 MREG Output pipelining  
 DSP snake_controller_inst/pos_to_index0__2 multiplier stage snake_controller_inst/pos_to_index0__2/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+DPOP-2#5 Warning
+MREG Output pipelining  
+DSP snake_controller_inst/pos_to_index0__3 multiplier stage snake_controller_inst/pos_to_index0__3/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+DPOP-2#6 Warning
+MREG Output pipelining  
+DSP snake_controller_inst/pos_to_index0__4 multiplier stage snake_controller_inst/pos_to_index0__4/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
 Related violations: <none>
 
 REQP-1839#1 Warning

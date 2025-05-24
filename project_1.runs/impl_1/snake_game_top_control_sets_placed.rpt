@@ -1,8 +1,8 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Sat May 24 13:34:42 2025
-| Host         : DESKTOP-TFS410 running 64-bit major release  (build 9200)
+| Date         : Sat May 24 15:22:28 2025
+| Host         : LAPTOP-FMHA2MNQ running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file snake_game_top_control_sets_placed.rpt
 | Design       : snake_game_top
 | Device       : xc7a100t
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |   315 |
-|    Minimum number of control sets                        |   315 |
+| Total control sets                                       |   314 |
+|    Minimum number of control sets                        |   314 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |  2161 |
+| Unused register locations in slices containing registers |  2162 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |   315 |
-| >= 0 to < 4        |     1 |
+| Total control sets |   314 |
+| >= 0 to < 4        |     0 |
 | >= 4 to < 6        |     2 |
 | >= 6 to < 8        |     0 |
 | >= 8 to < 10       |   302 |
-| >= 10 to < 12      |     0 |
+| >= 10 to < 12      |     1 |
 | >= 12 to < 14      |     2 |
 | >= 14 to < 16      |     1 |
-| >= 16              |     7 |
+| >= 16              |     6 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -59,335 +59,334 @@ Table of Contents
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |              42 |           21 |
-| No           | No                    | Yes                    |              98 |           32 |
-| No           | Yes                   | No                     |             327 |          134 |
-| Yes          | No                    | No                     |            2673 |         1233 |
-| Yes          | No                    | Yes                    |             143 |           52 |
-| Yes          | Yes                   | No                     |              12 |            4 |
+| No           | No                    | Yes                    |             406 |          220 |
+| No           | Yes                   | No                     |              27 |           10 |
+| Yes          | No                    | No                     |            2673 |         1273 |
+| Yes          | No                    | Yes                    |             126 |           55 |
+| Yes          | Yes                   | No                     |              12 |            5 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+------------------------+----------------------------------------------------+--------------------------------+------------------+----------------+--------------+
-|      Clock Signal      |                    Enable Signal                   |        Set/Reset Signal        | Slice Load Count | Bel Load Count | Bels / Slice |
-+------------------------+----------------------------------------------------+--------------------------------+------------------+----------------+--------------+
-|  update_signal_BUFG    |                                                    | snake_controller_inst/p_0_in   |                1 |              1 |         1.00 |
-|  update_signal_BUFG    | key_handler_inst/E[0]                              | snake_controller_inst/p_0_in   |                1 |              5 |         5.00 |
-|  clk_IBUF_BUFG         | key_handler_inst/move_state_r                      | snake_controller_inst/p_0_in   |                2 |              5 |         2.50 |
-|  clk_IBUF_BUFG         | snake_controller_inst/lfsr_reg[7][0]               | snake_controller_inst/p_0_in   |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[198][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[195][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[154][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[171][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[199][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[19][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[14][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[164][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[193][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[196][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[163][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[167][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[174][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[176][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[201][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[202][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[147][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[178][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[170][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[191][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[180][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[166][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[169][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[165][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[177][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[148][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[18][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[192][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[157][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[17][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[194][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[152][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[181][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[200][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[158][x]0       |                                |                9 |              9 |         1.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[16][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[188][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[203][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[153][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[184][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[185][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[156][x]0       |                                |                8 |              9 |         1.12 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[159][x]0       |                                |                9 |              9 |         1.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[15][x]0        |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[151][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[172][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[189][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[197][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[168][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[150][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[179][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[182][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[183][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[173][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[155][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[186][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[187][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[190][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[146][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[149][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[160][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[162][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[250][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[248][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[226][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[239][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[251][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[252][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[249][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[254][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[224][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[230][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[233][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[255][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[258][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[259][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[261][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[257][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[25][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[215][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[21][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[245][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[247][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[208][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[256][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[207][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[253][x]0       |                                |                8 |              9 |         1.12 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[260][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[216][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[212][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[214][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[218][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[221][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[209][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[228][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[210][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[205][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[220][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[223][x]0       |                                |                8 |              9 |         1.12 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[22][x]0        |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[232][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[234][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[211][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[217][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[227][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[206][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[235][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[237][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[240][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[241][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[242][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[243][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[222][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[229][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[231][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[244][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[204][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[213][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[23][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[20][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[219][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[225][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[236][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[238][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[246][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[24][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[30][x]0        |                                |                8 |              9 |         1.12 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[33][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[34][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[35][x]0        |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[36][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[31][x]0        |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[37][x]0        |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[38][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[39][x]0        |                                |                9 |              9 |         1.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[265][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[3][x]0         |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[294][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[271][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[292][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[27][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[32][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[279][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[276][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[288][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[28][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[297][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[264][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[262][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[272][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[274][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[278][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[281][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[283][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[286][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[266][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[267][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[275][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[287][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[290][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[269][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[26][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[291][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[295][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[296][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[298][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[263][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[270][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[29][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[280][x]0       |                                |                9 |              9 |         1.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[277][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[282][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[273][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[284][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[285][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[268][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[289][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[293][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[299][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[66][x]0        |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[44][x]0        |                                |                8 |              9 |         1.12 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[69][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[6][x]0         |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[58][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[67][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[72][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[73][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[74][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[75][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[50][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[55][x]0        |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[70][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[71][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[49][x]0        |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[53][x]0        |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[64][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[61][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[76][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[77][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[42][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[62][x]0        |                                |                9 |              9 |         1.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[47][x]0        |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[5][x]0         |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[40][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[63][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[43][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[59][x]0        |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[68][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[48][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[52][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[65][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[41][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[78][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[79][x]0        |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[7][x]0         |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[80][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[81][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[82][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[45][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[46][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[60][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[51][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[56][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[4][x]0         |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[54][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[57][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[86][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[83][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[97][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[87][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[9][x]0         |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[90][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[85][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[89][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[95][x]0        |                                |                9 |              9 |         1.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[99][x]0        |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[98][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[84][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[88][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[92][x]0        |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[93][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[96][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[91][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[94][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[106][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[12][x]0        |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[138][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[13][x]0        |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[115][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[129][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[139][x]0       |                                |                9 |              9 |         1.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[141][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[123][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[140][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[135][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[144][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[145][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[116][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[131][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[124][x]0       |                                |                9 |              9 |         1.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[142][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[143][x]0       |                                |                9 |              9 |         1.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[107][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[110][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[118][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[119][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[102][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[100][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[117][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[120][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[101][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[108][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[10][x]0        |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[111][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[114][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[122][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[125][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[126][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[128][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[130][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[105][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[133][x]0       |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[134][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[112][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[113][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[103][x]0       |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[11][x]0        |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[127][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[109][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[121][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[104][x]0       |                                |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[132][x]0       |                                |                2 |              9 |         4.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[136][x]0       |                                |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos[8][y][3]_i_1_n_0   |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[137][x]0       |                                |                7 |              9 |         1.29 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos[175][y][3]_i_1_n_0 |                                |                6 |              9 |         1.50 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos[1][y][3]_i_1_n_0   | snake_controller_inst/p_0_in   |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos[161][y][3]_i_1_n_0 |                                |                3 |              9 |         3.00 |
-|  update_signal_BUFG    | snake_controller_inst/snake_pos[2][y][3]_i_1_n_0   | snake_controller_inst/p_0_in   |                4 |              9 |         2.25 |
-|  update_signal_BUFG    | snake_controller_inst/p_0_out                      | snake_controller_inst/p_0_in   |                5 |              9 |         1.80 |
-|  update_signal_BUFG    | snake_controller_inst/snake_len_r                  | snake_controller_inst/p_0_in   |                4 |              9 |         2.25 |
-|  vga_inst/pix_clk_BUFG | vga_inst/v_cnt                                     | snake_controller_inst/p_0_in   |                4 |             12 |         3.00 |
-|  vga_inst/pix_clk_BUFG |                                                    | vga_inst/blue_r                |                3 |             12 |         4.00 |
-|  vga_inst/pix_clk_BUFG |                                                    | snake_controller_inst/p_0_in   |                6 |             15 |         2.50 |
-|  clk_IBUF_BUFG         | snake_controller_inst/E[0]                         | snake_controller_inst/p_0_in   |                5 |             16 |         3.20 |
-|  clk_IBUF_BUFG         | vga_inst/active_flag                               | snake_controller_inst/p_0_in   |                7 |             20 |         2.86 |
-|  update_signal_BUFG    | game_fsm_inst/state_r_reg[0]_0                     | snake_controller_inst/p_0_in   |                7 |             23 |         3.29 |
-|  update_signal_BUFG    | game_fsm_inst/state_r_reg[1]_6                     | snake_controller_inst/p_0_in   |                9 |             29 |         3.22 |
-|  clk_IBUF_BUFG         |                                                    |                                |               21 |             42 |         2.00 |
-|  clk_IBUF_BUFG         |                                                    | snake_controller_inst/p_0_in   |               31 |             97 |         3.13 |
-|  clk_IBUF_BUFG         |                                                    | game_fsm_inst/state_r_reg[0]_1 |              125 |            300 |         2.40 |
-+------------------------+----------------------------------------------------+--------------------------------+------------------+----------------+--------------+
++------------------------+------------------------------------------------------------+------------------------------+------------------+----------------+--------------+
+|      Clock Signal      |                        Enable Signal                       |       Set/Reset Signal       | Slice Load Count | Bel Load Count | Bels / Slice |
++------------------------+------------------------------------------------------------+------------------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG         | key_handler_inst/move_state_r                              | snake_controller_inst/p_0_in |                2 |              5 |         2.50 |
+|  update_signal_BUFG    | game_fsm_inst/FSM_sequential_state_r_reg[1]_rep_1[0]       | snake_controller_inst/p_0_in |                2 |              5 |         2.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[113][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[92][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[96][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[82][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[88][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[98][x]0                |                              |                6 |              9 |         1.50 |
+|  clk_IBUF_BUFG         | snake_controller_inst/FSM_sequential_state_r_reg[0]_rep[0] | snake_controller_inst/p_0_in |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[99][x]0                |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[80][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[85][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[9][x]0                 |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_len_r                          | snake_controller_inst/p_0_in |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos[0][y][3]_i_1_n_0           | snake_controller_inst/p_0_in |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos[1][y][3]_i_1_n_0           | snake_controller_inst/p_0_in |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos[2][y][3]_i_1_n_0           | snake_controller_inst/p_0_in |                9 |              9 |         1.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[126][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[127][x]0               |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[102][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[108][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[10][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[110][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[111][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[115][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[118][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[120][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[121][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[100][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[109][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[114][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[117][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[101][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[103][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[104][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[105][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[106][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[107][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[112][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[131][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[116][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[11][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[122][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[123][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[124][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[119][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[125][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[128][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[136][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[154][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[142][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[163][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[140][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[165][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[166][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[14][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[167][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[130][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[133][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[146][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[152][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[159][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[169][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[170][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[132][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[171][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[174][x]0               |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[161][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[15][x]0                |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[176][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[173][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[177][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[168][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[178][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[179][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[164][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[145][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[12][x]0                |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[91][x]0                |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[162][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[134][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[16][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[17][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[138][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[143][x]0               |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[13][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[148][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[153][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[135][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[147][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[155][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[129][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[151][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[158][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[172][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[175][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[149][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[160][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[180][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[181][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[182][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[150][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[144][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[141][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[156][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[137][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[139][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[157][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[225][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[231][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[232][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[220][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[209][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[234][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[186][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[235][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[210][x]0               |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[18][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[204][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[189][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[199][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[207][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[20][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[214][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[226][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[192][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[196][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[227][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[230][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[190][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[194][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[236][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[205][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[237][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[198][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[238][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[202][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[212][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[224][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[229][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[195][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[208][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[239][x]0               |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[184][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[200][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[215][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[218][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[21][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[188][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[219][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[191][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[203][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[213][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[217][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[223][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[22][x]0                |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[193][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[216][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[233][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[183][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[19][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[201][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[211][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[197][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[221][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[222][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[185][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[228][x]0               |                              |                9 |              9 |         1.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[187][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[206][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[272][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[291][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[295][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[280][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[286][x]0               |                              |                9 |              9 |         1.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[253][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[23][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[241][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[249][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[271][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[255][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[274][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[243][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[248][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[252][x]0               |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[244][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[261][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[266][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[275][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[264][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[277][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[254][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[278][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[279][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[282][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[240][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[265][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[268][x]0               |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[246][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[250][x]0               |                              |                9 |              9 |         1.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[263][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[283][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[285][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[288][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[28][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[245][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[289][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[292][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[293][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[273][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[276][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[259][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[251][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[262][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[270][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[27][x]0                |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[284][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[242][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[26][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[281][x]0               |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[290][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[294][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[24][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[257][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[25][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[256][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[267][x]0               |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[287][x]0               |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[258][x]0               |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[260][x]0               |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[247][x]0               |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[269][x]0               |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[32][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[29][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[39][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[38][x]0                |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[37][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[30][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[3][x]0                 |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[298][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[31][x]0                |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[297][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[33][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[36][x]0                |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[35][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[296][x]0               |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[34][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[299][x]0               |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[6][x]0                 |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[46][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[72][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[50][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[77][x]0                |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[55][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[58][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[49][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[59][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[48][x]0                |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[54][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[57][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[4][x]0                 |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[61][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[62][x]0                |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[41][x]0                |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[52][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[47][x]0                |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[5][x]0                 |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[71][x]0                |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[74][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[75][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[78][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[67][x]0                |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[69][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[43][x]0                |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[56][x]0                |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[45][x]0                |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[53][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[51][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[60][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[64][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[66][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[65][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[68][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[63][x]0                |                              |                7 |              9 |         1.29 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[70][x]0                |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[73][x]0                |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[76][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[79][x]0                |                              |                8 |              9 |         1.12 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[7][x]0                 |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[42][x]0                |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[40][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[44][x]0                |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[87][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[86][x]0                |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[83][x]0                |                              |                2 |              9 |         4.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[94][x]0                |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[93][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[8][x]0                 |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[97][x]0                |                              |                5 |              9 |         1.80 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[95][x]0                |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[84][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[81][x]0                |                              |                6 |              9 |         1.50 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[89][x]0                |                              |                4 |              9 |         2.25 |
+|  update_signal_BUFG    | snake_controller_inst/snake_pos_reg[90][x]0                |                              |                3 |              9 |         3.00 |
+|  update_signal_BUFG    | game_fsm_inst/E[0]                                         | snake_controller_inst/p_0_in |                5 |             10 |         2.00 |
+|  vga_inst/pix_clk_BUFG |                                                            | vga_inst/blue_r              |                3 |             12 |         4.00 |
+|  vga_inst/pix_clk_BUFG | vga_inst/v_cnt                                             | snake_controller_inst/p_0_in |                5 |             12 |         2.40 |
+|  vga_inst/pix_clk_BUFG |                                                            | snake_controller_inst/p_0_in |                7 |             15 |         2.14 |
+|  clk_IBUF_BUFG         | game_fsm_inst/flag_eat_r_reg[0]                            | snake_controller_inst/p_0_in |                4 |             16 |         4.00 |
+|  clk_IBUF_BUFG         | vga_inst/active_flag                                       | snake_controller_inst/p_0_in |                7 |             20 |         2.86 |
+|  update_signal_BUFG    | game_fsm_inst/FSM_sequential_state_r_reg[0]_rep_0          | snake_controller_inst/p_0_in |                8 |             25 |         3.12 |
+|  clk_IBUF_BUFG         |                                                            |                              |               21 |             42 |         2.00 |
+|  clk_IBUF_BUFG         |                                                            | snake_controller_inst/p_0_in |               34 |            105 |         3.09 |
+|  update_signal_BUFG    |                                                            | snake_controller_inst/p_0_in |              186 |            301 |         1.62 |
++------------------------+------------------------------------------------------------+------------------------------+------------------+----------------+--------------+
 
 

@@ -71,33 +71,46 @@ begin
         variable new_head : pos_type;
         variable old_tail : pos_type;
         variable map_index : integer;
+        variable head_index : integer;
+        variable tail_index : integer;
     begin
         if rst_n = '0' then
-            -- 初始化蛇身
+            -- 初始化蛇身，确保在有效范围内
             for i in 0 to LENGTH_INIT-1 loop
-                snake_pos(i).x <= to_unsigned(GRID_WIDTH/2 - i, 5);
-                snake_pos(i).y <= to_unsigned(GRID_HEIGHT/2, 4);
+                snake_pos(i).x <= to_unsigned(10 - i, 5);  -- 从x=10开始，向左延伸
+                snake_pos(i).y <= to_unsigned(8, 4);       -- y固定在中间位置
             end loop;
-            head_ptr <= 0;
-            tail_ptr <= LENGTH_INIT-1;
+            head_ptr <= LENGTH_INIT-1;  -- 头部指针指向最后一个位置
+            tail_ptr <= 0;              -- 尾部指针指向第一个位置
             snake_len_r <= to_unsigned(LENGTH_INIT, 9);
             current_dir <= STOP;
             is_win_r <= '0';
             flag_eat_r <= '0';
+            snake_map_r <= (others => '0');  -- 清除蛇身位置图
             
         elsif rising_edge(flag_update) then
             if general_state = "01" then  -- 游戏初始化
-                -- 重置蛇身
+                -- 重置蛇身，确保在有效范围内
                 for i in 0 to LENGTH_INIT-1 loop
-                    snake_pos(i).x <= to_unsigned(GRID_WIDTH/2 - i, 5);
-                    snake_pos(i).y <= to_unsigned(GRID_HEIGHT/2, 4);
+                    snake_pos(i).x <= to_unsigned(10 - i, 5);  -- 从x=10开始，向左延伸
+                    snake_pos(i).y <= to_unsigned(8, 4);       -- y固定在中间位置
                 end loop;
-                head_ptr <= 0;
-                tail_ptr <= LENGTH_INIT-1;
+                head_ptr <= LENGTH_INIT-1;  -- 头部指针指向最后一个位置
+                tail_ptr <= 0;              -- 尾部指针指向第一个位置
                 snake_len_r <= to_unsigned(LENGTH_INIT, 9);
                 current_dir <= STOP;
                 is_win_r <= '0';
                 flag_eat_r <= '0';
+                snake_map_r <= (others => '0');  -- 清除蛇身位置图
+                
+                -- 设置初始蛇身位置
+                for i in 0 to LENGTH_INIT-1 loop
+                    head_index := pos_to_index(
+                        to_unsigned(10 - i, 5),
+                        to_unsigned(8, 4)
+                    );
+                    snake_map_r(head_index) <= '1';
+                end loop;
                 
             elsif general_state = "10" then  -- 游戏中
                 -- 更新方向
@@ -143,31 +156,9 @@ begin
                     head_ptr <= head_ptr + 1;
                 end if;
                 snake_pos(head_ptr) <= new_head;
-            end if;
-        end if;
-    end process;
 
-    -- 更新蛇身位置图
-    process(clk)
-        variable head_index : integer;
-        variable tail_index : integer;
-        variable i : integer;
-    begin
-        if rising_edge(clk) then
-            if general_state = "01" then  -- 初始化时设置初始蛇身
-                -- 清除所有位置
-                snake_map_r <= (others => '0');
-                -- 设置初始蛇身位置
-                for i in 0 to LENGTH_INIT-1 loop
-                    head_index := pos_to_index(
-                        to_unsigned(GRID_WIDTH/2 - i, 5),
-                        to_unsigned(GRID_HEIGHT/2, 4)
-                    );
-                    snake_map_r(head_index) <= '1';
-                end loop;
-            elsif general_state = "10" then  -- 游戏中
-                -- 计算头部和尾部的位置索引
-                head_index := pos_to_index(snake_pos(head_ptr).x, snake_pos(head_ptr).y);
+                -- 更新蛇身位置图
+                head_index := pos_to_index(new_head.x, new_head.y);
                 tail_index := pos_to_index(snake_pos(tail_ptr).x, snake_pos(tail_ptr).y);
                 
                 -- 更新头部位置
@@ -182,19 +173,28 @@ begin
     end process;
 
     -- 检查是否撞到墙壁或自身
-    process(snake_pos, head_ptr, snake_len_r)
+    process(snake_pos, head_ptr, snake_len_r, general_state, snake_map_r)
         variable head_index : integer;
+        variable temp_map : std_logic_vector(299 downto 0);
     begin
         is_dead <= '0';
-        head_index := pos_to_index(snake_pos(head_ptr).x, snake_pos(head_ptr).y);
-        
-        -- 检查是否撞墙
-        if snake_pos(head_ptr).x < 1 or snake_pos(head_ptr).x > to_unsigned(GRID_WIDTH, 5) or
-           snake_pos(head_ptr).y < 1 or snake_pos(head_ptr).y > to_unsigned(GRID_HEIGHT, 4) then
-            is_dead <= '1';
-        -- 检查是否撞到自身
-        elsif snake_map_r(head_index) = '1' then
-            is_dead <= '1';
+        if general_state = "10" then  -- 只在游戏运行时检查碰撞
+            head_index := pos_to_index(snake_pos(head_ptr).x, snake_pos(head_ptr).y);
+            
+            -- 检查是否撞墙
+            if snake_pos(head_ptr).x < 1 or snake_pos(head_ptr).x > to_unsigned(GRID_WIDTH, 5) or
+               snake_pos(head_ptr).y < 1 or snake_pos(head_ptr).y > to_unsigned(GRID_HEIGHT, 4) then
+                is_dead <= '1';
+            -- 检查是否撞到自身(排除蛇头位置)
+            else
+                -- 创建临时地图,排除蛇头位置
+                temp_map := snake_map_r;
+                temp_map(head_index) := '0';
+                -- 如果蛇头位置在临时地图中为1,说明撞到了其他蛇身部分
+                if temp_map(head_index) = '1' then
+                    is_dead <= '1';
+                end if;
+            end if;
         end if;
     end process;
 
