@@ -296,13 +296,13 @@ begin
                                 -- 根据位置确定显示哪个数字
                                 case digit_index is
                                     when 0 => -- 千位
-                                        digit_value := score(11 downto 8);
+                                        digit_value := score_bcd(15 downto 12);
                                     when 1 => -- 百位
-                                        digit_value := score(7 downto 4);
+                                        digit_value := score_bcd(11 downto 8);
                                     when 2 => -- 十位
-                                        digit_value := score(3 downto 0);
+                                        digit_value := score_bcd(7 downto 4);
                                     when 3 => -- 个位
-                                        digit_value := "0000";
+                                        digit_value := score_bcd(3 downto 0);
                                     when others =>
                                         digit_value := "0000";
                                 end case;
@@ -316,8 +316,13 @@ begin
                                 font_row <= std_logic_vector(to_unsigned(y_offset, 4));
                                 
                                 -- 检查当前像素是否需要点亮（从字体ROM获取数据）
-                                if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
-                                    pixel_color <= "111"; -- 白色显示数字
+                                if x_offset < SCORE_DIGIT_WIDTH then
+                                    -- 安全计算字体像素索引
+                                    if (x_offset * 8 / SCORE_DIGIT_WIDTH) < 8 then
+                                        if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
+                                            pixel_color <= "111"; -- 白色显示数字
+                                        end if;
+                                    end if;
                                 end if;
                                 
                             -- 检查是否在最高分显示区域
@@ -330,13 +335,13 @@ begin
                                 -- 根据位置确定显示哪个数字
                                 case digit_index is
                                     when 0 => -- 千位
-                                        digit_value := high_score(11 downto 8);
+                                        digit_value := high_score_bcd(15 downto 12);
                                     when 1 => -- 百位
-                                        digit_value := high_score(7 downto 4);
+                                        digit_value := high_score_bcd(11 downto 8);
                                     when 2 => -- 十位
-                                        digit_value := high_score(3 downto 0);
+                                        digit_value := high_score_bcd(7 downto 4);
                                     when 3 => -- 个位
-                                        digit_value := "0000";
+                                        digit_value := high_score_bcd(3 downto 0);
                                     when others =>
                                         digit_value := "0000";
                                 end case;
@@ -350,8 +355,13 @@ begin
                                 font_row <= std_logic_vector(to_unsigned(y_offset, 4));
                                 
                                 -- 检查当前像素是否需要点亮（从字体ROM获取数据）
-                                if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
-                                    pixel_color <= "110"; -- 黄色显示最高分
+                                if x_offset < SCORE_DIGIT_WIDTH then
+                                    -- 安全计算字体像素索引
+                                    if (x_offset * 8 / SCORE_DIGIT_WIDTH) < 8 then
+                                        if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
+                                            pixel_color <= "110"; -- 黄色显示最高分
+                                        end if;
+                                    end if;
                                 end if;
                                 
                             -- 检查是否在难度显示区域
@@ -385,8 +395,13 @@ begin
                                 font_row <= std_logic_vector(to_unsigned(y_offset, 4));
                                 
                                 -- 检查当前像素是否需要点亮（从字体ROM获取数据）
-                                if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
-                                    pixel_color <= "101"; -- 洋红色(紫色)显示难度
+                                if x_offset < SCORE_DIGIT_WIDTH then
+                                    -- 安全计算字体像素索引
+                                    if (x_offset * 8 / SCORE_DIGIT_WIDTH) < 8 then
+                                        if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
+                                            pixel_color <= "101"; -- 洋红色(紫色)显示难度
+                                        end if;
+                                    end if;
                                 end if;
                                 
                             -- 难度图形条显示（简单的条形图表示难度）
