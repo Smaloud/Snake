@@ -17,8 +17,7 @@ entity food_generator is
         snake_map     : in  std_logic_vector(299 downto 0);  -- 蛇身位置图
 
         food_x        : out unsigned(4 downto 0);  -- 食物x坐标
-        food_y        : out unsigned(3 downto 0);   -- 食物y坐标
-        flag_food_ready : out std_logic  -- 食物已准备好的信号
+        food_y        : out unsigned(3 downto 0)   -- 食物y坐标
     );
 end food_generator;
 
@@ -28,66 +27,48 @@ architecture Behavioral of food_generator is
 
     signal food_x_r    : unsigned(4 downto 0) := (others => '0');
     signal food_y_r    : unsigned(3 downto 0) := (others => '0');
-    signal random_x    : unsigned(4 downto 0) := (others => '0');
-    signal random_y    : unsigned(3 downto 0) := (others => '0');
     signal lfsr       : std_logic_vector(15 downto 0) := x"ACE1";  -- 16位LFSR初始值
-    signal food_ready_r : std_logic := '0';  -- 内部信号表示食物已准备好
 
 begin
-    ------------------------------------------------------------------
-    -- 随机数生成（使用LFSR）
-    ------------------------------------------------------------------
-    process(clk, rst_n)
-        variable feedback : std_logic;
-    begin
-        if rst_n = '0' then
-            lfsr <= x"ACE1";
-        elsif rising_edge(clk) then
-            if general_state = "01" or flag_eat = '1' then  -- 初始化或食物被吃掉
-                -- LFSR更新
-                feedback := lfsr(15) xor lfsr(13) xor lfsr(12) xor lfsr(10);
-                lfsr <= lfsr(14 downto 0) & feedback;
-                
-                -- 生成随机坐标
-                random_x <= unsigned(lfsr(4 downto 0)) mod to_unsigned(GRID_WIDTH, 5);
-                random_y <= unsigned(lfsr(8 downto 5)) mod to_unsigned(GRID_HEIGHT, 4);
-            end if;
-        end if;
-    end process;
-
     ------------------------------------------------------------------
     -- 食物位置生成逻辑
     ------------------------------------------------------------------
     process(clk, rst_n)
-        variable map_index : integer;
+        variable feedback : std_logic;
+        variable random_pos : integer range 0 to 299;
+        variable valid_pos_found : boolean;
+        variable retry_count : integer range 0 to 299;
     begin
         if rst_n = '0' then
             food_x_r <= (others => '0');
             food_y_r <= (others => '0');
-            food_ready_r <= '0';
+            lfsr <= x"ACE1";
+            valid_pos_found := false;
+            retry_count := 0;
         elsif rising_edge(clk) then
-            if general_state = "01" then  -- 初始化
-                -- 计算在snake_map中的索引
-                map_index := to_integer(random_x) + to_integer(random_y) * GRID_WIDTH;
+            if general_state = "01" or flag_eat = '1' then  -- 初始化或食物被吃掉
+                valid_pos_found := false;
+                retry_count := 0;
                 
-                -- 如果位置未被占用，则更新食物位置
-                if snake_map(map_index) = '0' then
-                    food_x_r <= random_x;
-                    food_y_r <= random_y;
-                    food_ready_r <= '1';  -- 食物准备就绪
-                end if;
-            elsif flag_eat = '1' then  -- 食物被吃掉
-                food_ready_r <= '0';  -- 重置食物就绪标志
-                
-                -- 计算在snake_map中的索引
-                map_index := to_integer(random_x) + to_integer(random_y) * GRID_WIDTH;
-                
-                -- 如果位置未被占用，则更新食物位置
-                if snake_map(map_index) = '0' then
-                    food_x_r <= random_x;
-                    food_y_r <= random_y;
-                    food_ready_r <= '1';  -- 食物准备就绪
-                end if;
+                -- 尝试找到有效位置
+                while not valid_pos_found and retry_count < 300 loop
+                    -- 更新LFSR
+                    feedback := lfsr(15) xor lfsr(13) xor lfsr(12) xor lfsr(10);
+                    lfsr <= lfsr(14 downto 0) & feedback;
+                    
+                    -- 生成0-299之间的随机位置
+                    random_pos := to_integer(unsigned(lfsr(8 downto 0))) mod 300;
+                    
+                    -- 检查位置是否有效（没有蛇身）
+                    if snake_map(random_pos) = '0' then
+                        valid_pos_found := true;
+                        -- 将位置转换为x,y坐标（从1开始）
+                        food_x_r <= to_unsigned((random_pos mod GRID_WIDTH) + 1, 5);
+                        food_y_r <= to_unsigned((random_pos / GRID_WIDTH) + 1, 4);
+                    end if;
+                    
+                    retry_count := retry_count + 1;
+                end loop;
             end if;
         end if;
     end process;
@@ -97,6 +78,5 @@ begin
     ------------------------------------------------------------------
     food_x <= food_x_r;
     food_y <= food_y_r;
-    flag_food_ready <= food_ready_r;
 
 end Behavioral;

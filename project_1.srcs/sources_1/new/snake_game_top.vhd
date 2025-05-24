@@ -34,7 +34,6 @@ architecture Behavioral of snake_game_top is
     signal update_signal : std_logic;                     -- 更新信号
     signal move_state    : std_logic_vector(4 downto 0);  -- 移动状�??
     signal flag_eat      : std_logic;                     -- 吃到食物信号
-    signal flag_food_ready : std_logic;                   -- 食物准备就绪信号
     signal is_dead       : std_logic;                     -- 死亡信号
     signal is_win        : std_logic;                     -- 胜利信号
     
@@ -132,7 +131,6 @@ begin
         flag_update   => update_signal,
         food_x        => food_x,
         food_y        => food_y,
-        flag_food_ready => flag_food_ready,
         snake_map     => snake_map,
         is_win        => is_win,
         is_dead       => is_dead,
@@ -149,7 +147,6 @@ begin
         snake_map     => snake_map,
         food_x        => food_x,
         food_y        => food_y,
-        flag_food_ready => flag_food_ready
     );
 
     -- 分数记录�?
