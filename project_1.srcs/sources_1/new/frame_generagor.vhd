@@ -93,6 +93,11 @@ architecture Behavioral of frame_generator is
     signal score_bcd      : std_logic_vector(15 downto 0);
     signal high_score_bcd : std_logic_vector(15 downto 0);
     
+    -- 保存最终分数的信号
+    signal final_score : std_logic_vector(11 downto 0) := (others => '0');
+    signal final_score_bcd : std_logic_vector(15 downto 0);
+    signal prev_game_state : std_logic_vector(1 downto 0) := "00";
+    
     -- BCD转换组件
     component bin_to_bcd
         port(
@@ -177,6 +182,13 @@ begin
         bcd_out => high_score_bcd
     );
     
+    -- 实例化BCD转换器 - 最终分数
+    final_score_bcd_converter: bin_to_bcd
+    port map (
+        bin_in  => final_score,
+        bcd_out => final_score_bcd
+    );
+    
     -- 帧生成过程
     process(clk, rst_n)
         variable h_pos : integer;
@@ -218,7 +230,16 @@ begin
             gameover_rom_addr <= (others => '0');
             font_char_code <= (others => '0');
             font_row <= (others => '0');
+            final_score <= (others => '0');
+            prev_game_state <= "00";
         elsif rising_edge(clk) then
+            -- 检测游戏状态变化并保存最终分数
+            if prev_game_state = "10" and general_state = "11" then
+                -- 游戏状态从"运行中"变为"游戏结束"，保存当前分数
+                final_score <= score;
+            end if;
+            prev_game_state <= general_state;
+            
             -- 获取当前像素位置
             h_pos := to_integer(R_h_cnt);
             v_pos := to_integer(R_v_cnt);
@@ -442,8 +463,93 @@ begin
                     when "11" =>
                         -- 使用GameOver ROM图像
                         if gameover_rom_data(0) = '1' then
-                            -- GameOver图像为1的像素用红色显示
-                            pixel_color <= "111";  -- 红色 (R=1, G=0, B=0)
+                            -- GameOver图像为1的像素用白色显示
+                            pixel_color <= "111";  -- 白色 (R=1, G=1, B=1)
+                        -- 在GameOver界面底部显示分数和最高分（并排）
+                        -- 显示当前分数
+                        elsif v_pos >= SCREEN_HEIGHT - 80 and v_pos < SCREEN_HEIGHT - 80 + DIGIT_HEIGHT then
+                            -- 分数显示区域 - 左侧显示当前分数
+                            if h_pos >= SCREEN_WIDTH/2 - 120 and h_pos < SCREEN_WIDTH/2 - 120 + 4*SCORE_DIGIT_WIDTH then
+                                -- 计算当前位于哪个数字位置
+                                digit_index := (h_pos - (SCREEN_WIDTH/2 - 120)) / SCORE_DIGIT_WIDTH;
+                                
+                                -- 根据位置确定显示哪个数字
+                                case digit_index is
+                                    when 0 => -- 千位
+                                        digit_value := final_score_bcd(15 downto 12);
+                                    when 1 => -- 百位
+                                        digit_value := final_score_bcd(11 downto 8);
+                                    when 2 => -- 十位
+                                        digit_value := final_score_bcd(7 downto 4);
+                                    when 3 => -- 个位
+                                        digit_value := final_score_bcd(3 downto 0);
+                                    when others =>
+                                        digit_value := "0000";
+                                end case;
+                                
+                                -- 计算在当前数字内的偏移位置
+                                x_offset := (h_pos - (SCREEN_WIDTH/2 - 120)) mod SCORE_DIGIT_WIDTH;
+                                y_offset := v_pos - (SCREEN_HEIGHT - 80);
+                                
+                                -- 设置字体ROM地址
+                                font_char_code <= digit_value;
+                                font_row <= std_logic_vector(to_unsigned(y_offset, 4));
+                                
+                                -- 显示分数数字
+                                if x_offset < SCORE_DIGIT_WIDTH then
+                                    -- 安全计算字体像素索引
+                                    if (x_offset * 8 / SCORE_DIGIT_WIDTH) < 8 then
+                                        if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
+                                            pixel_color <= "110"; -- 黄色显示当前分数
+                                        end if;
+                                    end if;
+                                end if;
+                            -- 右侧显示最高分
+                            elsif h_pos >= SCREEN_WIDTH/2 + 30 and h_pos < SCREEN_WIDTH/2 + 30 + 4*SCORE_DIGIT_WIDTH then
+                                -- 计算当前位于哪个数字位置
+                                digit_index := (h_pos - (SCREEN_WIDTH/2 + 30)) / SCORE_DIGIT_WIDTH;
+                                
+                                -- 根据位置确定显示哪个数字
+                                case digit_index is
+                                    when 0 => -- 千位
+                                        digit_value := high_score_bcd(15 downto 12);
+                                    when 1 => -- 百位
+                                        digit_value := high_score_bcd(11 downto 8);
+                                    when 2 => -- 十位
+                                        digit_value := high_score_bcd(7 downto 4);
+                                    when 3 => -- 个位
+                                        digit_value := high_score_bcd(3 downto 0);
+                                    when others =>
+                                        digit_value := "0000";
+                                end case;
+                                
+                                -- 计算在当前数字内的偏移位置
+                                x_offset := (h_pos - (SCREEN_WIDTH/2 + 30)) mod SCORE_DIGIT_WIDTH;
+                                y_offset := v_pos - (SCREEN_HEIGHT - 80);
+                                
+                                -- 设置字体ROM地址
+                                font_char_code <= digit_value;
+                                font_row <= std_logic_vector(to_unsigned(y_offset, 4));
+                                
+                                -- 显示最高分数字
+                                if x_offset < SCORE_DIGIT_WIDTH then
+                                    -- 安全计算字体像素索引
+                                    if (x_offset * 8 / SCORE_DIGIT_WIDTH) < 8 then
+                                        if font_row_data(7 - (x_offset * 8 / SCORE_DIGIT_WIDTH)) = '1' then
+                                            pixel_color <= "101"; -- 洋红色(紫色)显示最高分
+                                        end if;
+                                    end if;
+                                end if;
+                            end if;
+                        -- 简单文字标签(小方块标记而不是线条)
+                        elsif v_pos >= SCREEN_HEIGHT - 100 and v_pos < SCREEN_HEIGHT - 90 then
+                            -- 左侧标记 - S符号
+                            if h_pos = SCREEN_WIDTH/2 - 110 and v_pos = SCREEN_HEIGHT - 95 then
+                                pixel_color <= "110"; -- 当前分数标记，黄色
+                            -- 右侧标记 - H符号
+                            elsif h_pos = SCREEN_WIDTH/2 + 40 and v_pos = SCREEN_HEIGHT - 95 then
+                                pixel_color <= "101"; -- 最高分标记，洋红色
+                            end if;
                         else
                             -- GameOver图像为0的像素为黑色背景
                             pixel_color <= "000";  -- 黑色背景 (R=0, G=0, B=0)
