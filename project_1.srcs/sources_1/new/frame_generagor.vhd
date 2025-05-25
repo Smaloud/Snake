@@ -541,30 +541,14 @@ begin
                                     end if;
                                 end if;
                             end if;
-                        -- 显示标签 - 使用点阵而不是整个区域
-                        elsif v_pos >= SCREEN_HEIGHT - 100 and v_pos < SCREEN_HEIGHT - 85 then
-                            -- 左侧标签 "SCORE"
-                            if h_pos >= SCREEN_WIDTH/2 - 120 and h_pos < SCREEN_WIDTH/2 - 70 then
-                                -- 简单绘制"SCORE"字样 (通过点控制)
-                                if (v_pos = SCREEN_HEIGHT - 98 or v_pos = SCREEN_HEIGHT - 92 or 
-                                    v_pos = SCREEN_HEIGHT - 86) and 
-                                   (h_pos >= SCREEN_WIDTH/2 - 118 and h_pos < SCREEN_WIDTH/2 - 72) then
-                                    pixel_color <= "111"; -- 白色文字
-                                elsif (v_pos >= SCREEN_HEIGHT - 97 and v_pos <= SCREEN_HEIGHT - 93) and
-                                      (h_pos = SCREEN_WIDTH/2 - 118 or h_pos = SCREEN_WIDTH/2 - 72) then
-                                    pixel_color <= "111"; -- 白色文字
-                                end if;
-                            -- 右侧标签 "HI-SCORE"
-                            elsif h_pos >= SCREEN_WIDTH/2 + 30 and h_pos < SCREEN_WIDTH/2 + 85 then
-                                -- 简单绘制"HI-SCORE"字样
-                                if (v_pos = SCREEN_HEIGHT - 98 or v_pos = SCREEN_HEIGHT - 92 or 
-                                    v_pos = SCREEN_HEIGHT - 86) and
-                                   (h_pos >= SCREEN_WIDTH/2 + 32 and h_pos < SCREEN_WIDTH/2 + 83) then
-                                    pixel_color <= "111"; -- 白色文字
-                                elsif (v_pos >= SCREEN_HEIGHT - 97 and v_pos <= SCREEN_HEIGHT - 93) and
-                                      (h_pos = SCREEN_WIDTH/2 + 32 or h_pos = SCREEN_WIDTH/2 + 83) then
-                                    pixel_color <= "111"; -- 白色文字
-                                end if;
+                        -- 简单文字标签(小方块标记而不是线条)
+                        elsif v_pos >= SCREEN_HEIGHT - 100 and v_pos < SCREEN_HEIGHT - 90 then
+                            -- 左侧标记 - S符号
+                            if h_pos = SCREEN_WIDTH/2 - 110 and v_pos = SCREEN_HEIGHT - 95 then
+                                pixel_color <= "110"; -- 当前分数标记，黄色
+                            -- 右侧标记 - H符号
+                            elsif h_pos = SCREEN_WIDTH/2 + 40 and v_pos = SCREEN_HEIGHT - 95 then
+                                pixel_color <= "101"; -- 最高分标记，洋红色
                             end if;
                         else
                             -- GameOver图像为0的像素为黑色背景
