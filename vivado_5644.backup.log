@@ -1,0 +1,73 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sat May 24 22:42:54 2025
+# Process ID: 5644
+# Current directory: E:/Snake
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent31484 E:\Snake\project_1.xpr
+# Log file: E:/Snake/vivado.log
+# Journal file: E:/Snake\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/Snake/project_1.xpr
+INFO: [Project 1-313] Project file moved from 'E:/VivadoWorks/project_1' since last save.
+CRITICAL WARNING: [Project 1-311] Could not find the file 'E:/TopLevel/TopLevel.srcs/sources_1/new/ButtonDebounce.vhd', nor could it be found using path 'E:/VivadoWorks/TopLevel/TopLevel.srcs/sources_1/new/ButtonDebounce.vhd'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
+update_compile_order -fileset sources_1
+reset_run blk_mem_gen_GameOver_synth_1
+reset_run blk_mem_gen_menu_synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 20
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'blk_mem_gen_GameOver'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'blk_mem_gen_menu'...
+[Sat May 24 22:43:45 2025] Launched blk_mem_gen_GameOver_synth_1, blk_mem_gen_menu_synth_1, synth_1...
+Run output will be captured here:
+blk_mem_gen_GameOver_synth_1: E:/Snake/project_1.runs/blk_mem_gen_GameOver_synth_1/runme.log
+blk_mem_gen_menu_synth_1: E:/Snake/project_1.runs/blk_mem_gen_menu_synth_1/runme.log
+synth_1: E:/Snake/project_1.runs/synth_1/runme.log
+[Sat May 24 22:43:46 2025] Launched impl_1...
+Run output will be captured here: E:/Snake/project_1.runs/impl_1/runme.log
+launch_runs: Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 1017.305 ; gain = 0.000
+open_hw_manager
+connect_hw_server -allow_non_jtag
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-2222] Launching hw_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+****** Xilinx hw_server v2020.2
+  **** Build date : Nov 18 2020 at 10:01:48
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+
+INFO: [Labtools 27-3415] Connecting to cs_server url TCP:localhost:3042
+INFO: [Labtools 27-3417] Launching cs_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+
+******** Xilinx cs_server v2020.2
+  ****** Build date   : Nov 04 2020-05:02:56
+    **** Build number : 2020.2.1604437376
+      ** Copyright 2017-2020 Xilinx, Inc. All Rights Reserved.
+
+
+
+connect_hw_server: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1017.305 ; gain = 0.000
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210292B7F4E4A
+set_property PROGRAM.FILE {E:/Snake/project_1.runs/impl_1/snake_game_top.bit} [get_hw_devices xc7a100t_0]
+current_hw_device [get_hw_devices xc7a100t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a100t_0] 0]
+INFO: [Labtools 27-1434] Device xc7a100t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {E:/Snake/project_1.runs/impl_1/snake_game_top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+INFO: [Labtools 27-1434] Device xc7a100t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+exit
+INFO: [Common 17-206] Exiting Vivado at Sat May 24 23:02:33 2025...

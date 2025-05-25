@@ -1,0 +1,30 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sat May 24 13:17:47 2025
+# Process ID: 9608
+# Current directory: E:/Snake
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent7900 E:\Snake\project_1.xpr
+# Log file: E:/Snake/vivado.log
+# Journal file: E:/Snake\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/Snake/project_1.xpr
+update_compile_order -fileset sources_1
+launch_runs synth_1 -jobs 20
+wait_on_run synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 20
+wait_on_run synth_1
+launch_runs impl_1 -jobs 20
+wait_on_run impl_1
+open_run synth_1 -name synth_1
+report_utilization -name utilization_1
+launch_runs impl_1 -to_step write_bitstream -jobs 20
+wait_on_run impl_1
+refresh_design
+close_design
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream -jobs 20
+wait_on_run impl_1

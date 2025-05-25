@@ -2,13 +2,13 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Sat May 24 13:56:18 2025
-# Process ID: 27800
-# Current directory: E:/VivadoWorks/project_1/project_1.runs/blk_mem_gen_menu_synth_1
+# Start of session at: Sat May 24 22:43:47 2025
+# Process ID: 20472
+# Current directory: E:/Snake/project_1.runs/blk_mem_gen_menu_synth_1
 # Command line: vivado.exe -log blk_mem_gen_menu.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source blk_mem_gen_menu.tcl
-# Log file: E:/VivadoWorks/project_1/project_1.runs/blk_mem_gen_menu_synth_1/blk_mem_gen_menu.vds
-# Journal file: E:/VivadoWorks/project_1/project_1.runs/blk_mem_gen_menu_synth_1\vivado.jou
+# Log file: E:/Snake/project_1.runs/blk_mem_gen_menu_synth_1/blk_mem_gen_menu.vds
+# Journal file: E:/Snake/project_1.runs/blk_mem_gen_menu_synth_1\vivado.jou
 #-----------------------------------------------------------
 source blk_mem_gen_menu.tcl -notrace
 INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP blk_mem_gen_menu, cache-ID = ad70d076346f8ca7.
-INFO: [Common 17-206] Exiting Vivado at Sat May 24 13:56:33 2025...
+INFO: [Common 17-206] Exiting Vivado at Sat May 24 22:43:52 2025...

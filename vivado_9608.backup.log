@@ -1,0 +1,74 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sat May 24 13:17:47 2025
+# Process ID: 9608
+# Current directory: E:/Snake
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent7900 E:\Snake\project_1.xpr
+# Log file: E:/Snake/vivado.log
+# Journal file: E:/Snake\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/Snake/project_1.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
+update_compile_order -fileset sources_1
+launch_runs synth_1 -jobs 20
+[Sat May 24 13:19:03 2025] Launched blk_mem_gen_GameOver_synth_1, blk_mem_gen_menu_synth_1...
+Run output will be captured here:
+blk_mem_gen_GameOver_synth_1: E:/Snake/project_1.runs/blk_mem_gen_GameOver_synth_1/runme.log
+blk_mem_gen_menu_synth_1: E:/Snake/project_1.runs/blk_mem_gen_menu_synth_1/runme.log
+[Sat May 24 13:19:03 2025] Launched synth_1...
+Run output will be captured here: E:/Snake/project_1.runs/synth_1/runme.log
+reset_run synth_1
+launch_runs synth_1 -jobs 20
+[Sat May 24 13:20:42 2025] Launched synth_1...
+Run output will be captured here: E:/Snake/project_1.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 20
+[Sat May 24 13:22:03 2025] Launched impl_1...
+Run output will be captured here: E:/Snake/project_1.runs/impl_1/runme.log
+open_run synth_1 -name synth_1
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xc7a100tcsg324-1
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Project 1-454] Reading design checkpoint 'e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_GameOver/blk_mem_gen_GameOver.dcp' for cell 'gameover_rom_inst'
+INFO: [Project 1-454] Reading design checkpoint 'e:/Snake/project_1.gen/sources_1/ip/blk_mem_gen_menu/blk_mem_gen_menu.dcp' for cell 'menu_rom_inst'
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.032 . Memory (MB): peak = 1243.230 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 943 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'snake_game_top' is not ideal for floorplanning, since the cellview 'snake_controller' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-479] Netlist was created with Vivado 2020.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [E:/Snake/Nexys-4-DDR-Master.xdc]
+Finished Parsing XDC File [E:/Snake/Nexys-4-DDR-Master.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1321.016 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+open_run: Time (s): cpu = 00:00:13 ; elapsed = 00:00:07 . Memory (MB): peak = 1487.051 ; gain = 470.719
+report_utilization -name utilization_1
+launch_runs impl_1 -to_step write_bitstream -jobs 20
+[Sat May 24 13:23:12 2025] Launched impl_1...
+Run output will be captured here: E:/Snake/project_1.runs/impl_1/runme.log
+refresh_design
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [E:/Snake/Nexys-4-DDR-Master.xdc]
+WARNING: [Vivado 12-584] No ports matched 'CLK100MHZ'. [E:/Snake/Nexys-4-DDR-Master.xdc:7]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [E:/Snake/Nexys-4-DDR-Master.xdc:7]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'CLK100MHZ'. [E:/Snake/Nexys-4-DDR-Master.xdc:8]
+CRITICAL WARNING: [Vivado 12-4739] create_clock:No valid object(s) found for '-objects [get_ports CLK100MHZ]'. [E:/Snake/Nexys-4-DDR-Master.xdc:8]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+Finished Parsing XDC File [E:/Snake/Nexys-4-DDR-Master.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+close_design
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream -jobs 20
+WARNING: [Vivado 12-872] Run step 'Design Initialization' is out-of-date.
+[Sat May 24 13:31:33 2025] Launched impl_1...
+Run output will be captured here: E:/Snake/project_1.runs/impl_1/runme.log
